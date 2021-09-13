@@ -1,0 +1,22 @@
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "Backend de la aplicacion Wired In",
+    "main": "backend/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/santiagovasquez1/Wired_In.git"
+    },
+    "author": "Santiago Vasquez",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/santiagovasquez1/Wired_In/issues"
+    },
+    "homepage": "https://github.com/santiagovasquez1/Wired_In#readme",
+    "dependencies": {
+        "express": "^4.17.1"
+    }
+}
