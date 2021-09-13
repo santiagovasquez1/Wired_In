@@ -1,0 +1,3 @@
+Hola, mi nombre es Eliab López Murillo, soy Ingeniero químico e instrumentista industrial. Soy un entusiasta de la tecnología, y la computación siempre ha sido parte fundamental en mi vida.
+
+Tengo experiencia en análisis químico, coordinación de inventarios, instrumentación y control de procesos. Me encuentro ampliando mis conocimientos y habilidades en el desarrollo de aplicaciones Web utilizando el stack MERN de JavaScript.
