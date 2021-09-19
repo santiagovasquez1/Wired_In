@@ -16,8 +16,12 @@ app.use(express.json());
 //Conexion a bd
 bdConnection();
 
-//
+//Carpeta con la info de la apirest
 app.use(express.static('public'));
+
+//Rutas
+app.use('/api/usuarios', require('./routes/usuario.routes'));
+
 
 app.listen(process.env.PORT, () => {
     console.log("Servidor corriendo en el puerto " + process.env.PORT);
