@@ -1,5 +1,18 @@
+/* ===== Estilos globales ===== */
+
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+}
+
+html {
+	font-family: 'Roboto', sans-serif;
+	font-size: 62.5%;
+}
+
+body {
+	font-size: 1.8rem;
+	background: grey;
+	color: #fff;
 }
