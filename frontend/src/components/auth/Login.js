@@ -1,9 +1,22 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
-	const onChange = () => {
-		console.log('Escribiendo...');
+	// State para iniciar sesion
+	const [usuario, guardarUsuario] = useState({
+		email: '',
+		password: '',
+	});
+
+	// Extraer de usuario
+	const { email, password } = usuario;
+
+	const onChange = (event) => {
+		guardarUsuario({
+			...usuario,
+			[event.target.name]: event.target.value,
+		});
 	};
 
 	return (
@@ -18,6 +31,7 @@ function Login() {
 							id="email"
 							name="email"
 							placeholder="Email"
+							value={email}
 							onChange={onChange}
 						></input>
 					</div>
@@ -28,6 +42,7 @@ function Login() {
 							id="password"
 							name="password"
 							placeholder="Contraseña"
+							value={password}
 							onChange={onChange}
 						></input>
 					</div>
@@ -35,6 +50,9 @@ function Login() {
 						<input type="submit" value="Iniciar Sesión" />
 					</div>
 				</form>
+				<Link to={'/nueva-cuenta'} className="enlace-cuenta">
+					Crear nueva cuenta
+				</Link>
 			</div>
 		</Fragment>
 	);

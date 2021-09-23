@@ -60,3 +60,10 @@
 .submit-btn input:hover {
 	filter: brightness(1.5);
 }
+
+.enlace-cuenta {
+	margin-top: 2rem;
+	display: block;
+	opacity: 0.7;
+	color: var(--grisOscuro);
+}
