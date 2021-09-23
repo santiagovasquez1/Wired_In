@@ -1,5 +1,15 @@
 /* ===== Estilos globales ===== */
 
+:root {
+	--blanco: #fff;
+	--grisClaro: #edf2f6;
+	--grisMedio: #2f3848;
+	--grisOscuro: #1a202d;
+	--rojo: rgb(206, 0, 0);
+
+	--fontFamily: 'Roboto', sans-serif;
+}
+
 * {
 	padding: 0;
 	margin: 0;
@@ -12,7 +22,21 @@ html {
 }
 
 body {
-	font-size: 1.8rem;
-	background: grey;
-	color: #fff;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	/* width: 100vw; */
+	height: 100vh;
+	font-size: 1.6rem;
+	background: var(--grisOscuro);
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
 }
