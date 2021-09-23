@@ -19,10 +19,19 @@ function Login() {
 		});
 	};
 
+	// funcion de iniciar sesion
+	const onSubmit = (e) => {
+		e.preventDefault();
+
+		// validar que no haya campos vacios
+
+		// pasarlo al action
+	};
+
 	return (
 		<Fragment>
 			<div className="login">
-				<form>
+				<form onSubmit={onSubmit}>
 					<h1>Iniciar Sesión</h1>
 					<div className="email field">
 						<label htmlFor="email">Email</label>

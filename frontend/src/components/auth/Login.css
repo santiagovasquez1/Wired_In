@@ -52,7 +52,7 @@
 	border-radius: 0.5rem;
 	border: none;
 	background: var(--grisOscuro);
-	color: var(--blanco);
+	color: var(--grisClaro);
 	/* color: var(--rojo); */
 	transition: 0.5s ease;
 }
