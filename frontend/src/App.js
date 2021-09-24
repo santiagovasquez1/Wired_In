@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
 function App() {
+	console.log(process.env.REACT_APP_BACKEND_URL);
 	return (
 		<Router>
 			<Switch>

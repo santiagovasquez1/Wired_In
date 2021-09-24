@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import clienteAxios from '../../config/axios';
 import './Login.css';
 
 function NuevaCuenta() {
@@ -20,6 +21,16 @@ function NuevaCuenta() {
 			...usuario,
 			[e.target.name]: e.target.value,
 		});
+	};
+
+	// funcion para registrar usuario
+	const registrarUsuario = async (datos) => {
+		try {
+			const respuesta = await clienteAxios.post('/api/usuarios', datos);
+			console.log(respuesta);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	// funcion de crear cuenta
@@ -54,6 +65,9 @@ function NuevaCuenta() {
 		}
 
 		// pasarlo al action
+		registrarUsuario({ nombre, email, password });
+
+		// limpiar formulario
 	};
 
 	return (
