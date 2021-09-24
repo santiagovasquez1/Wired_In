@@ -15,22 +15,43 @@ function NuevaCuenta() {
 	// Extraer de usuario
 	const { nombre, email, password, confirmar, rol } = usuario;
 
-	const onChange = (event) => {
+	const onChange = (e) => {
 		guardarUsuario({
 			...usuario,
-			[event.target.name]: event.target.value,
+			[e.target.name]: e.target.value,
 		});
 	};
 
 	// funcion de crear cuenta
 	const onSubmit = (e) => {
+		console.log('submit');
 		e.preventDefault();
 
 		// validar que no haya campos vacios
+		if (
+			nombre.trim() === '' ||
+			email.trim() === '' ||
+			password.trim() === '' ||
+			confirmar.trim() === ''
+		) {
+			// prueba momentanea
+			alert('Todos los campos son obligatorios');
+			return;
+		}
 
 		// contraseña minimio de 6 caracteres
+		if (password.length < 6) {
+			// prueba momentanea
+			alert('La contraseña debe ser de al menos 6 caracteres');
+			return;
+		}
 
 		// contraseña igual en ambos campos
+		if (password !== confirmar) {
+			// prueba momentanea
+			alert('Las contraseñas no coinciden');
+			return;
+		}
 
 		// pasarlo al action
 	};
@@ -105,7 +126,7 @@ function NuevaCuenta() {
 					</div>
 
 					<div className="submit-btn">
-						<input type="submit" value="Registrarme" />
+						<input onSubmit={onSubmit} type="submit" value="Registrarme" />
 					</div>
 				</form>
 
