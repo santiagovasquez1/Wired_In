@@ -68,6 +68,13 @@ function NuevaCuenta() {
 		registrarUsuario({ nombre, email, password });
 
 		// limpiar formulario
+		guardarUsuario({
+			nombre: '',
+			email: '',
+			password: '',
+			confirmar: '',
+			rol: '',
+		});
 	};
 
 	return (
