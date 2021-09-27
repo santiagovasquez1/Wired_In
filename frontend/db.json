@@ -1,0 +1,39 @@
+{
+    "ventas": [
+        {
+            "valor total": 35000,
+            "fecha": "27/09/2021",
+            "identificación cliente": 10191118,
+            "nombre cliente": "cliente1",
+            "vendedor": "vendedor1"
+        },
+        {
+            "valor total": 45000,
+            "fecha": "26/09/2021",
+            "identificación cliente": 10191117,
+            "nombre cliente": "cliente3",
+            "vendedor": "vendedor2"
+        },
+        {
+            "valor total": 55000,
+            "fecha": "25/09/2021",
+            "identificación cliente": 10191116,
+            "nombre cliente": "cliente3",
+            "vendedor": "vendedor3"
+        },
+        {
+            "valor total": 65000,
+            "fecha": "24/09/2021",
+            "identificación cliente": 10191115,
+            "nombre cliente": "cliente4",
+            "vendedor": "vendedor4"
+        },
+        {
+            "valor total": 75000,
+            "fecha": "23/09/2021",
+            "identificación cliente": 10191114,
+            "nombre cliente": "cliente5",
+            "vendedor": "vendedor5"
+        }
+    ]
+}
