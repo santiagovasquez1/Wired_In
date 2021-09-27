@@ -15,10 +15,10 @@ function Sidebar() {
 	return (
 		<div className="sidebar">
 			<div className="logo-content">
-				<div className="logo">
+				<Link to={'/'} className="logo">
 					<FontAwesomeIcon icon={faBacon} />
 					<div className="logo_name">Carnicería</div>
-				</div>
+				</Link>
 			</div>
 			<ul className="nav_list">
 				<li>
@@ -28,25 +28,25 @@ function Sidebar() {
 					</Link>
 				</li>
 				<li>
-					<Link to={'/dashboard'} className="link">
+					<Link to={'/ventas'} className="link">
 						<FontAwesomeIcon icon={faTag} className="fontAwesome-icon" />
 						<span className="links_name">Ventas</span>
 					</Link>
 				</li>
 				<li>
-					<Link to={'/dashboard'} className="link">
+					<Link to={'/productos'} className="link">
 						<FontAwesomeIcon icon={faWarehouse} className="fontAwesome-icon" />
 						<span className="links_name">Productos</span>
 					</Link>
 				</li>
 				<li>
-					<Link to={'/dashboard'} className="link">
+					<Link to={'/vendedores'} className="link">
 						<FontAwesomeIcon icon={faUserTag} className="fontAwesome-icon" />
 						<span className="links_name">Vendedores</span>
 					</Link>
 				</li>
 				<li>
-					<Link to={'/dashboard'} className="link">
+					<Link to={'/usuarios'} className="link">
 						<FontAwesomeIcon icon={faUsers} className="fontAwesome-icon" />
 						<span className="links_name">Usuarios</span>
 					</Link>
