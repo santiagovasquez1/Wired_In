@@ -2,13 +2,14 @@ import React from 'react';
 import { Login } from './components/auth/Login';
 import { NuevaCuenta } from './components/auth/NuevaCuenta';
 import { Dashboard } from './components/layout/Dashboard';
+import { Sidebar } from './components/layout/Sidebar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
 function App() {
-	console.log(process.env.REACT_APP_BACKEND_URL);
 	return (
 		<Router>
+			<Sidebar />
 			<Switch>
 				<Route exact path="/" component={Login} />
 				<Route exact path="/nueva-cuenta" component={NuevaCuenta} />
