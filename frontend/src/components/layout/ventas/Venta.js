@@ -13,6 +13,14 @@ const Venta = ({ venta }) => {
 			</td>
 			<td>{fecha}</td>
 			<td>{vendedor}</td>
+			<td className="acciones">
+				<button className="btn btn-editar" type="button">
+					Editar
+				</button>
+				<button className="btn btn-eliminar" type="button">
+					Eliminar
+				</button>
+			</td>
 		</tr>
 	);
 };
