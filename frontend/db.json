@@ -1,38 +1,6 @@
 {
   "ventas": [
     {
-      "valor": 35000,
-      "fecha": "27/09/2021",
-      "cedula": 10191118,
-      "cliente": "cliente1",
-      "vendedor": "vendedor1",
-      "id": 1
-    },
-    {
-      "valor": 45000,
-      "fecha": "26/09/2021",
-      "cedula": 10191117,
-      "cliente": "cliente3",
-      "vendedor": "vendedor2",
-      "id": 2
-    },
-    {
-      "valor": 55000,
-      "fecha": "25/09/2021",
-      "cedula": 10191116,
-      "cliente": "cliente3",
-      "vendedor": "vendedor3",
-      "id": 3
-    },
-    {
-      "valor": 65000,
-      "fecha": "24/09/2021",
-      "cedula": 10191115,
-      "cliente": "cliente4",
-      "vendedor": "vendedor4",
-      "id": 4
-    },
-    {
       "valor": 75000,
       "fecha": "23/09/2021",
       "cedula": 10191114,
@@ -47,14 +15,6 @@
       "cliente": "Orlando",
       "cedula": 10293847,
       "vendedor": "soy un vendedor"
-    },
-    {
-      "id": 1029384756,
-      "valor": 15000,
-      "fecha": "2021-09-10",
-      "cliente": "lopez",
-      "cedula": 234567,
-      "vendedor": "Juancho"
     },
     {
       "id": 112341234,

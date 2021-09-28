@@ -27,8 +27,6 @@ const Ventas = () => {
 		data();
 	}, []);
 
-	// data();
-
 	return (
 		<div className="ventas">
 			<NavbarVentas />
@@ -46,7 +44,14 @@ const Ventas = () => {
 				<tbody className="table-body">
 					{ventas.length === 0
 						? 'No hay ventas'
-						: ventas.map((venta) => <Venta key={venta.id} venta={venta} />)}
+						: ventas.map((venta) => (
+								<Venta
+									key={venta.id}
+									ventas={ventas}
+									guardarVentas={guardarVentas}
+									venta={venta}
+								/>
+						  ))}
 				</tbody>
 			</table>
 		</div>
