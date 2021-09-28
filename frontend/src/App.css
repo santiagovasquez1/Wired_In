@@ -22,13 +22,8 @@ html {
 }
 
 body {
-	display: grid;
-	justify-content: center;
-	align-items: center;
-	/* width: 100vw; */
-	height: 100vh;
 	font-size: 1.6rem;
-	background: var(--grisOscuro);
+	/* background: var(--grisOscuro); */
 }
 
 ul {
@@ -39,4 +34,8 @@ ul {
 
 a {
 	text-decoration: none;
+}
+
+#root {
+	display: flex;
 }

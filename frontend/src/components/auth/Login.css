@@ -2,10 +2,14 @@
 
 /* ===== Login ===== */
 .login {
-	/* width: 100%; */
+	/* outline: 1px solid; */
+	/* align-self: center; */
+	/* margin-top: 20rem; */
+	margin: 10rem auto auto;
 	padding: 3.5rem 2rem;
 	border-radius: 2rem;
-	background: var(--blanco);
+	border: 2px solid var(--grisOscuro);
+	background: transparent;
 }
 
 .login h1 {
