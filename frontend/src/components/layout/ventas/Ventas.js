@@ -1,34 +1,55 @@
-import React, { Fragment } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import Venta from './Venta';
+import BuscadorVentas from './BuscadorVentas';
+import NavbarVentas from './NavbarVentas';
+import axios from 'axios';
 import './Ventas.css';
 
 const Ventas = () => {
+	// State con las ventas
+	const [ventas, guardarVentas] = useState([]);
+
+	// consultar la api
+	useEffect(() => {
+		const data = async () => {
+			try {
+				const respuesta = await axios({
+					method: 'get',
+					url: 'http://localhost:4000/ventas',
+				});
+
+				guardarVentas(respuesta.data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		data();
+	}, []);
+
+	// data();
+
 	return (
-		<Router>
-			<div className="ventas">
-				<nav>
-					<h1>Ventas</h1>
-					<div className="usuario">
-						<span>Administrador</span>
-						<FontAwesomeIcon icon={faUser} />
-					</div>
-				</nav>
-				<table className="table">
-					<thead className="table-head">
-						<tr>
-							<th scope="col">Código Venta</th>
-							<th scope="col">Nombre cliente</th>
-							<th scope="col">Valor</th>
-							<th scope="col">Fecha</th>
-							<th scope="col">Nombre vendedor</th>
-						</tr>
-					</thead>
-					<tbody className="table-body">No hay ventas</tbody>
-				</table>
-			</div>
-		</Router>
+		<div className="ventas">
+			<NavbarVentas />
+			<BuscadorVentas />
+			<table className="table">
+				<thead className="table-head">
+					<tr>
+						<th scope="col">Código</th>
+						<th scope="col">Cliente</th>
+						<th scope="col">Valor</th>
+						<th scope="col">Fecha</th>
+						<th scope="col">Vendedor</th>
+					</tr>
+				</thead>
+				<tbody className="table-body">
+					{ventas.length === 0
+						? 'No hay ventas'
+						: ventas.map((venta) => <Venta key={venta.id} venta={venta} />)}
+				</tbody>
+			</table>
+		</div>
 	);
 };
 

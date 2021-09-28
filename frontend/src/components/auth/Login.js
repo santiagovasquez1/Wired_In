@@ -12,10 +12,10 @@ function Login() {
 	// Extraer de usuario
 	const { email, password } = usuario;
 
-	const onChange = (event) => {
+	const onChange = (e) => {
 		guardarUsuario({
 			...usuario,
-			[event.target.name]: event.target.value,
+			[e.target.name]: e.target.value,
 		});
 	};
 

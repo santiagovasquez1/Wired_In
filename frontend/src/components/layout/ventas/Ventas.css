@@ -6,7 +6,7 @@
 	width: 100%;
 }
 
-.ventas nav {
+.nav-ventas {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -15,7 +15,7 @@
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
-.ventas h1 {
+.nav-ventas h1 {
 	font-size: 2.5rem;
 	color: var(--grisOscuro);
 }
@@ -50,4 +50,65 @@
 .table-head th {
 	padding: 0.5rem 0.5rem;
 	color: var(--blanco);
+}
+
+.table-body {
+	background: var(--grisClaro);
+}
+
+.table-body td {
+	padding: 0.5rem 0.5rem;
+	color: var(--grisOscuro);
+}
+
+.buscador {
+	/* outline: 1px solid; */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 2%;
+}
+
+.buscador-input {
+	/* outline: 1px solid; */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 40%;
+}
+
+.buscador-input h3 {
+	margin-right: 2rem;
+	font-size: 2rem;
+	font-weight: 500;
+	color: var(--grisOscuro);
+}
+
+.buscador-input input {
+	width: 70%;
+	padding: 1rem 1.2rem;
+	font-size: 1.8rem;
+	border: 0.2rem solid var(--grisClaro);
+	border-radius: 0.5rem;
+	background: var(--grisClaro);
+	color: var(--grisOscuro);
+}
+
+.buscador-input input:focus {
+	outline: none;
+	border: 0.2rem solid var(--grisOscuro);
+}
+
+.btn-agregar {
+	/* outline: 1px solid; */
+	padding: 1.2rem 1.8rem;
+	border-radius: 1.5rem;
+	font-size: 2rem;
+	font-weight: 600;
+	background: rgb(2, 63, 2);
+	color: var(--blanco);
+}
+
+.btn-agregar:hover {
+	filter: brightness(2);
 }

@@ -4,6 +4,7 @@ import { NuevaCuenta } from './components/auth/NuevaCuenta';
 import { Dashboard } from './components/layout/Dashboard';
 import { Sidebar } from './components/layout/Sidebar';
 import Ventas from './components/layout/ventas/Ventas';
+import NuevaVenta from './components/layout/ventas/NuevaVenta';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
@@ -16,6 +17,7 @@ function App() {
 				<Route exact path="/nueva-cuenta" component={NuevaCuenta} />
 				<Route exact path="/dashboard" component={Dashboard} />
 				<Route exact path="/ventas" component={Ventas} />
+				<Route exact path="/ventas/nueva" component={NuevaVenta} />
 			</Switch>
 		</Router>
 	);

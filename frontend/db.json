@@ -1,39 +1,44 @@
 {
     "ventas": [
         {
-            "valor total": 35000,
+            "valorTotal": 35000,
             "fecha": "27/09/2021",
-            "identificación cliente": 10191118,
-            "nombre cliente": "cliente1",
-            "vendedor": "vendedor1"
+            "identificacionCliente": 10191118,
+            "nombreCliente": "cliente1",
+            "vendedor": "vendedor1",
+            "id": 1
         },
         {
-            "valor total": 45000,
+            "valorTotal": 45000,
             "fecha": "26/09/2021",
-            "identificación cliente": 10191117,
-            "nombre cliente": "cliente3",
-            "vendedor": "vendedor2"
+            "identificacionCliente": 10191117,
+            "nombreCliente": "cliente3",
+            "vendedor": "vendedor2",
+            "id": 2
         },
         {
-            "valor total": 55000,
+            "valorTotal": 55000,
             "fecha": "25/09/2021",
-            "identificación cliente": 10191116,
-            "nombre cliente": "cliente3",
-            "vendedor": "vendedor3"
+            "identificacionCliente": 10191116,
+            "nombreCliente": "cliente3",
+            "vendedor": "vendedor3",
+            "id": 3
         },
         {
-            "valor total": 65000,
+            "valorTotal": 65000,
             "fecha": "24/09/2021",
-            "identificación cliente": 10191115,
-            "nombre cliente": "cliente4",
-            "vendedor": "vendedor4"
+            "identificacionCliente": 10191115,
+            "nombreCliente": "cliente4",
+            "vendedor": "vendedor4",
+            "id": 4
         },
         {
-            "valor total": 75000,
+            "valorTotal": 75000,
             "fecha": "23/09/2021",
-            "identificación cliente": 10191114,
-            "nombre cliente": "cliente5",
-            "vendedor": "vendedor5"
+            "identificacionCliente": 10191114,
+            "nombreCliente": "cliente5",
+            "vendedor": "vendedor5",
+            "id": 5
         }
     ]
 }
