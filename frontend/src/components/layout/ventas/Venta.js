@@ -66,7 +66,7 @@ const Venta = ({ venta, ventas, guardarVentas }) => {
 					className="btn btn-eliminar"
 					type="button"
 					onClick={() => confirmarEliminarVenta(id)}
-				>
+								>
 					Eliminar
 				</button>
 			</td>

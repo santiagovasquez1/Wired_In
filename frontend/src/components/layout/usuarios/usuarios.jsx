@@ -1,6 +1,9 @@
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import Usuario from './usuario';
+import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import './usuarios.css';
 
@@ -32,9 +35,9 @@ const Usuarios = () => {
                 method: 'DELETE',
                 url: `${urlUsuarios}/${usuario.uid}`
             });
-            Swal.fire('¡Eliminada!', response.data.msg, 'success');
+            Swal.fire('¡Eliminado!', response.data.msg, 'success');
         } catch (error) {
-            Swal.fire('Error', 'No se pudo eliminarl al usuario', 'error');
+            Swal.fire('Error', error.msg, 'error');
         }
     }
 
@@ -51,7 +54,6 @@ const Usuarios = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 eliminarUsuario(usuario);
-                // eliminar venta del estado
                 eliminarUsuarioDelEstado(usuario);
                 history.push('/usuarios');
             }
@@ -63,13 +65,40 @@ const Usuarios = () => {
         guardarUsuarios(usuarios.filter((usuarioEsado) => usuarioEsado.uid !== usuario.uid));
     };
 
+    const editarUsuario = (usuario) => {
+        <Usuario
+            key={usuario.uid}
+            usuario={usuario}
+        />
+    };
+
     return (
         <div className="usuarios">
-            <h1>Usuarios</h1>
+            <nav className="nav-ventas">
+                <h1>Usuarios</h1>
+            </nav>
             {
                 usuarios.length === 0
-                    ? <p>Cargando Usuarios....</p>
-                    : <table className="table">
+                    ? <div style={{
+                        textAlign: "center",
+                        width: '100%',
+                    }}>
+                        <h4>Cargando Usuarios....</h4>
+                        {/* <i>
+                            <FontAwesomeIcon icon={faSpinner} rotation={90} onAnimationStart={() => {
+
+                            }} />
+                        </i> */}
+                        <p className="">Por favor esperar</p>
+                    </div>
+                    :
+                    //  <div className="buscador">
+                    //     <div className="buscador-input">
+                    //         <h3>Buscar Usuario</h3>
+                    //         <input type="text" placeholder="Buscar" />
+                    //     </div>
+                    // </div>
+                    <table className="table">
                         <thead className="table-head">
                             <tr>
                                 <th scope="col">Correo</th>
@@ -86,7 +115,7 @@ const Usuarios = () => {
                                         <td>{usuario.nombre}</td>
                                         <td className="w200">{usuario.rol}</td>
                                         <td className="acciones">
-                                            <button className="btn btn-editar" type="button">
+                                            <button className="btn btn-editar" type="button" onClick={() => editarUsuario(usuario)}>
                                                 Editar
                                             </button>
 
