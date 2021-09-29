@@ -9,9 +9,7 @@ const getUsuarios = async(req = request, res = response) => {
         const from = parseInt(req.query.from) || 0;
 
         const [usuarios, total] = await Promise.all([
-            UsuarioDb.find({}, 'nombre email rol imagen activo')
-            .skip(from)
-            .limit(5),
+            UsuarioDb.find({}, 'nombre email rol imagen activo'),
             UsuarioDb.countDocuments()
         ]);
 
@@ -117,7 +115,7 @@ const borrarUsuario = async(req = request, res = response) => {
                 msg: 'No existe un usuario por ese id'
             });
         } else {
-            await User.findByIdAndDelete(uid);
+            await UsuarioDb.findByIdAndDelete(uid);
             return res.status(200).send({
                 ok: false,
                 msg: 'Usuario eliminado'
