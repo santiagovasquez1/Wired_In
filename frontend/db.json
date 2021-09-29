@@ -25,20 +25,28 @@
       "vendedor": "Adriana"
     },
     {
-      "id": 1234,
-      "valor": 65000,
-      "fecha": "2021-09-04",
-      "cliente": "Orlando",
-      "cedula": 239045678,
-      "vendedor": "Juancho"
+      "id": "44444",
+      "valor": 30000,
+      "fecha": "2021-09-15",
+      "cliente": "Nombre",
+      "cedula": 44444,
+      "vendedor": "Vendedor"
     },
     {
-      "id": 777777,
-      "valor": 25000,
-      "fecha": "2021-09-13",
+      "id": "22222",
+      "valor": 20000,
+      "fecha": "2021-09-07",
+      "cliente": "eeeee",
+      "cedula": 22222,
+      "vendedor": "Vendedor2"
+    },
+    {
+      "id": "66666",
+      "valor": 40000,
+      "fecha": "2021-09-14",
       "cliente": "Nombre",
-      "cedula": 5555555,
-      "vendedor": "Vendedor"
+      "cedula": 66666,
+      "vendedor": "Vendedor3"
     }
   ]
 }
