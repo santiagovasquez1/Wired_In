@@ -8,7 +8,7 @@ import {
 	faWarehouse,
 	faLaptop,
 	faUserTag,
-	faBacon,
+	// faBacon,
 } from '@fortawesome/free-solid-svg-icons';
 
 function Sidebar() {
@@ -16,7 +16,7 @@ function Sidebar() {
 		<div className="sidebar">
 			<div className="logo-content">
 				<Link to={'/'} className="logo">
-					<FontAwesomeIcon icon={faBacon} />
+					{/* <FontAwesomeIcon icon={faBacon} /> */}
 					<div className="logo_name">Carnicería</div>
 				</Link>
 			</div>

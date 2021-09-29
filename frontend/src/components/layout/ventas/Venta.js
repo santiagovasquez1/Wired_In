@@ -8,7 +8,7 @@ const Venta = ({ venta, ventas, guardarVentas }) => {
 	const { valor, fecha, cliente, vendedor, id } = venta;
 	const history = useHistory();
 
-	// funcion eliminar venta
+	// funcion eliminar venta de la api
 	const eliminarVenta = async (id) => {
 		try {
 			await axios({
@@ -23,7 +23,7 @@ const Venta = ({ venta, ventas, guardarVentas }) => {
 		}
 	};
 
-	// cambiar el estado de las ventas
+	// eliminar venta del estado
 	const eliminarVentaDelEstado = (id) => {
 		guardarVentas(ventas.filter((ventaState) => ventaState.id !== id));
 	};

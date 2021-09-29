@@ -1,14 +1,6 @@
 {
   "ventas": [
     {
-      "valor": 75000,
-      "fecha": "23/09/2021",
-      "cedula": 10191114,
-      "cliente": "cliente5",
-      "vendedor": "vendedor5",
-      "id": 5
-    },
-    {
       "id": 454647,
       "valor": 23000,
       "fecha": "2021-09-10",
@@ -31,6 +23,22 @@
       "cliente": "Luis Diaz",
       "cedula": 896745,
       "vendedor": "Adriana"
+    },
+    {
+      "id": 1234,
+      "valor": 65000,
+      "fecha": "2021-09-04",
+      "cliente": "Orlando",
+      "cedula": 239045678,
+      "vendedor": "Juancho"
+    },
+    {
+      "id": 777777,
+      "valor": 25000,
+      "fecha": "2021-09-13",
+      "cliente": "Nombre",
+      "cedula": 5555555,
+      "vendedor": "Vendedor"
     }
   ]
 }
