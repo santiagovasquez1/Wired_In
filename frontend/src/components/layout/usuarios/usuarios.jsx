@@ -66,10 +66,10 @@ const Usuarios = () => {
     };
 
     const editarUsuario = (usuario) => {
-        <Usuario
-            key={usuario.uid}
-            usuario={usuario}
-        />
+        // <Usuario
+        //     key={usuario.uid}
+        //     usuario={usuario}
+        // />
     };
 
     return (
@@ -115,9 +115,12 @@ const Usuarios = () => {
                                         <td>{usuario.nombre}</td>
                                         <td className="w200">{usuario.rol}</td>
                                         <td className="acciones">
-                                            <button className="btn btn-editar" type="button" onClick={() => editarUsuario(usuario)}>
+                                            {/* <button className="btn btn-editar" type="button" onClick={() => editarUsuario(usuario)}>
                                                 Editar
-                                            </button>
+                                            </button> */}
+                                            <Link to={{pathname:'/usuarios/info', state:usuario}}  className="btn btn-editar">
+                                                Editar
+                                            </Link>
 
                                             <button className="btn btn-eliminar" type="button" onClick={() => confirmarEliminarUsuario(usuario)}>
                                                 Eliminar

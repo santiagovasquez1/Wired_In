@@ -55,3 +55,71 @@ a {
 .w200 {
     width: 200px
 }
+
+.form-container {
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 3.5rem 2rem;
+    border-radius: 2rem;
+    border: 2px solid var(--grisOscuro);
+    background: transparent;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--grisOscuro);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.field-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 1rem 0;
+}
+
+.field-form label {
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-right: 2rem;
+    color: var(--grisOscuro);
+}
+
+.field-form input {
+    width: 40rem;
+    height: 3.5rem;
+    font-size: 1.8rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.2rem;
+    outline: none;
+    background: var(--grisClaro);
+}
+
+.form-container button {
+    cursor: pointer;
+    font-family: var(--fontFamily);
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    /* margin: 1rem 0 0 auto; */
+    margin-top: 2rem;
+    margin-left: auto;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--grisOscuro);
+    color: var(--blanco);
+}
+
+.form-container button:hover {
+    filter: brightness(1.5);
+}
