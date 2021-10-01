@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegistrarProductos</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <h1> Carnicería Wired-in</h1>
+    <h1> Registro de Productos </h1>
+
+    <form action="" >
+        <label for="Código Producto">Código Producto:</label>
+        <input type="text" name="Código Producto" placeholder="Código de Barras">
+        <br><br>
+        <label for="Descripción Producto">Descripción Producto:</label>
+        <input type="text" name="Descripción Producto" placeholder="Ejemplo: Manzana verde">
+        <br><br>
+        <label for="Valor Unitario">Valor Unitario:</label>
+        <input type="number" name="valor Unitario" id="valor Unitario" placeholder="Valor unitario en pesos">
+        <br><br>
+        <label for="Estado">Estado:</label>
+        <select name="Estado" id="Estado">
+            <option value="Sin Asignar" selected></option>
+            <option value="D">Disponible</option>
+            <option value="ND">No Disponible</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Registrar Producto">
+    </form>
+    <br><br>
+
+    <a href="/Index.html">ir a módulo de productos</a>
+</body>
+</html>
