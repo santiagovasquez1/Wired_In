@@ -37,7 +37,7 @@ const Usuarios = () => {
             });
             Swal.fire('¡Eliminado!', response.data.msg, 'success');
         } catch (error) {
-            Swal.fire('Error', error.msg, 'error');
+            Swal.fire('Error!', error.error.msg, 'error');
         }
     }
 
@@ -64,14 +64,7 @@ const Usuarios = () => {
     const eliminarUsuarioDelEstado = (usuario) => {
         guardarUsuarios(usuarios.filter((usuarioEsado) => usuarioEsado.uid !== usuario.uid));
     };
-
-    const editarUsuario = (usuario) => {
-        // <Usuario
-        //     key={usuario.uid}
-        //     usuario={usuario}
-        // />
-    };
-
+    
     return (
         <div className="usuarios">
             <nav className="nav-ventas">
@@ -118,7 +111,7 @@ const Usuarios = () => {
                                             {/* <button className="btn btn-editar" type="button" onClick={() => editarUsuario(usuario)}>
                                                 Editar
                                             </button> */}
-                                            <Link to={{pathname:'/usuarios/info', state:usuario}}  className="btn btn-editar">
+                                            <Link to={{ pathname: '/usuarios/info', state: usuario }} className="btn btn-editar">
                                                 Editar
                                             </Link>
 

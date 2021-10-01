@@ -5,7 +5,7 @@ import { Login } from './components/auth/Login';
 import { NuevaCuenta } from './components/auth/NuevaCuenta';
 import { Dashboard } from './components/layout/Dashboard';
 import { Sidebar } from './components/layout/Sidebar';
-import usuario from './components/layout/usuarios/usuario';
+import Usuario from './components/layout/usuarios/usuario';
 import Usuarios from './components/layout/usuarios/usuarios';
 import NuevaVenta from './components/layout/ventas/NuevaVenta';
 import Ventas from './components/layout/ventas/Ventas';
@@ -21,7 +21,7 @@ function App() {
 				<Route exact path="/ventas" component={Ventas} />
 				<Route exact path="/ventas/nueva" component={NuevaVenta} />
 				<Route exact path="/usuarios" component={Usuarios}></Route>
-				<Route exact path="/usuarios/info" component={usuario}></Route>
+				<Route exact path="/usuarios/info" component={Usuario}></Route>
 			</Switch>
 		</Router>
 	);

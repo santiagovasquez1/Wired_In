@@ -18,7 +18,6 @@
     },
     "homepage": "https://github.com/santiagovasquez1/Wired_In#readme",
     "dependencies": {
-        "bcrypt": "^5.0.1",
         "bcryptjs": "^2.4.3",
         "cors": "^2.8.5",
         "dotenv": "^10.0.0",
@@ -28,5 +27,8 @@
         "morgan": "^1.10.0",
         "nodemon": "^2.0.12",
         "swagger-ui-express": "^4.1.6"
+    },
+    "devDependencies": {
+        "node": "^16.10.0"
     }
 }

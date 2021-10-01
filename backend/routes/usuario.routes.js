@@ -18,9 +18,9 @@ router.post('/', [
     crearUsuario);
 
 router.put('/:id', [
-    check('name', 'El nombre es obligatorio').not().isEmpty(),
+    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('email', 'El email no tiene el formato correcto').isEmail(),
-    check('role', 'El rol es obligatorio').not().isEmpty(),
+    check('rol', 'El rol es obligatorio').not().isEmpty(),
     validarCampos,
 ], actualizarUsurario);
 
