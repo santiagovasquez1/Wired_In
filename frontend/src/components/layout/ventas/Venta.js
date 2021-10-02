@@ -1,8 +1,11 @@
 import React from 'react';
-import './Ventas.css';
+import { useHistory } from 'react-router-dom';
+
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+
+// Estilos
+import './Ventas.css';
 
 const Venta = ({ venta, ventas, guardarVentas }) => {
 	const { valor, fecha, cliente, vendedor, id } = venta;

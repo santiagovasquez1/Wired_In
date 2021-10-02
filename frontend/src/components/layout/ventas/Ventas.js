@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
+
+// Componentes
 import Venta from './Venta';
 import BuscadorVentas from './BuscadorVentas';
 import NavbarVentas from './NavbarVentas';
+
 import axios from 'axios';
+
+// Estilos
 import './Ventas.css';
 
 const Ventas = () => {
@@ -11,20 +16,20 @@ const Ventas = () => {
 
 	// consultar la api
 	useEffect(() => {
-		const data = async () => {
+		const obtenerVentas = async () => {
 			try {
 				const respuesta = await axios({
 					method: 'get',
 					url: 'http://localhost:4000/ventas',
 				});
-
 				guardarVentas(respuesta.data);
 			} catch (error) {
 				console.log(error);
+				// alerta momentanea
+				alert('Las ventas no se pueden cargar de la base de datos');
 			}
 		};
-
-		data();
+		obtenerVentas();
 	}, []);
 
 	return (

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 
-function NuevaCuenta() {
+const NuevaCuenta = () => {
 	// State para crear cuenta
 	const [usuario, guardarUsuario] = useState({
 		nombre: '',
@@ -161,6 +161,6 @@ function NuevaCuenta() {
 			</div>
 		</Fragment>
 	);
-}
+};
 
-export { NuevaCuenta };
+export default NuevaCuenta;
