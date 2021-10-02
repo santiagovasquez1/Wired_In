@@ -8,6 +8,7 @@ import Sidebar from './components/layout/Sidebar';
 import Ventas from './components/layout/ventas/Ventas';
 import NuevaVenta from './components/layout/ventas/NuevaVenta';
 import Productos from './components/layout/productos/Productos';
+// import NuevoProductos from './components/layout/productos/Productos';
 
 // Rutas
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -26,6 +27,7 @@ function App() {
 				<Route exact path="/ventas" component={Ventas} />
 				<Route exact path="/ventas/nueva" component={NuevaVenta} />
 				<Route exact path="/productos" component={Productos} />
+				{/* <Route exact path="/productos/nuevo" component={NuevoProductos} /> */}
 			</Switch>
 		</Router>
 	);

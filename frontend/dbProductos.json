@@ -34,7 +34,7 @@
           "idProducto": "106",
           "descripcion": "Lomo ancho",
           "valorUnitario": 18000,
-          "estadoProducto": true
+          "estadoProducto": false
         },
         {
           "idProducto": "107",
@@ -46,7 +46,7 @@
           "idProducto": "108",
           "descripcion": "Lomo de brazo",
           "valorUnitario": 18000,
-          "estadoProducto": true
+          "estadoProducto": false
         },
         {
           "idProducto": "109",

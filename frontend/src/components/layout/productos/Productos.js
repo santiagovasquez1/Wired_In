@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
 
+// Estilos
+import './Productos.css';
+
 // Componentes
+import NavbarProductos from './NavbarProductos';
+import BuscadorProductos from './BuscadorProductos';
+import Producto from './Producto';
 
 const Ventas = () => {
 	// State con los productos
 	const [productos, guardarProductos] = useState([]);
-
-	// const { idProducto, descripcion, valorUnitario, estadoProducto } = productos;
 
 	// consultar la api
 	useEffect(() => {
@@ -30,10 +34,11 @@ const Ventas = () => {
 
 	return (
 		<div className="productos">
-			<h1>Productos</h1>
+			<NavbarProductos />
+			<BuscadorProductos />
 			<div>
 				{productos.map((producto) => (
-					<p>{producto.descripcion}</p>
+					<Producto key={producto.idProducto} producto={producto} />
 				))}
 			</div>
 		</div>

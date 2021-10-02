@@ -1,0 +1,16 @@
+@import url('../../../App.css');
+
+.productos {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.nav-productos {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1.4rem 5%;
+	margin-bottom: 5rem;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
