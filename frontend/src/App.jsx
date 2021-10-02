@@ -5,6 +5,7 @@ import { Login } from './components/auth/Login';
 import { NuevaCuenta } from './components/auth/NuevaCuenta';
 import { Dashboard } from './components/layout/Dashboard';
 import { Sidebar } from './components/layout/Sidebar';
+import NuevoUsuario from './components/layout/usuarios/NuevoUsuario';
 import Usuario from './components/layout/usuarios/usuario';
 import Usuarios from './components/layout/usuarios/usuarios';
 import NuevaVenta from './components/layout/ventas/NuevaVenta';
@@ -22,6 +23,7 @@ function App() {
 				<Route exact path="/ventas/nueva" component={NuevaVenta} />
 				<Route exact path="/usuarios" component={Usuarios}></Route>
 				<Route exact path="/usuarios/info" component={Usuario}></Route>
+				<Route exact path="/usuarios/nuevo" component={NuevoUsuario}></Route>
 			</Switch>
 		</Router>
 	);

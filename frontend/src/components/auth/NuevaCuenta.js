@@ -100,8 +100,9 @@ function NuevaCuenta() {
         placeholder = "Nombre"
         value = { nombre }
         onChange = { onChange } >
-        < /input> <
-        /div>
+        <
+        /input> < /
+        div >
 
         <
         div className = "field" >
@@ -113,8 +114,9 @@ function NuevaCuenta() {
         placeholder = "Email"
         value = { email }
         onChange = { onChange } >
-        < /input> <
-        /div>
+        <
+        /input> < /
+        div >
 
         <
         div className = "field" >
@@ -126,8 +128,9 @@ function NuevaCuenta() {
         placeholder = "Contraseña"
         value = { password }
         onChange = { onChange } >
-        < /input> <
-        /div>
+        <
+        /input> < /
+        div >
 
         <
         div className = "field" >
@@ -137,13 +140,13 @@ function NuevaCuenta() {
         Contraseña <
         /label> <
         input type = "password"
-        id = "confirmar"
         name = "confirmar"
         placeholder = "Confirmar contraseña"
         value = { confirmar }
         onChange = { onChange } >
-        < /input> <
-        /div>
+        <
+        /input> < /
+        div >
 
         <
         div className = "field" >
@@ -155,8 +158,9 @@ function NuevaCuenta() {
         placeholder = "Rol"
         value = { rol }
         onChange = { onChange } >
-        < /input> <
-        /div>
+        <
+        /input> < /
+        div >
 
         <
         div className = "submit-btn" >
@@ -165,15 +169,15 @@ function NuevaCuenta() {
         type = "submit"
         value = "Registrarme" / >
         <
-        /div> <
-        /form>
+        /div> < /
+        form >
 
         <
         Link to = { '/' }
         className = "enlace-cuenta" >
         Iniciar sesión <
-        /Link> <
-        /div> <
+        /Link> < /
+        div > <
         /Fragment>
     );
 }

@@ -1,10 +1,11 @@
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Usuario from './usuario';
+
 import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Buscador from './../share/buscador';
+import NavbarVentanas from '../share/NavbarVentanas';
 import './usuarios.css';
 
 const Usuarios = () => {
@@ -64,67 +65,59 @@ const Usuarios = () => {
     const eliminarUsuarioDelEstado = (usuario) => {
         guardarUsuarios(usuarios.filter((usuarioEsado) => usuarioEsado.uid !== usuario.uid));
     };
-    
+
+    if (usuarios.length === 0) {
+        return (
+            <div className="usuarios">
+                <NavbarVentanas title="Usuarios" url="/usuarios/nuevo" />
+                <div style={{
+                    textAlign: "center",
+                    width: '100%',
+                }}>
+                    <h4>Cargando Usuarios....</h4>
+                    <p className="">Por favor esperar</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="usuarios">
-            <nav className="nav-ventas">
-                <h1>Usuarios</h1>
-            </nav>
-            {
-                usuarios.length === 0
-                    ? <div style={{
-                        textAlign: "center",
-                        width: '100%',
-                    }}>
-                        <h4>Cargando Usuarios....</h4>
-                        {/* <i>
-                            <FontAwesomeIcon icon={faSpinner} rotation={90} onAnimationStart={() => {
-
-                            }} />
-                        </i> */}
-                        <p className="">Por favor esperar</p>
-                    </div>
-                    :
-                    //  <div className="buscador">
-                    //     <div className="buscador-input">
-                    //         <h3>Buscar Usuario</h3>
-                    //         <input type="text" placeholder="Buscar" />
-                    //     </div>
-                    // </div>
-                    <table className="table">
-                        <thead className="table-head">
+            <NavbarVentanas title="Usuarios" />
+            <Buscador title='usuario' url='/usuarios/nuevo' />
+            <table className="table">
+                <thead className="table-head">
+                    <tr>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody className="table-body">
+                    {
+                        usuarios.map(usuario => (
                             <tr>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Rol</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody className="table-body">
-                            {
-                                usuarios.map(usuario => (
-                                    <tr>
-                                        <td >{usuario.email}</td>
-                                        <td>{usuario.nombre}</td>
-                                        <td className="w200">{usuario.rol}</td>
-                                        <td className="acciones">
-                                            {/* <button className="btn btn-editar" type="button" onClick={() => editarUsuario(usuario)}>
+                                <td >{usuario.email}</td>
+                                <td>{usuario.nombre}</td>
+                                <td className="w200">{usuario.rol}</td>
+                                <td className="acciones">
+                                    {/* <button className="btn btn-editar" type="button" onClick={() => editarUsuario(usuario)}>
                                                 Editar
                                             </button> */}
-                                            <Link to={{ pathname: '/usuarios/info', state: usuario }} className="btn btn-editar">
-                                                Editar
-                                            </Link>
+                                    <Link to={{ pathname: '/usuarios/info', state: usuario }} className="btn btn-editar">
+                                        Editar
+                                    </Link>
 
-                                            <button className="btn btn-eliminar" type="button" onClick={() => confirmarEliminarUsuario(usuario)}>
-                                                Eliminar
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
-            }
+                                    <button className="btn btn-eliminar" type="button" onClick={() => confirmarEliminarUsuario(usuario)}>
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
         </div >
     );
 }

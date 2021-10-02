@@ -6,7 +6,7 @@
     --grisMedio: #2f3848;
     --grisOscuro: #1a202d;
     --rojo: rgb(206, 0, 0);
-    --fontFamily: 'Roboto', sans-serif;
+    --fontFamily: "Roboto", sans-serif;
 }
 
 * {
@@ -16,7 +16,7 @@
 }
 
 html {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 62.5%;
 }
 
@@ -45,15 +45,15 @@ a {
 }
 
 .w100 {
-    width: 100px
+    width: 100px;
 }
 
 .w140 {
-    width: 140px
+    width: 140px;
 }
 
 .w200 {
-    width: 200px
+    width: 200px;
 }
 
 .form-container {
@@ -64,6 +64,14 @@ a {
     border-radius: 2rem;
     border: 2px solid var(--grisOscuro);
     background: transparent;
+    height: fit-content;
+}
+
+.form-container h1 {
+    font-weight: 900;
+    margin: 0 0 4rem 0;
+    text-align: center;
+    color: var(--grisOscuro);
 }
 
 .form-container h2 {
@@ -93,7 +101,8 @@ a {
     color: var(--grisOscuro);
 }
 
-.field-form input {
+.field-form input,
+select {
     width: 40rem;
     height: 3.5rem;
     font-size: 1.8rem;
@@ -102,6 +111,10 @@ a {
     border-radius: 0.2rem;
     outline: none;
     background: var(--grisClaro);
+}
+
+.field-form input ::placeholder {
+    font-family: var(--fontFamily);
 }
 
 .form-container button {
@@ -122,4 +135,25 @@ a {
 
 .form-container button:hover {
     filter: brightness(1.5);
+}
+
+.form-actions {
+    margin: 0px auto;
+    display: inline-flex;
+}
+
+.form-actions button {
+    cursor: pointer;
+    font-family: var(--fontFamily);
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    /* margin: 1rem 0 0 auto; */
+    margin-top: 2rem;
+    margin-left: 2rem;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--grisOscuro);
+    color: var(--blanco);
 }
