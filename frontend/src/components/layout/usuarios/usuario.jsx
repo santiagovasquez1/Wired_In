@@ -81,8 +81,7 @@ export default class Usuario extends React.Component {
                             </div>
                             <div className="field-form">
                                 <label htmlFor="rol">Rol de usuario</label>
-                                <select name="rol" id="rol" value={usuario.rol} onChange={this.onChangeModel} required="true"
-                                    required="true">
+                                <select name="rol" id="rol" value={usuario.rol} onChange={this.onChangeModel} required="true">
                                     <option value=""></option>
                                     <option value="Administrador">Administrador</option>
                                     <option value="Vendedor">Vendedor</option>
