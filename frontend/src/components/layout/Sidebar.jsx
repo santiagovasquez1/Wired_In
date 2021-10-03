@@ -21,12 +21,12 @@ function Sidebar() {
 				</Link>
 			</div>
 			<ul className="nav_list">
-				<li>
+				{/* <li>
 					<Link to={'/dashboard'} className="link">
 						<FontAwesomeIcon icon={faLaptop} className="fontAwesome-icon" />
 						<span className="links_name">Dashboard</span>
 					</Link>
-				</li>
+				</li> */}
 				<li>
 					<Link to={'/ventas'} className="link">
 						<FontAwesomeIcon icon={faTag} className="fontAwesome-icon" />
@@ -39,12 +39,12 @@ function Sidebar() {
 						<span className="links_name">Productos</span>
 					</Link>
 				</li>
-				<li>
+				{/* <li>
 					<Link to={'/vendedores'} className="link">
 						<FontAwesomeIcon icon={faUserTag} className="fontAwesome-icon" />
 						<span className="links_name">Vendedores</span>
 					</Link>
-				</li>
+				</li> */}
 				<li>
 					<Link to={'/usuarios'} className="link">
 						<FontAwesomeIcon icon={faUsers} className="fontAwesome-icon" />

@@ -4,6 +4,9 @@ import './App.css';
 import { Login } from './components/auth/Login';
 import { NuevaCuenta } from './components/auth/NuevaCuenta';
 import { Dashboard } from './components/layout/Dashboard';
+import NuevoProducto from './components/layout/Productos/NuevoProducto';
+import Producto from './components/layout/Productos/Producto';
+import Productos from './components/layout/Productos/Productos';
 import { Sidebar } from './components/layout/Sidebar';
 import NuevoUsuario from './components/layout/usuarios/NuevoUsuario';
 import Usuario from './components/layout/usuarios/usuario';
@@ -24,6 +27,9 @@ function App() {
 				<Route exact path="/usuarios" component={Usuarios}></Route>
 				<Route exact path="/usuarios/info" component={Usuario}></Route>
 				<Route exact path="/usuarios/nuevo" component={NuevoUsuario}></Route>
+				<Route exact path="/productos" component={Productos}></Route>
+				<Route exact path="/productos/info" component={Producto}></Route>
+				<Route exact path="/productos/nuevo" component={NuevoProducto}></Route>
 			</Switch>
 		</Router>
 	);
