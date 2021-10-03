@@ -20,7 +20,7 @@ const usuarioSchema = Schema({
     rol: {
         type: String,
         required: true,
-        default: "USER_ROLE"
+        default: "Usuario"
     },
     activo: {
         type: Boolean,
