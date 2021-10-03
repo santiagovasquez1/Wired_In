@@ -16,10 +16,12 @@ export default class NuevoUsuario extends Component {
                 nombre: '',
                 email: '',
                 rol: '',
+                password: '',
                 confirmar: ''
             },
             urlUsuarios: 'http://localhost:3500/api/usuarios',
             redirect: false,
+            crearDisabled: false
         }
     }
 
@@ -36,9 +38,9 @@ export default class NuevoUsuario extends Component {
 
     async onSubmit(e) {
         e.preventDefault();
+        this.setState({ crearDisabled: true })
         try {
             const { usuario, urlUsuarios } = this.state;
-
             if (usuario.confirmar === usuario.password) {
                 await axios({
                     method: 'POST',
@@ -50,17 +52,23 @@ export default class NuevoUsuario extends Component {
                     .then(result => {
                         this.regresar();
                     });
-            } else {
+            } else if (usuario.password.length < 6) {
+                Swal.fire('Error!', 'La contraseña debe ser de al menos 6 caracteres', 'error');
+                this.setState({ crearDisabled: false });
+            }
+            else {
                 Swal.fire('Error!', 'Las contraseñas no coinciden', 'error');
+                this.setState({ crearDisabled: false });
             }
 
         } catch (error) {
             Swal.fire('Error!', 'Error al actualizar el usuario', 'error');
+            this.setState({ crearDisabled: false });
         }
     }
 
     render() {
-        const { usuario } = this.state;
+        const { usuario, crearDisabled } = this.state;
         return (
             <div className="usuarios">
                 <NavbarVentanas title="Usuarios" />
@@ -73,15 +81,15 @@ export default class NuevoUsuario extends Component {
                         </div>
                         <div className="field-form">
                             <label htmlFor="email">Email</label>
-                            <input type="text" id="email" name="email" placeholder="Email" value={usuario.email} onChange={this.onChangeModel} required="true"/>
+                            <input type="text" id="email" name="email" placeholder="Email" value={usuario.email} onChange={this.onChangeModel} required="true"  />
                         </div>
                         <div className="field-form">
                             <label htmlFor="password">Contraseña</label>
-                            <input type="password" name="password" id="password" placeholder="Contraseña" value={usuario.password} onChange={this.onChangeModel} required="true"/>
+                            <input type="password" name="password" id="password" placeholder="Contraseña" value={usuario.password} onChange={this.onChangeModel} required="true" />
                         </div>
                         <div className="field-form">
                             <label htmlFor="confirmar">Confirmar contraseña</label>
-                            <input type="password" name="confirmar" id="confirmar" placeholder="Confirmar contraseña" value={usuario.confirmar} onChange={this.onChangeModel} required="true"/>
+                            <input type="password" name="confirmar" id="confirmar" placeholder="Confirmar contraseña" value={usuario.confirmar} onChange={this.onChangeModel} required="true" />
                         </div>
                         <div className="field-form">
                             <label htmlFor="rol">Rol de usuario</label>
@@ -93,7 +101,7 @@ export default class NuevoUsuario extends Component {
                             </select>
                         </div>
                         <div className="form-actions">
-                            <button>Crear Usuario</button>
+                            <button disabled={crearDisabled}>Crear Usuario</button>
                             <button onClick={this.regresar}>Regresar</button>
                         </div>
                     </form>

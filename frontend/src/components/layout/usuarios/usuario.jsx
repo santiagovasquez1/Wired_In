@@ -20,6 +20,7 @@ export default class Usuario extends React.Component {
             },
             urlUsuarios: 'http://localhost:3500/api/usuarios',
             redirect: false,
+            actualizarDisabled: false
         };
     }
 
@@ -32,7 +33,7 @@ export default class Usuario extends React.Component {
 
     async actualizarUsuario(e) {
         e.preventDefault();
-
+        this.setState({ actualizarDisabled: true });
         try {
             const { usuario, urlUsuarios } = this.state;
             await axios({
@@ -46,6 +47,7 @@ export default class Usuario extends React.Component {
                 });
         } catch (error) {
             Swal.fire('Error!', 'Error al actualizar el usuario', 'error');
+            this.setState({ actualizarDisabled: false });
         }
     }
 
@@ -67,22 +69,28 @@ export default class Usuario extends React.Component {
                                 <label htmlFor="nombre">Nombre</label>
                                 <input type="text" id="nombre" name="nombre"
                                     value={usuario.nombre}
-                                    onChange={this.onChangeModel} />
+                                    onChange={this.onChangeModel}
+                                    required="true" />
                             </div>
                             <div className="field-form">
                                 <label htmlFor="email">Correo</label>
                                 <input type="text" id="email" name="email"
                                     value={usuario.email}
-                                    onChange={this.onChangeModel} />
+                                    onChange={this.onChangeModel}
+                                    required="true" />
                             </div>
                             <div className="field-form">
-                                <label htmlFor="rol">Rol</label>
-                                <input type="text" id="email" name="rol"
-                                    value={usuario.rol}
-                                    onChange={this.onChangeModel} />
+                                <label htmlFor="rol">Rol de usuario</label>
+                                <select name="rol" id="rol" value={usuario.rol} onChange={this.onChangeModel} required="true"
+                                    required="true">
+                                    <option value=""></option>
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Vendedor">Vendedor</option>
+                                    <option value="Usuario">Usuario</option>
+                                </select>
                             </div>
                             <div className="form-actions">
-                                <button>Guardar</button>
+                                <button disabled={this.state.actualizarDisabled}>Guardar</button>
                                 <button onClick={this.regresar}>Regresar</button>
                             </div>
                         </form>

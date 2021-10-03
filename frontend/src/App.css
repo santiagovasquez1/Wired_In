@@ -5,6 +5,7 @@
     --grisClaro: #edf2f6;
     --grisMedio: #2f3848;
     --grisOscuro: #1a202d;
+    --disabled: #61656b;
     --rojo: rgb(206, 0, 0);
     --fontFamily: "Roboto", sans-serif;
 }
@@ -131,6 +132,11 @@ select {
     border-radius: 0.5rem;
     background: var(--grisOscuro);
     color: var(--blanco);
+}
+
+.form-container button:disabled {
+    cursor: not-allowed;
+    background: var(--disabled);
 }
 
 .form-container button:hover {

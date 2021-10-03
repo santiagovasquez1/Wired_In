@@ -84,8 +84,8 @@ const actualizarUsurario = async(req = request, res = response) => {
                 });
             }
         }
-
-        const userUpdate = await UsuarioDb.findByIdAndUpdate(uid, { email, campos }, { new: true });
+        campos.email = email;
+        const userUpdate = await UsuarioDb.findByIdAndUpdate(uid, campos, { new: true });
 
         return res.status(200).send({
             ok: true,
