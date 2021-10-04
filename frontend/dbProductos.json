@@ -3,13 +3,13 @@
         {
           "idProducto": "101",
           "descripcion": "Punta de anca",
-          "valorUnitario": 18000,
+          "valorUnitario": 10000,
           "estadoProducto": true
         },
         {
           "idProducto": "102",
           "descripcion": "Cola",
-          "valorUnitario": 18000,
+          "valorUnitario": 6000,
           "estadoProducto": true
         },
         {
@@ -27,13 +27,13 @@
         {
           "idProducto": "105",
           "descripcion": "Lomo fino",
-          "valorUnitario": 18000,
+          "valorUnitario": 25000,
           "estadoProducto": true
         },
         {
           "idProducto": "106",
           "descripcion": "Lomo ancho",
-          "valorUnitario": 18000,
+          "valorUnitario": 11000,
           "estadoProducto": false
         },
         {

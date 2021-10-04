@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // Estilos
-import './Productos.css';
+import '../ventas/Ventas.css';
 
 // Componentes
 import NavbarProductos from './NavbarProductos';
@@ -36,11 +36,23 @@ const Ventas = () => {
 		<div className="productos">
 			<NavbarProductos />
 			<BuscadorProductos />
-			<div>
-				{productos.map((producto) => (
-					<Producto key={producto.idProducto} producto={producto} />
-				))}
-			</div>
+			<table clasname="table">
+				<thead className="table-head">
+					<tr>
+						<th scope="col">Código</th>
+						<th scope="col">Descripción</th>
+						<th scope="col">Valor Unitario</th>
+						<th scope="col">Estado</th>
+					</tr>
+				</thead>
+				<tbody className="table-body">
+					{productos.length === 0
+						? 'No hay productos'
+						: productos.map((producto) => (
+								<Producto key={producto.idProducto} producto={producto} />
+						  ))}
+				</tbody>
+			</table>
 		</div>
 	);
 };

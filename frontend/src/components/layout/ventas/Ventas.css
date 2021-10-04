@@ -1,6 +1,7 @@
 @import url('../../../App.css');
 
-.ventas {
+.ventas,
+.productos {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -39,7 +40,7 @@
 	margin-right: 1rem;
 }
 
-.table {
+table {
 	padding: 1.5rem 2%;
 }
 
@@ -59,6 +60,42 @@
 .table-body td {
 	padding: 0.5rem 0.5rem;
 	color: var(--grisOscuro);
+}
+
+td span {
+	font-weight: 700;
+}
+
+.codigo {
+	text-align: center;
+}
+
+.valor {
+	text-align: right;
+}
+
+.estado {
+	text-align: center;
+	/* opacity: 0.8; */
+}
+
+.estado span {
+	padding: 1rem;
+	font-size: 1.5rem;
+	font-weight: 500;
+	border-radius: 0.5rem;
+	letter-spacing: 0.3rem;
+	/* color: var(--blanco); */
+}
+
+.disponible span {
+	background: rgba(60, 141, 47, 0.3);
+	color: rgba(60, 141, 47, 1);
+}
+
+.no-disponible span {
+	background: rgba(170, 121, 57, 0.3);
+	color: rgba(170, 121, 57, 1);
 }
 
 .buscador {

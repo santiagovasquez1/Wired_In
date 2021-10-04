@@ -54,10 +54,12 @@ const Venta = ({ venta, ventas, guardarVentas }) => {
 
 	return (
 		<tr>
-			<td>{id}</td>
+			<td>
+				<span>{id}</span>
+			</td>
 			<td>{cliente}</td>
 			<td>
-				<span className="valor-venta">$ {valor}</span>
+				<span>$ {valor}</span>
 			</td>
 			<td>{fecha}</td>
 			<td>{vendedor}</td>
