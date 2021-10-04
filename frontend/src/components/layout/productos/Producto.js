@@ -1,5 +1,4 @@
 import React from 'react';
-import '../ventas/Ventas.css';
 
 const Producto = ({ producto }) => {
 	const { idProducto, descripcion, valorUnitario, estadoProducto } = producto;

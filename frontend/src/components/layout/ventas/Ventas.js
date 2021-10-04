@@ -7,9 +7,6 @@ import NavbarVentas from './NavbarVentas';
 
 import axios from 'axios';
 
-// Estilos
-import './Ventas.css';
-
 const Ventas = () => {
 	// State con las ventas
 	const [ventas, guardarVentas] = useState([]);
@@ -33,7 +30,7 @@ const Ventas = () => {
 	}, []);
 
 	return (
-		<div className="ventas">
+		<div className="main-container">
 			<NavbarVentas />
 			<BuscadorVentas />
 			<table className="table">

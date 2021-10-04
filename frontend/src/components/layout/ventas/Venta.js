@@ -4,9 +4,6 @@ import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-// Estilos
-import './Ventas.css';
-
 const Venta = ({ venta, ventas, guardarVentas }) => {
 	const { valor, fecha, cliente, vendedor, id } = venta;
 	const history = useHistory();
@@ -54,11 +51,11 @@ const Venta = ({ venta, ventas, guardarVentas }) => {
 
 	return (
 		<tr>
-			<td>
+			<td className="codigo">
 				<span>{id}</span>
 			</td>
 			<td>{cliente}</td>
-			<td>
+			<td className="valor">
 				<span>$ {valor}</span>
 			</td>
 			<td>{fecha}</td>
@@ -71,7 +68,7 @@ const Venta = ({ venta, ventas, guardarVentas }) => {
 					className="btn btn-eliminar"
 					type="button"
 					onClick={() => confirmarEliminarVenta(id)}
-								>
+				>
 					Eliminar
 				</button>
 			</td>

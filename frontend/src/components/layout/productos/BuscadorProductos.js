@@ -1,23 +1,22 @@
 import React from 'react';
-import './Productos.css';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const BuscadorProductos = () => {
 	return (
-		<div className="hero-productos">
-			<div className="buscador">
-				<div className="buscador-input-codigo">
-					<p>Buscar por codigo</p>
+		<div className="buscador">
+			<div className="buscador-productos">
+				<div className="buscador-input-codigo buscador-input">
+					<h3>Buscar por código</h3>
 					<input type="text" placeholder="Buscar" />
 				</div>
-				<div className="buscador-input-descripcion">
-					<p>Buscar por descripción</p>
+				<div className="buscador-input-descripcion buscador-input">
+					<h3>Buscar por descripción</h3>
 					<input type="text" placeholder="Buscar" />
 				</div>
 			</div>
-			{/* <Link to={'/ventas/nueva'} className="btn-agregar">
+			<Link to={'/productos/nuevo'} className="btn-agregar">
 				Agregar Producto
-			</Link> */}
+			</Link>
 		</div>
 	);
 };

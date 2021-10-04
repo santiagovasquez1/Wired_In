@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
 
-// Estilos
-import '../ventas/Ventas.css';
-
 // Componentes
 import NavbarProductos from './NavbarProductos';
 import BuscadorProductos from './BuscadorProductos';
@@ -33,7 +30,7 @@ const Ventas = () => {
 	}, []);
 
 	return (
-		<div className="productos">
+		<div className="main-container">
 			<NavbarProductos />
 			<BuscadorProductos />
 			<table clasname="table">
