@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 // Componentes
 import NavbarVentas from './NavbarVentas';
 import { useHistory } from 'react-router-dom';
-import './NuevaVenta.css';
 
 import axios from 'axios';
 
@@ -106,9 +105,9 @@ const NuevaVenta = () => {
 	};
 
 	return (
-		<div className="ventas">
+		<div className="main-container">
 			<NavbarVentas />
-			<div className="nueva-venta">
+			<div className="nuevo-item">
 				<h2>Nueva Venta</h2>
 
 				{alerta ? (
