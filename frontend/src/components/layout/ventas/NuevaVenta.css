@@ -52,7 +52,6 @@
 	font-size: 1.8rem;
 	font-weight: 600;
 	text-transform: uppercase;
-	/* margin: 1rem 0 0 auto; */
 	margin-top: 2rem;
 	margin-left: auto;
 	padding: 1rem 1.5rem;
@@ -64,4 +63,30 @@
 
 .nueva-venta button:hover {
 	filter: brightness(1.5);
+}
+
+.alerta {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 1rem;
+	margin: 2rem;
+	border-radius: 0.5rem;
+	text-align: center;
+	font-size: 1.6rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	background: var(--rojo);
+	color: var(--blanco);
+}
+
+.alerta span {
+	cursor: pointer;
+	margin-left: 2rem;
+	font-size: 3rem;
+	color: black;
+}
+
+.alerta span:hover {
+	color: var(--blanco);
 }

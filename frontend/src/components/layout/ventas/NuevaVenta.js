@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
+
+// Componentes
 import NavbarVentas from './NavbarVentas';
 import { useHistory } from 'react-router-dom';
 import './NuevaVenta.css';
+
 import axios from 'axios';
+
+// Sweetalert
+import Swal from 'sweetalert2';
+
+// FontAwesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 const NuevaVenta = () => {
 	const history = useHistory();
@@ -10,7 +20,7 @@ const NuevaVenta = () => {
 	// state con la informacion de la venta
 	const [nuevaVenta, guardarNuevaVenta] = useState({
 		// valores iniciales
-		id: null,
+		id: '',
 		valor: null,
 		fecha: '',
 		cliente: '',
@@ -18,15 +28,15 @@ const NuevaVenta = () => {
 		vendedor: '',
 	});
 
+	// state de la alerta
+	const [alerta, guardarAlerta] = useState(null);
+
+	// Desestructuración de nuevaVenta
 	const { id, valor, fecha, cliente, cedula, vendedor } = nuevaVenta;
 
 	// leer los datos del formulario y tenerlos en el estado
 	const onChangeNuevaVenta = (e) => {
-		if (
-			e.target.name === 'id' ||
-			e.target.name === 'valor' ||
-			e.target.name === 'cedula'
-		) {
+		if (e.target.name === 'valor' || e.target.name === 'cedula') {
 			guardarNuevaVenta({
 				...nuevaVenta,
 				[e.target.name]: Number(e.target.value),
@@ -47,11 +57,24 @@ const NuevaVenta = () => {
 				url: 'http://localhost:4000/ventas',
 				data: nuevaVenta,
 			});
-			alert('envio exitoso');
+
+			// Alerta de exito al ingresar venta
+			Swal.fire('Correcto', 'La venta se agregó correctamente', 'success');
 		} catch (error) {
-			alert('Algo salio mal');
 			console.log(error);
+
+			// Alerta de error
+			Swal.fire({
+				icon: 'error',
+				title: 'Error',
+				text: 'Hubo un error, intenta de nuevo',
+			});
 		}
+	};
+
+	// quitar alerta onClick
+	const quitarAlerta = () => {
+		guardarAlerta(null);
 	};
 
 	// funcion submit
@@ -60,7 +83,7 @@ const NuevaVenta = () => {
 
 		// validar formulario
 		if (
-			id <= 0 ||
+			id.trim() === '' ||
 			valor <= 0 ||
 			fecha.trim() === '' ||
 			cliente.trim() === '' ||
@@ -68,7 +91,10 @@ const NuevaVenta = () => {
 			vendedor.trim() === ''
 		) {
 			// alerta momentanea
-			alert('Todos los campos son obligatorios');
+			guardarAlerta({
+				msg: 'Todos los campos son obligatorios',
+				classes: 'alerta',
+			});
 			return;
 		}
 
@@ -84,6 +110,16 @@ const NuevaVenta = () => {
 			<NavbarVentas />
 			<div className="nueva-venta">
 				<h2>Nueva Venta</h2>
+
+				{alerta ? (
+					<p className={alerta.classes}>
+						{alerta.msg}{' '}
+						<span>
+							<FontAwesomeIcon onClick={quitarAlerta} icon={faWindowClose} />
+						</span>
+					</p>
+				) : null}
+
 				<form onSubmit={submitNuevaVenta}>
 					<div className="form-group">
 						<div className="field-form">

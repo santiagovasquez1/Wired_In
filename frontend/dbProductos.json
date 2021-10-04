@@ -1,0 +1,64 @@
+{
+    "productos": [
+        {
+          "idProducto": "101",
+          "descripcion": "Punta de anca",
+          "valorUnitario": 10000,
+          "estadoProducto": true
+        },
+        {
+          "idProducto": "102",
+          "descripcion": "Cola",
+          "valorUnitario": 6000,
+          "estadoProducto": true
+        },
+        {
+          "idProducto": "103",
+          "descripcion": "Costilla",
+          "valorUnitario": 18000,
+          "estadoProducto": true
+        },
+        {
+          "idProducto": "104",
+          "descripcion": "Sobrebarriga",
+          "valorUnitario": 18000,
+          "estadoProducto": true
+        },
+        {
+          "idProducto": "105",
+          "descripcion": "Lomo fino",
+          "valorUnitario": 25000,
+          "estadoProducto": true
+        },
+        {
+          "idProducto": "106",
+          "descripcion": "Lomo ancho",
+          "valorUnitario": 11000,
+          "estadoProducto": false
+        },
+        {
+          "idProducto": "107",
+          "descripcion": "Centro de pierna",
+          "valorUnitario": 18000,
+          "estadoProducto": true
+        },
+        {
+          "idProducto": "108",
+          "descripcion": "Lomo de brazo",
+          "valorUnitario": 18000,
+          "estadoProducto": false
+        },
+        {
+          "idProducto": "109",
+          "descripcion": "Pecho",
+          "valorUnitario": 18000,
+          "estadoProducto": true
+        },
+        {
+          "idProducto": "110",
+          "descripcion": "Paletero externo",
+          "valorUnitario": 18000,
+          "estadoProducto": true
+        }
+      ] 
+}

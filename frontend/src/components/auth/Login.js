@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
 
-function Login() {
+const Login = () => {
 	// State para iniciar sesion
 	const [usuario, guardarUsuario] = useState({
 		email: '',
@@ -65,6 +65,6 @@ function Login() {
 			</div>
 		</Fragment>
 	);
-}
+};
 
-export { Login };
+export default Login;
