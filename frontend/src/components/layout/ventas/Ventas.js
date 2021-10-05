@@ -1,34 +1,36 @@
 import React, { useState, useEffect } from 'react';
+
+// Componentes
 import Venta from './Venta';
 import BuscadorVentas from './BuscadorVentas';
 import NavbarVentas from './NavbarVentas';
+
 import axios from 'axios';
-import './Ventas.css';
 
 const Ventas = () => {
 	// State con las ventas
 	const [ventas, guardarVentas] = useState([]);
 
-	// consultar la api
+	// Consultar la api
 	useEffect(() => {
-		const data = async () => {
+		const obtenerVentas = async () => {
 			try {
 				const respuesta = await axios({
 					method: 'get',
 					url: 'http://localhost:4000/ventas',
 				});
-
 				guardarVentas(respuesta.data);
 			} catch (error) {
 				console.log(error);
+				// Alerta momentanea
+				alert('Las ventas no se pueden cargar de la base de datos');
 			}
 		};
-
-		data();
+		obtenerVentas();
 	}, []);
 
 	return (
-		<div className="ventas">
+		<div className="main-container">
 			<NavbarVentas />
 			<BuscadorVentas />
 			<table className="table">

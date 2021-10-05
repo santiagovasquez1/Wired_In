@@ -1,6 +1,7 @@
 import React from 'react';
-import './Sidebar.css';
 import { Link } from 'react-router-dom';
+
+// Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faUsers,
@@ -8,25 +9,23 @@ import {
 	faWarehouse,
 	faLaptop,
 	faUserTag,
-	faBacon,
 } from '@fortawesome/free-solid-svg-icons';
 
-function Sidebar() {
+const Sidebar = () => {
 	return (
 		<div className="sidebar">
 			<div className="logo-content">
 				<Link to={'/'} className="logo">
-					<FontAwesomeIcon icon={faBacon} />
 					<div className="logo_name">Carnicería</div>
 				</Link>
 			</div>
 			<ul className="nav_list">
-				{/* <li>
+				<li>
 					<Link to={'/dashboard'} className="link">
 						<FontAwesomeIcon icon={faLaptop} className="fontAwesome-icon" />
 						<span className="links_name">Dashboard</span>
 					</Link>
-				</li> */}
+				</li>
 				<li>
 					<Link to={'/ventas'} className="link">
 						<FontAwesomeIcon icon={faTag} className="fontAwesome-icon" />
@@ -39,12 +38,12 @@ function Sidebar() {
 						<span className="links_name">Productos</span>
 					</Link>
 				</li>
-				{/* <li>
+				<li>
 					<Link to={'/vendedores'} className="link">
 						<FontAwesomeIcon icon={faUserTag} className="fontAwesome-icon" />
 						<span className="links_name">Vendedores</span>
 					</Link>
-				</li> */}
+				</li>
 				<li>
 					<Link to={'/usuarios'} className="link">
 						<FontAwesomeIcon icon={faUsers} className="fontAwesome-icon" />
@@ -54,6 +53,6 @@ function Sidebar() {
 			</ul>
 		</div>
 	);
-}
+};
 
-export { Sidebar };
+export default Sidebar;
