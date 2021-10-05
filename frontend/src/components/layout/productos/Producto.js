@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import Swal from 'sweetalert2';
 import axios from 'axios';
@@ -72,9 +72,9 @@ const Producto = ({ producto, productos, guardarProductos }) => {
 				{estadoProducto ? <span>DISPONIBLE</span> : <span>NO DISPONIBLE</span>}
 			</td>
 			<td className="acciones">
-				<button className="btn btn-editar" type="button">
+				<Link to={'/productos/editar'} className="btn btn-editar" type="button">
 					Editar
-				</button>
+				</Link>
 				<button
 					className="btn btn-eliminar"
 					type="button"

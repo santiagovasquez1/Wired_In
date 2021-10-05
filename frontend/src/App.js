@@ -9,6 +9,7 @@ import Ventas from './components/layout/ventas/Ventas';
 import NuevaVenta from './components/layout/ventas/NuevaVenta';
 import Productos from './components/layout/productos/Productos';
 import NuevoProducto from './components/layout/productos/NuevoProducto';
+import EditarProducto from './components/layout/productos/EditarProducto';
 
 // Rutas
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -28,6 +29,7 @@ function App() {
 				<Route exact path="/ventas/nueva" component={NuevaVenta} />
 				<Route exact path="/productos" component={Productos} />
 				<Route exact path="/productos/nuevo" component={NuevoProducto} />
+				<Route exact path="/productos/editar" component={EditarProducto} />
 			</Switch>
 		</Router>
 	);
