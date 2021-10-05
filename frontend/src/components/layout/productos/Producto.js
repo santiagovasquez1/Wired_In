@@ -1,12 +1,12 @@
 import React from 'react';
 
 const Producto = ({ producto }) => {
-	const { idProducto, descripcion, valorUnitario, estadoProducto } = producto;
+	const { id, descripcion, valorUnitario, estadoProducto } = producto;
 
 	return (
 		<tr>
 			<td className="codigo">
-				<span>{idProducto}</span>
+				<span>{id}</span>
 			</td>
 			<td>{descripcion}</td>
 			<td className="valor">
