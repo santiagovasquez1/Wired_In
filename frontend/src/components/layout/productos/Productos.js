@@ -46,7 +46,12 @@ const Ventas = () => {
 					{productos.length === 0
 						? 'No hay productos'
 						: productos.map((producto) => (
-								<Producto key={producto.idProducto} producto={producto} />
+								<Producto
+									key={producto.id}
+									producto={producto}
+									productos={productos}
+									guardarProductos={guardarProductos}
+								/>
 						  ))}
 				</tbody>
 			</table>

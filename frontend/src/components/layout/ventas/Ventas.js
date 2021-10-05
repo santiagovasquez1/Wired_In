@@ -11,7 +11,7 @@ const Ventas = () => {
 	// State con las ventas
 	const [ventas, guardarVentas] = useState([]);
 
-	// consultar la api
+	// Consultar la api
 	useEffect(() => {
 		const obtenerVentas = async () => {
 			try {
@@ -22,7 +22,7 @@ const Ventas = () => {
 				guardarVentas(respuesta.data);
 			} catch (error) {
 				console.log(error);
-				// alerta momentanea
+				// Alerta momentanea
 				alert('Las ventas no se pueden cargar de la base de datos');
 			}
 		};
