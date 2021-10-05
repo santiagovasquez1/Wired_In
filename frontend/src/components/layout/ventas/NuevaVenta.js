@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 // Componentes
 import NavbarVentas from './NavbarVentas';
 import { useHistory } from 'react-router-dom';
 
 import axios from 'axios';
+
+// Context
+import { ProductosContext } from '../../../Context/ProductosContext';
 
 // Sweetalert
 import Swal from 'sweetalert2';
@@ -15,6 +18,9 @@ import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 const NuevaVenta = () => {
 	const history = useHistory();
+
+	// Llamando los productos desde el context
+	const { productos } = useContext(ProductosContext);
 
 	// State con la informacion de la venta
 	const [nuevaVenta, guardarNuevaVenta] = useState({
@@ -98,85 +104,145 @@ const NuevaVenta = () => {
 		history.push('/ventas');
 	};
 
+	// const productos = [
+	// 	{
+	// 		id: '101',
+	// 		descripcion: 'punta de anca',
+	// 		valorUnitario: 10000,
+	// 		estadoProducto: true,
+	// 	},
+	// 	{
+	// 		id: '102',
+	// 		descripcion: 'punta de algo',
+	// 		valorUnitario: 11000,
+	// 		estadoProducto: true,
+	// 	},
+	// 	{
+	// 		id: '103',
+	// 		descripcion: 'punta de otra',
+	// 		valorUnitario: 12000,
+	// 		estadoProducto: true,
+	// 	},
+	// 	{
+	// 		id: '104',
+	// 		descripcion: 'punta de cosa',
+	// 		valorUnitario: 13000,
+	// 		estadoProducto: true,
+	// 	},
+	// ];
+
 	return (
 		<div className="main-container">
 			<NavbarVentas />
-			<div className="nuevo-item">
-				<h2>Nueva Venta</h2>
+			<div className="main">
+				<div className="listado-productos">
+					<table>
+						<thead className="table-head">
+							<tr>
+								<th scope="col">Código</th>
+								<th scope="col">Descripción</th>
+								<th scope="col">Valor unitario</th>
+							</tr>
+						</thead>
+						<tbody className="table-body">
+							{productos.length === 0
+								? 'No hay productos'
+								: productos.map((producto) => (
+										<tr>
+											<td className="codigo">
+												<span>{producto.id}</span>
+											</td>
+											<td>{producto.descripcion}</td>
+											<td>
+												<span>$ {producto.valorUnitario}</span>
+											</td>
+											<td className="acciones">
+												<button className="btn btn-editar" type="button">
+													Agregar
+												</button>
+											</td>
+										</tr>
+								  ))}
+						</tbody>
+					</table>
+				</div>
+				<div className="nuevo-item">
+					<h2>Nueva Venta</h2>
 
-				{alerta ? (
-					<p className={alerta.classes}>
-						{alerta.msg}{' '}
-						<span>
-							<FontAwesomeIcon
-								onClick={() => guardarAlerta(null)}
-								icon={faWindowClose}
-							/>
-						</span>
-					</p>
-				) : null}
+					{alerta ? (
+						<p className={alerta.classes}>
+							{alerta.msg}{' '}
+							<span>
+								<FontAwesomeIcon
+									onClick={() => guardarAlerta(null)}
+									icon={faWindowClose}
+								/>
+							</span>
+						</p>
+					) : null}
 
-				<form onSubmit={submitNuevaVenta}>
-					<div className="form-group">
-						<div className="field-form">
-							<label>Código</label>
-							<input
-								type="text"
-								placeholder="Código"
-								name="id"
-								onChange={onChangeNuevaVenta}
-							/>
-						</div>
+					<form onSubmit={submitNuevaVenta}>
+						<div className="form-group">
+							<div className="field-form">
+								<label>Código</label>
+								<input
+									type="text"
+									placeholder="Código"
+									name="id"
+									onChange={onChangeNuevaVenta}
+								/>
+							</div>
 
-						<div className="field-form">
-							<label>Valor</label>
-							<input
-								type="number"
-								placeholder="0"
-								name="valor"
-								onChange={onChangeNuevaVenta}
-							/>
-						</div>
+							<div className="field-form">
+								<label>Valor</label>
+								<input
+									type="number"
+									placeholder="0"
+									name="valor"
+									onChange={onChangeNuevaVenta}
+								/>
+							</div>
 
-						<div className="field-form">
-							<label>Fecha</label>
-							<input
-								type="date"
-								placeholder="Fecha"
-								name="fecha"
-								onChange={onChangeNuevaVenta}
-							/>
+							<div className="field-form">
+								<label>Fecha</label>
+								<input
+									type="date"
+									placeholder="Fecha"
+									name="fecha"
+									onChange={onChangeNuevaVenta}
+								/>
+							</div>
+							<div className="field-form">
+								<label>Cliente</label>
+								<input
+									type="text"
+									placeholder="Cliente"
+									name="cliente"
+									onChange={onChangeNuevaVenta}
+								/>
+							</div>
+							<div className="field-form">
+								<label>Cédula</label>
+								<input
+									type="number"
+									placeholder="Cédula"
+									name="cedula"
+									onChange={onChangeNuevaVenta}
+								/>
+							</div>
+							<div className="field-form">
+								<label>Vendedor</label>
+								<input
+									type="text"
+									placeholder="Vendedor"
+									name="vendedor"
+									onChange={onChangeNuevaVenta}
+								/>
+							</div>
 						</div>
-						<div className="field-form">
-							<label>Cliente</label>
-							<input
-								type="text"
-								placeholder="Cliente"
-								name="cliente"
-								onChange={onChangeNuevaVenta}
-							/>
-						</div>
-						<div className="field-form">
-							<label>Cédula</label>
-							<input
-								type="number"
-								placeholder="Cédula"
-								name="cedula"
-								onChange={onChangeNuevaVenta}
-							/>
-						</div>
-						<div className="field-form">
-							<label>Vendedor</label>
-							<input
-								type="text"
-								placeholder="Vendedor"
-								name="vendedor"
-								onChange={onChangeNuevaVenta}
-							/>
-						</div>
-					</div>
-					<button>Agregar</button>
-				</form>
+						<button>Nueva venta</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	);

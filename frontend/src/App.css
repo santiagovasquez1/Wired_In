@@ -103,6 +103,11 @@ a {
 	width: 100%;
 }
 
+.main {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
 .navbar {
 	display: flex;
 	justify-content: space-between;
@@ -252,7 +257,7 @@ td span {
 
 /* ===== Adicion de productos, ventas, usuarios, vendedores ===== */
 .nuevo-item {
-	margin: 0 20%;
+	margin: 0 auto;
 	padding: 3.5rem 2rem;
 	border-radius: 2rem;
 	border: 2px solid var(--grisOscuro);
@@ -345,6 +350,10 @@ select {
 
 .field-form input ::placeholder {
 	font-family: var(--fontFamily);
+}
+
+.hidden {
+	display: none;
 }
 
 /* ================================ */
