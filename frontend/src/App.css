@@ -347,6 +347,10 @@ select {
 	font-family: var(--fontFamily);
 }
 
+.hidden {
+	display: none;
+}
+
 /* ================================ */
 
 .w100 {

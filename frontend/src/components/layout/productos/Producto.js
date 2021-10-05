@@ -72,7 +72,12 @@ const Producto = ({ producto, productos, guardarProductos }) => {
 				{estadoProducto ? <span>DISPONIBLE</span> : <span>NO DISPONIBLE</span>}
 			</td>
 			<td className="acciones">
-				<Link to={'/productos/editar'} className="btn btn-editar" type="button">
+				<Link
+					to={'/productos/editar'}
+					className="btn btn-editar"
+					type="button"
+					productoeditar={producto}
+				>
 					Editar
 				</Link>
 				<button
