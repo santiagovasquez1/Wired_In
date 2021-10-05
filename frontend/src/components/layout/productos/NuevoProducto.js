@@ -17,10 +17,10 @@ const NuevoProducto = () => {
 		e.preventDefault();
 	};
 	return (
-		<div className="ventas">
+		<div className="main-container">
 			<NavbarProductos />
-			<div className="nueva-venta">
-				<h2>Nueva Producto</h2>
+			<div className="nuevo-item">
+				<h2>Nuevo Producto</h2>
 
 				{/* {alerta ? (
 					<p className={alerta.classes}>
@@ -38,56 +38,38 @@ const NuevoProducto = () => {
 							<input
 								type="text"
 								placeholder="Código"
-								name="id"
+								name="idProducto"
 								// onChange={onChangeNuevaVenta}
 							/>
 						</div>
 
 						<div className="field-form">
-							<label>Valor</label>
+							<label>Descripción</label>
+							<input
+								type="text"
+								placeholder="Descripción"
+								name="descripcion"
+								// onChange={onChangeNuevaVenta}
+							/>
+						</div>
+
+						<div className="field-form">
+							<label>Valor unitario</label>
 							<input
 								type="number"
 								placeholder="0"
-								name="valor"
+								name="valorUnitario"
 								// onChange={onChangeNuevaVenta}
 							/>
 						</div>
 
 						<div className="field-form">
-							<label>Fecha</label>
-							<input
-								type="date"
-								placeholder="Fecha"
-								name="fecha"
-								// onChange={onChangeNuevaVenta}
-							/>
-						</div>
-						<div className="field-form">
-							<label>Cliente</label>
-							<input
-								type="text"
-								placeholder="Cliente"
-								name="cliente"
-								// onChange={onChangeNuevaVenta}
-							/>
-						</div>
-						<div className="field-form">
-							<label>Cédula</label>
-							<input
-								type="number"
-								placeholder="Cédula"
-								name="cedula"
-								// onChange={onChangeNuevaVenta}
-							/>
-						</div>
-						<div className="field-form">
-							<label>Vendedor</label>
-							<input
-								type="text"
-								placeholder="Vendedor"
-								name="vendedor"
-								// onChange={onChangeNuevaVenta}
-							/>
+							<label>Estado</label>
+							<select name="estadoProducto">
+								<option value="">-- Selecciona --</option>
+								<option value="disponible">DISPONIBLE</option>
+								<option value="no disponible">NO DISPONIBLE</option>
+							</select>
 						</div>
 					</div>
 					<button>Agregar Producto</button>
