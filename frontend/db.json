@@ -31,6 +31,30 @@
       "cliente": "Luis Diaz",
       "cedula": 896745,
       "vendedor": "Adriana"
+    },
+    {
+      "id": 12131,
+      "valor": 5000,
+      "fecha": "2020-05-12",
+      "cliente": "Santiago Vasquez",
+      "cedula": 1036640223,
+      "vendedor": "Alejandra Vidal"
+    },
+    {
+      "id": 4568789,
+      "valor": 260000,
+      "fecha": "2021-10-31",
+      "cliente": "Cristian Duran",
+      "cedula": 103628882,
+      "vendedor": "Santiago Vasquez"
+    },
+    {
+      "id": 6588226,
+      "valor": 600000,
+      "fecha": "2021-09-30",
+      "cliente": "Santiago Vasquez",
+      "cedula": 1036640223,
+      "vendedor": "Cristian Duran"
     }
   ]
 }

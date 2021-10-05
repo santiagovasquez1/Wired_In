@@ -121,7 +121,9 @@ export default class Productos extends React.Component {
                                     <tr>
                                         <td>{producto.id}</td>
                                         <td>{producto.nombre}</td>
-                                        <td>{producto.valor}</td>
+                                        <td>
+                                            <span className="valor-venta">${producto.valor}</span>
+                                        </td>
                                         <td>{producto.cantidad}</td>
                                         <td>{producto.estado}</td>
                                         <td className="acciones">

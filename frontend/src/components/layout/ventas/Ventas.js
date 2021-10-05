@@ -39,6 +39,7 @@ const Ventas = () => {
 						<th scope="col">Valor</th>
 						<th scope="col">Fecha</th>
 						<th scope="col">Vendedor</th>
+						<th scope="col">Acciones</th>
 					</tr>
 				</thead>
 				<tbody className="table-body">
