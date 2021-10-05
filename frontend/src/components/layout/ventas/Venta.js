@@ -8,7 +8,7 @@ const Venta = ({ venta, ventas, guardarVentas }) => {
 	const { valor, fecha, cliente, vendedor, id } = venta;
 	const history = useHistory();
 
-	// funcion eliminar venta de la api
+	// Funcion eliminar venta de la api
 	const eliminarVenta = async (id) => {
 		try {
 			await axios({
@@ -16,19 +16,19 @@ const Venta = ({ venta, ventas, guardarVentas }) => {
 				url: `http://localhost:4000/ventas/${id}`,
 			});
 
-			// mostrar alerta
+			// Mostrar alerta
 			Swal.fire('¡Eliminada!', 'La venta se eliminó correctamente.', 'success');
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	// eliminar venta del estado
+	// Eliminar venta del estado
 	const eliminarVentaDelEstado = (id) => {
 		guardarVentas(ventas.filter((ventaState) => ventaState.id !== id));
 	};
 
-	// funcion confirmar eliminar venta
+	// Funcion confirmar eliminar venta
 	const confirmarEliminarVenta = (id) => {
 		Swal.fire({
 			title: '¿Estás seguro?',
@@ -42,7 +42,7 @@ const Venta = ({ venta, ventas, guardarVentas }) => {
 			if (result.isConfirmed) {
 				eliminarVenta(id);
 
-				// eliminar venta del estado
+				// Eliminar venta del estado
 				eliminarVentaDelEstado(id);
 				history.push('/ventas');
 			}

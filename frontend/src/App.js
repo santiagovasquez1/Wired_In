@@ -9,7 +9,6 @@ import Ventas from './components/layout/ventas/Ventas';
 import NuevaVenta from './components/layout/ventas/NuevaVenta';
 import Productos from './components/layout/productos/Productos';
 import NuevoProducto from './components/layout/productos/NuevoProducto';
-// import NuevoProductos from './components/layout/productos/Productos';
 
 // Rutas
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';

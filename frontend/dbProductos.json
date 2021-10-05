@@ -59,24 +59,6 @@
       "descripcion": "Paletero externo",
       "valorUnitario": 18000,
       "estadoProducto": true
-    },
-    {
-      "id": "111",
-      "descripcion": "Probando producto",
-      "valorUnitario": 10000,
-      "estadoProducto": true
-    },
-    {
-      "id": "112",
-      "descripcion": "Nuevo producto",
-      "valorUnitario": 25000,
-      "estadoProducto": false
-    },
-    {
-      "id": "113",
-      "descripcion": "Otro producto",
-      "valorUnitario": 12000,
-      "estadoProducto": true
     }
   ]
 }

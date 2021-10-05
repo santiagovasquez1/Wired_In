@@ -16,9 +16,9 @@ import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 const NuevaVenta = () => {
 	const history = useHistory();
 
-	// state con la informacion de la venta
+	// State con la informacion de la venta
 	const [nuevaVenta, guardarNuevaVenta] = useState({
-		// valores iniciales
+		// Valores iniciales
 		id: '',
 		valor: null,
 		fecha: '',
@@ -27,13 +27,13 @@ const NuevaVenta = () => {
 		vendedor: '',
 	});
 
-	// state de la alerta
+	// State de la alerta
 	const [alerta, guardarAlerta] = useState(null);
 
 	// Desestructuración de nuevaVenta
 	const { id, valor, fecha, cliente, cedula, vendedor } = nuevaVenta;
 
-	// leer los datos del formulario y tenerlos en el estado
+	// Leer los datos del formulario y tenerlos en el estado
 	const onChangeNuevaVenta = (e) => {
 		if (e.target.name === 'valor' || e.target.name === 'cedula') {
 			guardarNuevaVenta({
@@ -48,7 +48,7 @@ const NuevaVenta = () => {
 		}
 	};
 
-	// funcion que envia la venta a la api
+	// Funcion que envia la venta a la api
 	const enviarNuevaVenta = async (nuevaVenta) => {
 		try {
 			await axios({
@@ -71,16 +71,11 @@ const NuevaVenta = () => {
 		}
 	};
 
-	// quitar alerta onClick
-	const quitarAlerta = () => {
-		guardarAlerta(null);
-	};
-
-	// funcion submit
+	// Funcion submit
 	const submitNuevaVenta = (e) => {
 		e.preventDefault();
 
-		// validar formulario
+		// Validar formulario
 		if (
 			id.trim() === '' ||
 			valor <= 0 ||
@@ -89,7 +84,6 @@ const NuevaVenta = () => {
 			cedula <= 0 ||
 			vendedor.trim() === ''
 		) {
-			// alerta momentanea
 			guardarAlerta({
 				msg: 'Todos los campos son obligatorios',
 				classes: 'alerta',
@@ -97,10 +91,10 @@ const NuevaVenta = () => {
 			return;
 		}
 
-		// crear la venta
+		// Crear la venta
 		enviarNuevaVenta(nuevaVenta);
 
-		// redireccionar al home de ventas
+		// Redireccionar al home de ventas
 		history.push('/ventas');
 	};
 
@@ -114,7 +108,10 @@ const NuevaVenta = () => {
 					<p className={alerta.classes}>
 						{alerta.msg}{' '}
 						<span>
-							<FontAwesomeIcon onClick={quitarAlerta} icon={faWindowClose} />
+							<FontAwesomeIcon
+								onClick={() => guardarAlerta(null)}
+								icon={faWindowClose}
+							/>
 						</span>
 					</p>
 				) : null}
