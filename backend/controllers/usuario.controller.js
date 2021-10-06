@@ -3,7 +3,6 @@ const { response, request } = require('express');
 const bcrypt = require('bcryptjs');
 // const { generarJWT } = require('../helpers/jwt');
 
-
 const getUsuarios = async(req = request, res = response) => {
     try {
         const from = parseInt(req.query.from) || 0;
@@ -117,7 +116,7 @@ const borrarUsuario = async(req = request, res = response) => {
         } else {
             await UsuarioDb.findByIdAndDelete(uid);
             return res.status(200).send({
-                ok: false,
+                ok: true,
                 msg: 'Usuario eliminado'
             });
         }
