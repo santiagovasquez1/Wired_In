@@ -1,6 +1,7 @@
 const { response, request } = require('express');
 const bcrypt = require('bcryptjs');
 const UsuarioDb = require('../models/usuario');
+const { generarJWT } = require('../Helpers/jwt');
 
 const login = async(req = request, res = response) => {
     try {
@@ -13,9 +14,10 @@ const login = async(req = request, res = response) => {
                 msg: "El usuario no esta registrado en la aplicación"
             });
         } else if (validatePassword(password, usuario)) {
+            const token = await generarJWT(usuario.uid, usuario.rol);
             res.status(200).send({
                 ok: true,
-                usuario,
+                token,
                 msg: "Usuario logeado"
             });
         } else {
@@ -38,6 +40,23 @@ const validatePassword = (password, user) => {
     return validPassword = bcrypt.compareSync(password, user.password);
 }
 
+const renewToken = async(req, res = response) => {
+    const { uid, rol } = req;
+
+    const [user, token] = await Promise.all([
+        User.findById(uid),
+        generarJWT(uid, rol)
+    ]);
+
+    res.status(200).send({
+        ok: true,
+        token,
+        user
+    });
+
+}
+
 module.exports = {
-    login
+    login,
+    renewToken
 }
