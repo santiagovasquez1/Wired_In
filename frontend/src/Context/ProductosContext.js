@@ -13,8 +13,8 @@ const ProductosProvider = (props) => {
 	useEffect(() => {
 		const obtenerProductos = async () => {
 			const url = 'http://localhost:4500/productos';
-			const productos = await axios.get(url);
-			guardarProductos(productos.data);
+			const respuesta = await axios.get(url);
+			guardarProductos(respuesta.data);
 		};
 		obtenerProductos();
 	}, []);

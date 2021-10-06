@@ -104,33 +104,6 @@ const NuevaVenta = () => {
 		history.push('/ventas');
 	};
 
-	// const productos = [
-	// 	{
-	// 		id: '101',
-	// 		descripcion: 'punta de anca',
-	// 		valorUnitario: 10000,
-	// 		estadoProducto: true,
-	// 	},
-	// 	{
-	// 		id: '102',
-	// 		descripcion: 'punta de algo',
-	// 		valorUnitario: 11000,
-	// 		estadoProducto: true,
-	// 	},
-	// 	{
-	// 		id: '103',
-	// 		descripcion: 'punta de otra',
-	// 		valorUnitario: 12000,
-	// 		estadoProducto: true,
-	// 	},
-	// 	{
-	// 		id: '104',
-	// 		descripcion: 'punta de cosa',
-	// 		valorUnitario: 13000,
-	// 		estadoProducto: true,
-	// 	},
-	// ];
-
 	return (
 		<div className="main-container">
 			<NavbarVentas />
@@ -148,7 +121,7 @@ const NuevaVenta = () => {
 							{productos.length === 0
 								? 'No hay productos'
 								: productos.map((producto) => (
-										<tr>
+										<tr key={producto.id}>
 											<td className="codigo">
 												<span>{producto.id}</span>
 											</td>
