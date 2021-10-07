@@ -125,6 +125,7 @@ a {
 table {
 	width: 100%;
 	padding: 0rem 2%;
+	margin-bottom: 1rem;
 }
 
 .table-head {
@@ -354,6 +355,12 @@ select {
 
 .hidden {
 	display: none;
+}
+
+.venta__productos {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
 /* ================================ */

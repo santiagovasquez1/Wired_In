@@ -22,11 +22,31 @@ const NuevaVenta = () => {
 	// Llamando los productos desde el context
 	const { productos } = useContext(ProductosContext);
 
+	// State con el valor total de la venta
+	const [valortotal, guardarValorTotal] = useState(0);
+	const [items, guardarItems] = useState([]);
+
+	// Funcion para agregar producto a la venta
+	const agregarProducto = (producto) => {
+		// validar el estado disponible del producto
+		if (producto.estadoProducto) {
+			guardarItems([...items, producto]);
+		} else {
+			alert(`El producto ${producto.descripcion} no esta disponible`);
+		}
+
+		guardarValorTotal(valortotal + producto.valorUnitario);
+		guardarNuevaVenta({
+			...nuevaVenta,
+			valor: valortotal + producto.valorUnitario,
+		});
+	};
+
 	// State con la informacion de la venta
 	const [nuevaVenta, guardarNuevaVenta] = useState({
 		// Valores iniciales
 		id: '',
-		valor: null,
+		valor: 0,
 		fecha: '',
 		cliente: '',
 		cedula: null,
@@ -130,7 +150,11 @@ const NuevaVenta = () => {
 												<span>$ {producto.valorUnitario}</span>
 											</td>
 											<td className="acciones">
-												<button className="btn btn-editar" type="button">
+												<button
+													className="btn btn-editar"
+													type="button"
+													onClick={() => agregarProducto(producto)}
+												>
 													Agregar
 												</button>
 											</td>
@@ -166,11 +190,35 @@ const NuevaVenta = () => {
 								/>
 							</div>
 
+							<div className="field-form venta__productos">
+								<table>
+									<thead className="table-head">
+										<tr>
+											<th scope="col">Producto</th>
+											<th scope="col">Cantidad</th>
+											<th scope="col">Valor</th>
+										</tr>
+									</thead>
+									<tbody className="table-body">
+										{items.length === 0
+											? 'Agregue items'
+											: items.map((item) => (
+													<tr>
+														<td>{item.descripcion}</td>
+														<td>2</td>
+														<td>$ {item.valorUnitario}</td>
+													</tr>
+											  ))}
+									</tbody>
+								</table>
+							</div>
+
 							<div className="field-form">
-								<label>Valor</label>
+								<label>Valor Total</label>
 								<input
 									type="number"
-									placeholder="0"
+									readOnly
+									value={valortotal}
 									name="valor"
 									onChange={onChangeNuevaVenta}
 								/>

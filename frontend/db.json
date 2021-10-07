@@ -47,6 +47,14 @@
       "cliente": "cliente",
       "cedula": 9090909,
       "vendedor": "vendedor"
+    },
+    {
+      "id": "99999",
+      "valor": 34000,
+      "fecha": "2021-10-02",
+      "cliente": "Soy un cliente nuevo",
+      "cedula": 99999,
+      "vendedor": "Juancho"
     }
   ]
 }
