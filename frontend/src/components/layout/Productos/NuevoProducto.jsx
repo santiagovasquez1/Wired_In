@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 import '../../../App.css';
 import NavbarVentanas from '../share/NavbarVentanas';
+import productoService from '../../../services/productos.service';
 import './productos.css';
 
 export default class NuevoProducto extends Component {
@@ -34,12 +35,22 @@ export default class NuevoProducto extends Component {
         this.props.history.push('/productos');
     }
 
-    nuevoProducto(e) {
+    async nuevoProducto(e) {
         e.preventDefault();
-        Swal.fire('Actualizado', 'El producto ha sido creado', 'success')
-            .then(result => {
-                this.regresar();
+        const { producto } = this.state;
+
+        productoService.crearProducto(producto).then(result => {
+            Swal.fire('Actualizado', 'El producto ha sido creado', 'success')
+                .then(result => {
+                    this.regresar();
+                });
+        }).catch(error => {
+            Swal.fire('Error', error.msg, 'error').then(() => {
+                this.props.history.push('/');
             });
+        });
+
+
     }
 
     render() {

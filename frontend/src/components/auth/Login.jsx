@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import auth from '../../services/auth.service';
+import Swal from 'sweetalert2';
 import './Login.css';
 
 const Login = () => {
@@ -8,6 +10,8 @@ const Login = () => {
 		email: '',
 		password: '',
 	});
+
+	const history = useHistory();
 
 	// Extraer de usuario
 	const { email, password } = usuario;
@@ -26,6 +30,19 @@ const Login = () => {
 		// validar que no haya campos vacios
 
 		// pasarlo al action
+		const loginData = {
+			email,
+			password,
+		}
+
+		auth.login(loginData).then(result => {
+			localStorage.setItem('token', result.token);
+			Swal.fire('Login', 'Usuario logeado', 'success').then(result=>{
+				history.push('/usuarios');
+			});
+		}).catch(err => {
+			Swal.fire('Error', `${err.msg}`, 'error');
+		});
 	};
 
 	return (

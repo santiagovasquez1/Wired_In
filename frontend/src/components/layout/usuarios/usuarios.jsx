@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-
+import auth from '../../../services/auth.service';
 import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Buscador from './../share/buscador';
@@ -34,11 +34,12 @@ const Usuarios = () => {
         try {
             const response = await axios({
                 method: 'DELETE',
-                url: `${urlUsuarios}/${usuario.uid}`
+                url: `${urlUsuarios}/${usuario.uid}`,
+                headers: auth.getHeader(),
             });
             Swal.fire('¡Eliminado!', response.data.msg, 'success');
         } catch (error) {
-            Swal.fire('Error!', error.error.msg, 'error');
+            Swal.fire('Error!', error.response.msg, 'error');
         }
     }
 

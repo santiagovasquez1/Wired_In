@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { Login } from './components/auth/Login';
-import { NuevaCuenta } from './components/auth/NuevaCuenta';
-import { Dashboard } from './components/layout/Dashboard';
+import Login from './components/auth/Login';
+import NuevaCuenta from './components/auth/NuevaCuenta';
+import Dashboard from './components/layout/Dashboard';
 import NuevoProducto from './components/layout/Productos/NuevoProducto';
 import Producto from './components/layout/Productos/Producto';
 import Productos from './components/layout/Productos/Productos';
-import { Sidebar } from './components/layout/Sidebar';
+import  Sidebar  from './components/layout/Sidebar';
 import NuevoUsuario from './components/layout/usuarios/NuevoUsuario';
 import Usuario from './components/layout/usuarios/usuario';
 import Usuarios from './components/layout/usuarios/usuarios';
