@@ -1,60 +1,68 @@
 {
   "ventas": [
     {
-      "id": 112341234,
-      "valor": 12000,
-      "fecha": "2021-08-25",
-      "cliente": "cliente10",
-      "cedula": 98765,
-      "vendedor": "Juancho"
+      "id": "1222222",
+      "listaProductos": [
+        {
+          "id": "101",
+          "descripcion": "Punta de anca",
+          "valorUnitario": 10000,
+          "estadoProducto": true
+        },
+        {
+          "id": "101",
+          "descripcion": "Punta de anca",
+          "valorUnitario": 10000,
+          "estadoProducto": true
+        },
+        {
+          "id": "103",
+          "descripcion": "Costilla",
+          "valorUnitario": 18000,
+          "estadoProducto": true
+        },
+        {
+          "id": "110",
+          "descripcion": "Paletero externo",
+          "valorUnitario": 18000,
+          "estadoProducto": true
+        }
+      ],
+      "valor": 56000,
+      "fecha": "2021-10-11",
+      "cliente": "2333333",
+      "cedula": 3444444,
+      "vendedor": "qwwwwww",
+      "estadoVenta": "entregada"
     },
     {
-      "id": 76543,
-      "valor": 60000,
-      "fecha": "2021-09-04",
-      "cliente": "Luis Diaz",
-      "cedula": 896745,
-      "vendedor": "Adriana"
-    },
-    {
-      "id": "44444",
-      "valor": 30000,
-      "fecha": "2021-09-15",
-      "cliente": "Nombre",
-      "cedula": 44444,
-      "vendedor": "Vendedor"
-    },
-    {
-      "id": "22222",
-      "valor": 20000,
-      "fecha": "2021-09-07",
-      "cliente": "eeeee",
-      "cedula": 22222,
-      "vendedor": "Vendedor2"
-    },
-    {
-      "id": "66666",
-      "valor": 40000,
-      "fecha": "2021-09-14",
-      "cliente": "Nombre",
-      "cedula": 66666,
-      "vendedor": "Vendedor3"
-    },
-    {
-      "id": "1010101",
-      "valor": 20000,
-      "fecha": "2021-09-15",
-      "cliente": "cliente",
-      "cedula": 9090909,
-      "vendedor": "vendedor"
-    },
-    {
-      "id": "99999",
-      "valor": 34000,
-      "fecha": "2021-10-02",
-      "cliente": "Soy un cliente nuevo",
-      "cedula": 99999,
-      "vendedor": "Juancho"
+      "id": "233333",
+      "listaProductos": [
+        {
+          "id": "102",
+          "descripcion": "Cola",
+          "valorUnitario": 6000,
+          "estadoProducto": true
+        },
+        {
+          "id": "103",
+          "descripcion": "Costilla",
+          "valorUnitario": 18000,
+          "estadoProducto": true
+        },
+        {
+          "id": "104",
+          "descripcion": "Sobrebarriga",
+          "valorUnitario": 18000,
+          "estadoProducto": true
+        }
+      ],
+      "valor": 42000,
+      "fecha": "2021-10-08",
+      "cliente": "asssss",
+      "cedula": 455555,
+      "vendedor": "sddddd",
+      "estadoVenta": "proceso"
     }
   ]
 }

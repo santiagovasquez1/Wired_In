@@ -1,7 +1,7 @@
 import React from 'react';
 import NavbarVentanas from '../share/NavbarVentanas';
 import Buscador from './../share/buscador';
-import { Link, useHistory } from 'react-router-dom';
+// import { Link, useHistory } from 'react-router-dom';
 import './productos.css'
 import Swal from 'sweetalert2';
 
