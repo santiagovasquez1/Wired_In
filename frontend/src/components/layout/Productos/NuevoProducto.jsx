@@ -51,7 +51,7 @@ export default class NuevoProducto extends Component {
                 <div className="form-container">
                     <h2>Nuevo producto</h2>
                     <div className="form-group">
-                        <form onSubmit={this.actualizarProducto}>
+                        <form onSubmit={this.nuevoProducto}>
                             <div className="field-form">
                                 <label htmlFor="nombre">Descripcion</label>
                                 <input type="text" id="nombre" name="nombre"
