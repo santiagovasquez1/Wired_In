@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const NuevaVenta = () => {
 	const history = useHistory();
@@ -22,22 +23,51 @@ const NuevaVenta = () => {
 	// Llamando los productos desde el context
 	const { productos } = useContext(ProductosContext);
 
+	// State con el valor total de la venta
+	const [valortotal, guardarValorTotal] = useState(0);
+	const [items, guardarItems] = useState([]);
+
+	// Funcion para agregar producto a la venta
+	const agregarProducto = (producto) => {
+		// validar el estado disponible del producto
+		if (producto.estadoProducto) {
+			guardarItems([...items, producto]);
+			guardarValorTotal(valortotal + producto.valorUnitario);
+			guardarNuevaVenta({
+				...nuevaVenta,
+				valor: valortotal + producto.valorUnitario,
+				listaProductos: [...items, producto],
+			});
+		} else {
+			alert(`El producto ${producto.descripcion} no esta disponible`);
+		}
+	};
+
+	// Funcion para eliminar producto de la venta
+	const eliminarProducto = (item) => {
+		guardarItems(items.filter((itemState) => itemState.id !== item.id));
+		guardarValorTotal(valortotal - item.valorUnitario);
+	};
+
 	// State con la informacion de la venta
 	const [nuevaVenta, guardarNuevaVenta] = useState({
 		// Valores iniciales
 		id: '',
-		valor: null,
+		listaProductos: [],
+		valor: 0,
 		fecha: '',
 		cliente: '',
 		cedula: null,
 		vendedor: '',
+		estadoVenta: 'proceso',
 	});
 
 	// State de la alerta
 	const [alerta, guardarAlerta] = useState(null);
 
 	// Desestructuración de nuevaVenta
-	const { id, valor, fecha, cliente, cedula, vendedor } = nuevaVenta;
+	const { id, valor, fecha, cliente, cedula, vendedor, listaProductos } =
+		nuevaVenta;
 
 	// Leer los datos del formulario y tenerlos en el estado
 	const onChangeNuevaVenta = (e) => {
@@ -88,7 +118,8 @@ const NuevaVenta = () => {
 			fecha.trim() === '' ||
 			cliente.trim() === '' ||
 			cedula <= 0 ||
-			vendedor.trim() === ''
+			vendedor.trim() === '' ||
+			listaProductos.length <= 0
 		) {
 			guardarAlerta({
 				msg: 'Todos los campos son obligatorios',
@@ -103,33 +134,6 @@ const NuevaVenta = () => {
 		// Redireccionar al home de ventas
 		history.push('/ventas');
 	};
-
-	// const productos = [
-	// 	{
-	// 		id: '101',
-	// 		descripcion: 'punta de anca',
-	// 		valorUnitario: 10000,
-	// 		estadoProducto: true,
-	// 	},
-	// 	{
-	// 		id: '102',
-	// 		descripcion: 'punta de algo',
-	// 		valorUnitario: 11000,
-	// 		estadoProducto: true,
-	// 	},
-	// 	{
-	// 		id: '103',
-	// 		descripcion: 'punta de otra',
-	// 		valorUnitario: 12000,
-	// 		estadoProducto: true,
-	// 	},
-	// 	{
-	// 		id: '104',
-	// 		descripcion: 'punta de cosa',
-	// 		valorUnitario: 13000,
-	// 		estadoProducto: true,
-	// 	},
-	// ];
 
 	return (
 		<div className="main-container">
@@ -148,7 +152,7 @@ const NuevaVenta = () => {
 							{productos.length === 0
 								? 'No hay productos'
 								: productos.map((producto) => (
-										<tr>
+										<tr key={producto.id}>
 											<td className="codigo">
 												<span>{producto.id}</span>
 											</td>
@@ -157,7 +161,11 @@ const NuevaVenta = () => {
 												<span>$ {producto.valorUnitario}</span>
 											</td>
 											<td className="acciones">
-												<button className="btn btn-editar" type="button">
+												<button
+													className="btn btn-editar"
+													type="button"
+													onClick={() => agregarProducto(producto)}
+												>
 													Agregar
 												</button>
 											</td>
@@ -193,11 +201,43 @@ const NuevaVenta = () => {
 								/>
 							</div>
 
+							<div className="field-form venta__productos">
+								<table>
+									<thead className="table-head">
+										<tr>
+											<th scope="col">Producto</th>
+											<th scope="col">Valor</th>
+											<th scope="col">Accion</th>
+										</tr>
+									</thead>
+									<tbody className="table-body">
+										{items.length === 0
+											? 'Agregue items'
+											: items.map((item) => (
+													<tr>
+														<td>{item.descripcion}</td>
+														<td>$ {item.valorUnitario}</td>
+														<td className="acciones">
+															<FontAwesomeIcon
+																className="icon-trash"
+																icon={faTrash}
+																onClick={() => eliminarProducto(item)}
+															>
+																Eliminar
+															</FontAwesomeIcon>
+														</td>
+													</tr>
+											  ))}
+									</tbody>
+								</table>
+							</div>
+
 							<div className="field-form">
-								<label>Valor</label>
+								<label>Valor Total</label>
 								<input
 									type="number"
-									placeholder="0"
+									readOnly
+									value={valortotal}
 									name="valor"
 									onChange={onChangeNuevaVenta}
 								/>
@@ -238,6 +278,14 @@ const NuevaVenta = () => {
 									name="vendedor"
 									onChange={onChangeNuevaVenta}
 								/>
+							</div>
+							<div className="field-form">
+								<label>Estado</label>
+								<select name="estadoVenta" onChange={onChangeNuevaVenta}>
+									<option value="proceso">En proceso</option>
+									<option value="cancelada">Cancelada</option>
+									<option value="entregada">Entregada</option>
+								</select>
 							</div>
 						</div>
 						<button>Nueva venta</button>

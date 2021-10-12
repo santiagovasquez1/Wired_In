@@ -1,44 +1,39 @@
 {
   "ventas": [
     {
-      "id": 112341234,
-      "valor": 12000,
-      "fecha": "2021-08-25",
-      "cliente": "cliente10",
-      "cedula": 98765,
-      "vendedor": "Juancho"
+      "id": "1222222",
+      "listaProductos": [
+        {
+          "id": "101",
+          "descripcion": "Punta de anca",
+          "valorUnitario": 10000,
+          "estadoProducto": true
+        },
+        {
+          "id": "101",
+          "descripcion": "Punta de anca",
+          "valorUnitario": 10000,
+          "estadoProducto": true
+        },
+        {
+          "id": "103",
+          "descripcion": "Costilla",
+          "valorUnitario": 18000,
+          "estadoProducto": true
+        },
+        {
+          "id": "110",
+          "descripcion": "Paletero externo",
+          "valorUnitario": 18000,
+          "estadoProducto": true
+        }
+      ],
+      "valor": 56000,
+      "fecha": "2021-10-11",
+      "cliente": "2333333",
+      "cedula": 3444444,
+      "vendedor": "qwwwwww",
+      "estadoVenta": "entregada"
     },
-    {
-      "id": 76543,
-      "valor": 60000,
-      "fecha": "2021-09-04",
-      "cliente": "Luis Diaz",
-      "cedula": 896745,
-      "vendedor": "Adriana"
-    },
-    {
-      "id": 12131,
-      "valor": 5000,
-      "fecha": "2020-05-12",
-      "cliente": "Santiago Vasquez",
-      "cedula": 1036640223,
-      "vendedor": "Alejandra Vidal"
-    },
-    {
-      "id": 4568789,
-      "valor": 260000,
-      "fecha": "2021-10-31",
-      "cliente": "Cristian Duran",
-      "cedula": 103628882,
-      "vendedor": "Santiago Vasquez"
-    },
-    {
-      "id": 6588226,
-      "valor": 600000,
-      "fecha": "2021-09-30",
-      "cliente": "Santiago Vasquez",
-      "cedula": 1036640223,
-      "vendedor": "Cristian Duran"
-    }
   ]
 }

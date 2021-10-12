@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from 'react';
+import Error from './Error';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import axios from 'axios';
 import './Login.css';
 
@@ -13,8 +15,14 @@ const NuevaCuenta = () => {
 		rol: '',
 	});
 
+	// State con el error
+	const [error, guardarError] = useState({
+		errorEstado: false,
+		mensaje: '',
+	});
+
 	// Extraer de usuario
-	const { nombre, email, password, confirmar, rol } = usuario;
+	const { nombre, email, password, confirmar } = usuario;
 
 	const onChange = (e) => {
 		guardarUsuario({
@@ -26,20 +34,27 @@ const NuevaCuenta = () => {
 	// funcion para registrar usuario
 	const registrarUsuario = async (datos) => {
 		try {
-			const respuesta = await axios({
+			await axios({
 				method: 'post',
 				url: 'http://localhost:3500/api/usuarios',
 				data: datos,
 			});
-			console.log(respuesta);
+			// Usuario ingresado con exito
+			Swal.fire('Correcto', 'El usuario se registró correctamente', 'success');
 		} catch (error) {
-			console.log(error);
+			console.error(error);
+
+			// Alerta de error
+			Swal.fire({
+				icon: 'error',
+				title: 'Error',
+				text: 'Hubo un error, intenta de nuevo',
+			});
 		}
 	};
 
 	// funcion de crear cuenta
 	const onSubmit = (e) => {
-		console.log('submit');
 		e.preventDefault();
 
 		// validar que no haya campos vacios
@@ -50,25 +65,38 @@ const NuevaCuenta = () => {
 			confirmar.trim() === ''
 		) {
 			// prueba momentanea
-			alert('Todos los campos son obligatorios');
+			guardarError({
+				errorEstado: true,
+				mensaje: 'Todos los campos son obligatorios',
+			});
 			return;
 		}
 
 		// contraseña minimio de 6 caracteres
 		if (password.length < 6) {
 			// prueba momentanea
-			alert('La contraseña debe ser de al menos 6 caracteres');
+			guardarError({
+				errorEstado: true,
+				mensaje: 'La contraseña debe ser de al menos 6 caracteres',
+			});
 			return;
 		}
 
 		// contraseña igual en ambos campos
 		if (password !== confirmar) {
 			// prueba momentanea
-			alert('Las contraseñas no coinciden');
+			guardarError({
+				errorEstado: true,
+				mensaje: 'Las contraseñas no coinciden',
+			});
 			return;
 		}
 
 		// pasarlo al action
+		guardarError({
+			error: false,
+			mensaje: '',
+		});
 		registrarUsuario({ nombre, email, password });
 
 		// limpiar formulario
@@ -86,6 +114,8 @@ const NuevaCuenta = () => {
 			<div className="login">
 				<form onSubmit={onSubmit}>
 					<h1>Crear Nueva Cuenta</h1>
+
+					{error.errorEstado ? <Error mensaje={error.mensaje} /> : null}
 
 					<div className="field">
 						<label htmlFor="nombre">Nombre</label>
@@ -139,15 +169,13 @@ const NuevaCuenta = () => {
 					</div>
 
 					<div className="field">
-						<label htmlFor="rol">Rol</label>
-						<input
-							type="text"
-							id="rol"
-							name="rol"
-							placeholder="Rol"
-							value={rol}
-							onChange={onChange}
-						></input>
+						<label>Rol</label>
+						<select name="rol" onChange={onChange}>
+							<option value="">-- Selecciona rol --</option>
+							<option value="administrador">Administrador</option>
+							<option value="vendedor">Vendedor</option>
+							<option value="usuario">Usuario</option>
+						</select>
 					</div>
 
 					<div className="submit-btn">
