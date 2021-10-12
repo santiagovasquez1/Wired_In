@@ -25,6 +25,7 @@ bdConnection();
 app.use('/api/usuarios', require('./routes/usuario.routes'));
 app.use('/api/login', require('./routes/auth.route'));
 app.use('/api/ventas', require('./routes/ventas'));
+app.use('/api/productos', require('./routes/producto.route'));
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(process.env.PORT, () => {

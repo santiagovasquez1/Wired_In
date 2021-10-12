@@ -1,7 +1,7 @@
 import React from 'react';
 import NavbarVentanas from '../share/NavbarVentanas';
 import Buscador from './../share/buscador';
-import { Link, useHistory } from 'react-router-dom';
+// import { Link, useHistory } from 'react-router-dom';
 import './productos.css'
 import Swal from 'sweetalert2';
 
@@ -121,7 +121,9 @@ export default class Productos extends React.Component {
                                     <tr>
                                         <td>{producto.id}</td>
                                         <td>{producto.nombre}</td>
-                                        <td>{producto.valor}</td>
+                                        <td>
+                                            <span className="valor-venta">${producto.valor}</span>
+                                        </td>
                                         <td>{producto.cantidad}</td>
                                         <td>{producto.estado}</td>
                                         <td className="acciones">
