@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const VentaSchema = mongoose.Schema({
-	valor: {
+const VentaSchema = new Schema({
+	total: {
 		type: Number,
 		required: true,
 		trim: true,
@@ -22,10 +23,8 @@ const VentaSchema = mongoose.Schema({
 		trim: true,
 	},
 	vendedor: {
-		// type: mongoose.Schema.Types.ObjectId,
-		// ref: 'Usuario',
-		type: String,
-		required: true,
+		type: Schema.ObjectId,
+		ref: 'Usuario',
 	},
 	estadoVenta: {
 		type: String,
@@ -33,10 +32,12 @@ const VentaSchema = mongoose.Schema({
 		trim: true,
 	},
 	listaProductos: [
-		// {
-		// 	type: mongoose.Schema.Types.ObjectId,
-		// 	ref: 'Producto',
-		// },
+		{
+			producto: {
+				type: Schema.ObjectId,
+				ref: 'Producto',
+			},
+		},
 	],
 });
 
