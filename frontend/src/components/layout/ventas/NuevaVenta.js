@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const NuevaVenta = () => {
 	const history = useHistory();
@@ -31,33 +32,42 @@ const NuevaVenta = () => {
 		// validar el estado disponible del producto
 		if (producto.estadoProducto) {
 			guardarItems([...items, producto]);
+			guardarValorTotal(valortotal + producto.valorUnitario);
+			guardarNuevaVenta({
+				...nuevaVenta,
+				valor: valortotal + producto.valorUnitario,
+				listaProductos: [...items, producto],
+			});
 		} else {
 			alert(`El producto ${producto.descripcion} no esta disponible`);
 		}
+	};
 
-		guardarValorTotal(valortotal + producto.valorUnitario);
-		guardarNuevaVenta({
-			...nuevaVenta,
-			valor: valortotal + producto.valorUnitario,
-		});
+	// Funcion para eliminar producto de la venta
+	const eliminarProducto = (item) => {
+		guardarItems(items.filter((itemState) => itemState.id !== item.id));
+		guardarValorTotal(valortotal - item.valorUnitario);
 	};
 
 	// State con la informacion de la venta
 	const [nuevaVenta, guardarNuevaVenta] = useState({
 		// Valores iniciales
 		id: '',
+		listaProductos: [],
 		valor: 0,
 		fecha: '',
 		cliente: '',
 		cedula: null,
 		vendedor: '',
+		estadoVenta: 'proceso',
 	});
 
 	// State de la alerta
 	const [alerta, guardarAlerta] = useState(null);
 
 	// Desestructuración de nuevaVenta
-	const { id, valor, fecha, cliente, cedula, vendedor } = nuevaVenta;
+	const { id, valor, fecha, cliente, cedula, vendedor, listaProductos } =
+		nuevaVenta;
 
 	// Leer los datos del formulario y tenerlos en el estado
 	const onChangeNuevaVenta = (e) => {
@@ -108,7 +118,8 @@ const NuevaVenta = () => {
 			fecha.trim() === '' ||
 			cliente.trim() === '' ||
 			cedula <= 0 ||
-			vendedor.trim() === ''
+			vendedor.trim() === '' ||
+			listaProductos.length <= 0
 		) {
 			guardarAlerta({
 				msg: 'Todos los campos son obligatorios',
@@ -195,8 +206,8 @@ const NuevaVenta = () => {
 									<thead className="table-head">
 										<tr>
 											<th scope="col">Producto</th>
-											<th scope="col">Cantidad</th>
 											<th scope="col">Valor</th>
+											<th scope="col">Accion</th>
 										</tr>
 									</thead>
 									<tbody className="table-body">
@@ -205,8 +216,16 @@ const NuevaVenta = () => {
 											: items.map((item) => (
 													<tr>
 														<td>{item.descripcion}</td>
-														<td>2</td>
 														<td>$ {item.valorUnitario}</td>
+														<td className="acciones">
+															<FontAwesomeIcon
+																className="icon-trash"
+																icon={faTrash}
+																onClick={() => eliminarProducto(item)}
+															>
+																Eliminar
+															</FontAwesomeIcon>
+														</td>
 													</tr>
 											  ))}
 									</tbody>
@@ -259,6 +278,14 @@ const NuevaVenta = () => {
 									name="vendedor"
 									onChange={onChangeNuevaVenta}
 								/>
+							</div>
+							<div className="field-form">
+								<label>Estado</label>
+								<select name="estadoVenta" onChange={onChangeNuevaVenta}>
+									<option value="proceso">En proceso</option>
+									<option value="cancelada">Cancelada</option>
+									<option value="entregada">Entregada</option>
+								</select>
 							</div>
 						</div>
 						<button>Nueva venta</button>

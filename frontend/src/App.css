@@ -256,6 +256,14 @@ td span {
 	color: var(--blanco);
 }
 
+.icon-trash {
+	cursor: pointer;
+}
+
+.icon-trash:hover {
+	filter: brightness(2);
+}
+
 /* ===== Adicion de productos, ventas, usuarios, vendedores ===== */
 .nuevo-item {
 	margin: 0 auto;

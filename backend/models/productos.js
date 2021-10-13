@@ -15,6 +15,11 @@ const productoSchema = Schema({
 		require: true,
 		default: 0,
 	},
+	estado: {
+		type: String,
+		require: true,
+		default: 'No disponible',
+	},
 });
 
 productoSchema.method('toJSON', function () {
