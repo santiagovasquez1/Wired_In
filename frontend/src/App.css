@@ -125,6 +125,7 @@ a {
 table {
 	width: 100%;
 	padding: 0rem 2%;
+	margin-bottom: 1rem;
 }
 
 .table-head {
@@ -255,6 +256,14 @@ td span {
 	color: var(--blanco);
 }
 
+.icon-trash {
+	cursor: pointer;
+}
+
+.icon-trash:hover {
+	filter: brightness(2);
+}
+
 /* ===== Adicion de productos, ventas, usuarios, vendedores ===== */
 .nuevo-item {
 	margin: 0 auto;
@@ -354,6 +363,12 @@ select {
 
 .hidden {
 	display: none;
+}
+
+.venta__productos {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
 /* ================================ */

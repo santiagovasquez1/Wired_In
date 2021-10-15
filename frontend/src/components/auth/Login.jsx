@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Fragment, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import auth from '../../services/auth.service';
@@ -23,11 +24,32 @@ const Login = () => {
 		});
 	};
 
+	// Cuando el usuario inicia sesión
+	const iniciarSesion = async (usuario) => {
+		try {
+			const respuesta = await axios({
+				method: 'post',
+				url: 'http://localhost:3500/api/usuarios',
+				data: usuario,
+			});
+			console.log(respuesta);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	// funcion de iniciar sesion
 	const onSubmit = (e) => {
 		e.preventDefault();
 
 		// validar que no haya campos vacios
+		if (email.trim() === '' || password.trim() === '') {
+			guardarError({
+				errorEstado: true,
+				mensaje: 'Todos los campos son obligatorios',
+			});
+			return;
+		}
 
 		// pasarlo al action
 		const loginData = {
@@ -50,6 +72,9 @@ const Login = () => {
 			<div className="login">
 				<form onSubmit={onSubmit}>
 					<h1>Iniciar Sesión</h1>
+
+					{error.errorEstado ? <Error mensaje={error.mensaje} /> : null}
+
 					<div className="email field">
 						<label htmlFor="email">Email</label>
 						<input
