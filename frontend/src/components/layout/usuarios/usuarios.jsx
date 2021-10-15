@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Buscador from './../share/buscador';
 import NavbarVentanas from '../share/NavbarVentanas';
+import authService from '../../../services/auth.service';
 import './usuarios.css';
 
 const Usuarios = () => {
@@ -17,9 +18,8 @@ const Usuarios = () => {
     useEffect(() => {
         const data = async () => {
             try {
-                const respuesta = await axios({
-                    method: 'GET',
-                    url: urlUsuarios
+                const respuesta = await axios.get(urlUsuarios, {
+                    headers: authService.getHeader()
                 });
 
                 guardarUsuarios(respuesta.data.usuarios);
