@@ -1,9 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const ventaController = require('../controllers/venta.controller');
+const ventasController = require('../controllers/venta.controller');
 
-// Crea ventas
+// Nueva venta
 // api/ventas
-router.post('/', ventaController.crearVenta);
+router.post('/', ventasController.nuevaVenta);
+
+// Mostrar ventas
+router.get('/', ventasController.mostrarVentas);
+
+// Mostrar una venta por su id
+router.get('/:idVenta', ventasController.mostrarVenta);
+
+// Actualizar las ventas
+router.put('/:idVenta', ventasController.actualizarVenta);
+
+// Eliminar una venta
+router.delete('/:idVenta', ventasController.eliminarVenta);
 
 module.exports = router;
