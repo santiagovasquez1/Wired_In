@@ -27,13 +27,27 @@ const NuevaVenta = () => {
 	const [valortotal, guardarValorTotal] = useState(0);
 	const [items, guardarItems] = useState([]);
 
+	// Actualizar valor total a pagar
+	const actualizarTotal = () => {
+		if (items.length === 0) {
+			guardarValorTotal(0);
+			return;
+		}
+
+		let nuevoTotal = 0;
+
+		items.map((item) => (nuevoTotal += item.unidades * item.valor));
+
+		guardarValorTotal(nuevoTotal);
+	};
+
 	// Funcion para agregar producto a la venta
 	const agregarProducto = (producto) => {
 		// validar el estado disponible del producto
 		if (producto.estado === 'Disponible') {
-			producto.unidades = 1;
+			producto.unidades = 0;
 			guardarItems([...items, producto]);
-			guardarValorTotal(valortotal + producto.valor);
+			actualizarTotal();
 			guardarNuevaVenta({
 				...nuevaVenta,
 				valor: valortotal + producto.valor,
@@ -49,8 +63,15 @@ const NuevaVenta = () => {
 		const todosItems = [...items];
 		todosItems[i].unidades++;
 		guardarItems(todosItems);
+		actualizarTotal();
+		guardarNuevaVenta({
+			...nuevaVenta,
+			valor: valortotal,
+			listaProductos: [...items, todosItems[i]],
+		});
 		//console.log(todosItems[i].unidades);
 	};
+
 	const restarItems = (i) => {
 		// Copiar el arreglo original
 		const todosItems = [...items];
@@ -60,13 +81,24 @@ const NuevaVenta = () => {
 
 		todosItems[i].unidades--;
 		guardarItems(todosItems);
+		actualizarTotal();
+		guardarNuevaVenta({
+			...nuevaVenta,
+			valor: valortotal,
+			listaProductos: [...items, todosItems[i]],
+		});
 		//console.log(todosItems[i].unidades);
 	};
 
 	// Funcion para eliminar producto de la venta
 	const eliminarItems = (item) => {
 		guardarItems(items.filter((itemState) => itemState._id !== item._id));
-		guardarValorTotal(valortotal - item.valor);
+		actualizarTotal();
+		guardarNuevaVenta({
+			...nuevaVenta,
+			valor: valortotal,
+			listaProductos: [...items, item],
+		});
 	};
 
 	// State con la informacion de la venta
