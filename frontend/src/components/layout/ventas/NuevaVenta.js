@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 const NuevaVenta = () => {
 	const history = useHistory();
@@ -30,23 +30,43 @@ const NuevaVenta = () => {
 	// Funcion para agregar producto a la venta
 	const agregarProducto = (producto) => {
 		// validar el estado disponible del producto
-		if (producto.estadoProducto) {
+		if (producto.estado === 'Disponible') {
+			producto.unidades = 1;
 			guardarItems([...items, producto]);
-			guardarValorTotal(valortotal + producto.valorUnitario);
+			guardarValorTotal(valortotal + producto.valor);
 			guardarNuevaVenta({
 				...nuevaVenta,
-				valor: valortotal + producto.valorUnitario,
+				valor: valortotal + producto.valor,
 				listaProductos: [...items, producto],
 			});
 		} else {
-			alert(`El producto ${producto.descripcion} no esta disponible`);
+			alert(`El producto ${producto.nombre} no esta disponible`);
 		}
 	};
 
+	// Actualizar las cantidades de productos en la tabla
+	const sumarItems = (i) => {
+		const todosItems = [...items];
+		todosItems[i].unidades++;
+		guardarItems(todosItems);
+		//console.log(todosItems[i].unidades);
+	};
+	const restarItems = (i) => {
+		// Copiar el arreglo original
+		const todosItems = [...items];
+
+		// Validar que el numero no sea menor que 0
+		if (todosItems[i].unidades === 0) return;
+
+		todosItems[i].unidades--;
+		guardarItems(todosItems);
+		//console.log(todosItems[i].unidades);
+	};
+
 	// Funcion para eliminar producto de la venta
-	const eliminarProducto = (item) => {
-		guardarItems(items.filter((itemState) => itemState.id !== item.id));
-		guardarValorTotal(valortotal - item.valorUnitario);
+	const eliminarItems = (item) => {
+		guardarItems(items.filter((itemState) => itemState._id !== item._id));
+		guardarValorTotal(valortotal - item.valor);
 	};
 
 	// State con la informacion de la venta
@@ -143,7 +163,6 @@ const NuevaVenta = () => {
 					<table>
 						<thead className="table-head">
 							<tr>
-								<th scope="col">Código</th>
 								<th scope="col">Descripción</th>
 								<th scope="col">Valor unitario</th>
 							</tr>
@@ -152,13 +171,10 @@ const NuevaVenta = () => {
 							{productos.length === 0
 								? 'No hay productos'
 								: productos.map((producto) => (
-										<tr key={producto.id}>
-											<td className="codigo">
-												<span>{producto.id}</span>
-											</td>
-											<td>{producto.descripcion}</td>
+										<tr key={producto._id}>
+											<td>{producto.nombre}</td>
 											<td>
-												<span>$ {producto.valorUnitario}</span>
+												<span>$ {producto.valor}</span>
 											</td>
 											<td className="acciones">
 												<button
@@ -191,7 +207,7 @@ const NuevaVenta = () => {
 
 					<form onSubmit={submitNuevaVenta}>
 						<div className="form-group">
-							<div className="field-form">
+							{/* <div className="field-form">
 								<label>Código</label>
 								<input
 									type="text"
@@ -199,7 +215,7 @@ const NuevaVenta = () => {
 									name="id"
 									onChange={onChangeNuevaVenta}
 								/>
-							</div>
+							</div> */}
 
 							<div className="field-form venta__productos">
 								<table>
@@ -207,24 +223,34 @@ const NuevaVenta = () => {
 										<tr>
 											<th scope="col">Producto</th>
 											<th scope="col">Valor</th>
+											<th scope="col">Cantidad</th>
 											<th scope="col">Accion</th>
 										</tr>
 									</thead>
 									<tbody className="table-body">
 										{items.length === 0
 											? 'Agregue items'
-											: items.map((item) => (
-													<tr>
-														<td>{item.descripcion}</td>
-														<td>$ {item.valorUnitario}</td>
+											: items.map((item, index) => (
+													<tr key={item._id}>
+														<td>{item.nombre}</td>
+														<td>$ {item.valor}</td>
+														<td>{item.unidades}</td>
 														<td className="acciones">
 															<FontAwesomeIcon
-																className="icon-trash"
+																className="fa-icon"
+																icon={faPlus}
+																onClick={() => sumarItems(index)}
+															/>
+															<FontAwesomeIcon
+																className="fa-icon"
+																icon={faMinus}
+																onClick={() => restarItems(index)}
+															/>
+															<FontAwesomeIcon
+																className="fa-icon"
 																icon={faTrash}
-																onClick={() => eliminarProducto(item)}
-															>
-																Eliminar
-															</FontAwesomeIcon>
+																onClick={() => eliminarItems(item)}
+															/>
 														</td>
 													</tr>
 											  ))}

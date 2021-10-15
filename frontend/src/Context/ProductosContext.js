@@ -12,9 +12,10 @@ const ProductosProvider = (props) => {
 	// Ejecutar el llamado a la api
 	useEffect(() => {
 		const obtenerProductos = async () => {
-			const url = 'http://localhost:3500/productos';
+			const url = 'http://localhost:3500/api/productos';
 			const respuesta = await axios.get(url);
-			guardarProductos(respuesta.data);
+			// console.log(respuesta.data.usuarios);
+			guardarProductos(respuesta.data.usuarios);
 		};
 		obtenerProductos();
 	}, []);

@@ -8,7 +8,6 @@ import {
 	faTag,
 	faWarehouse,
 	faLaptop,
-	faUserTag,
 } from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar = () => {
@@ -36,12 +35,6 @@ const Sidebar = () => {
 					<Link to={'/productos'} className="link">
 						<FontAwesomeIcon icon={faWarehouse} className="fontAwesome-icon" />
 						<span className="links_name">Productos</span>
-					</Link>
-				</li>
-				<li>
-					<Link to={'/vendedores'} className="link">
-						<FontAwesomeIcon icon={faUserTag} className="fontAwesome-icon" />
-						<span className="links_name">Vendedores</span>
 					</Link>
 				</li>
 				<li>
