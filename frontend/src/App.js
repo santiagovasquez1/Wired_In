@@ -3,13 +3,17 @@ import React from 'react';
 // Componentes
 import Login from './components/auth/Login';
 import NuevaCuenta from './components/auth/NuevaCuenta';
+
 import Dashboard from './components/layout/Dashboard';
 import Sidebar from './components/layout/Sidebar';
+
 import Ventas from './components/layout/ventas/Ventas';
 import NuevaVenta from './components/layout/ventas/NuevaVenta';
+
 import Productos from './components/layout/Productos/Productos';
 import Producto from './components/layout/Productos/Producto';
 import NuevoProducto from './components/layout/Productos/NuevoProducto';
+
 import Usuarios from './components/layout/usuarios/usuarios';
 import Usuario from './components/layout/usuarios/usuario';
 import NuevoUsuario from './components/layout/usuarios/NuevoUsuario';
