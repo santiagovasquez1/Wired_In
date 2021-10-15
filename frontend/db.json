@@ -35,34 +35,5 @@
       "vendedor": "qwwwwww",
       "estadoVenta": "entregada"
     },
-    {
-      "id": "233333",
-      "listaProductos": [
-        {
-          "id": "102",
-          "descripcion": "Cola",
-          "valorUnitario": 6000,
-          "estadoProducto": true
-        },
-        {
-          "id": "103",
-          "descripcion": "Costilla",
-          "valorUnitario": 18000,
-          "estadoProducto": true
-        },
-        {
-          "id": "104",
-          "descripcion": "Sobrebarriga",
-          "valorUnitario": 18000,
-          "estadoProducto": true
-        }
-      ],
-      "valor": 42000,
-      "fecha": "2021-10-08",
-      "cliente": "asssss",
-      "cedula": 455555,
-      "vendedor": "sddddd",
-      "estadoVenta": "proceso"
-    }
   ]
 }
