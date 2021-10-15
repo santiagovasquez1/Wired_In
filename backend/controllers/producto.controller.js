@@ -5,13 +5,13 @@ const getProductos = async(req = request, res = response) => {
     try {
 
         const [productos, total] = await Promise.all([
-            ProductoDb.find({}, 'nombre valor cantidad'),
+            ProductoDb.find({}, 'nombre valor cantidad estado'),
             ProductoDb.countDocuments()
         ]);
 
         return res.status(200).send({
             ok: true,
-            usuarios: productos,
+            productos,
             total
         });
     } catch (error) {

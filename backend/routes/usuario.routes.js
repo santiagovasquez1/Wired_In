@@ -9,7 +9,7 @@ const { validarCampos } = require('../middlewares/validarCampos');
 const { validarUsuario } = require('../middlewares/validarUsuario');
 
 const router = Router();
-router.get('/', getUsuarios);
+router.get('/', validarUsuario, getUsuarios);
 router.post('/', [validarUsuario,
         check('nombre', 'El nombre es obligatorio').not().isEmpty(),
         check('password', 'El password es obligatorio').not().isEmpty(),

@@ -5,7 +5,7 @@ const { validarUsuario } = require('../middlewares/validarUsuario');
 const { actualizarProducto, crearProducto, borrarProducto, getProductos } = require('../controllers/producto.controller')
 
 const router = Router();
-router.get('/', getProductos);
+router.get('/', validarUsuario, getProductos);
 router.post('/', [validarUsuario,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('valor', 'El valor es obligatorio').not().isEmpty(),

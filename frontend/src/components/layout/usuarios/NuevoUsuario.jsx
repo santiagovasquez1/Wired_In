@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 import NavbarVentanas from '../share/NavbarVentanas';
 import './usuarios.css';
+import auth from '../../../services/auth.service';
 
 export default class NuevoUsuario extends Component {
 
@@ -45,7 +46,8 @@ export default class NuevoUsuario extends Component {
                 await axios({
                     method: 'POST',
                     url: urlUsuarios,
-                    data: usuario
+                    data: usuario,
+                    headers: auth.getHeader()
                 });
 
                 Swal.fire('Creacion', 'El usuario ha sido creado', 'success')
@@ -81,7 +83,7 @@ export default class NuevoUsuario extends Component {
                         </div>
                         <div className="field-form">
                             <label htmlFor="email">Email</label>
-                            <input type="text" id="email" name="email" placeholder="Email" value={usuario.email} onChange={this.onChangeModel} required="true"  />
+                            <input type="text" id="email" name="email" placeholder="Email" value={usuario.email} onChange={this.onChangeModel} required="true" />
                         </div>
                         <div className="field-form">
                             <label htmlFor="password">Contraseña</label>
