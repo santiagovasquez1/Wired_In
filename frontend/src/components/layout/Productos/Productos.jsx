@@ -1,61 +1,34 @@
 import React from 'react';
 import NavbarVentanas from '../share/NavbarVentanas';
 import Buscador from './../share/buscador';
-// import { Link, useHistory } from 'react-router-dom';
 import './productos.css'
 import Swal from 'sweetalert2';
-
+import productoService from '../../../services/productos.service';
 export default class Productos extends React.Component {
-
-    producto = {
-        id: '',
-        nombre: '',
-        valor: '',
-        cantidad: '',
-        estado: 'Disponible' || 'No disponible'
-    };
 
     constructor(props) {
         super(props);
         this.eliminarProducto = this.eliminarProducto.bind(this);
         this.infoProducto = this.infoProducto.bind(this);
+        this.cargarProductos = this.cargarProductos.bind(this);
+
         this.state = {
-            productos: []
+            productos: [],
+            mostrarProductos: false
         }
-        this.state.productos.push({
-            id: '1',
-            nombre: 'Chicharron',
-            valor: '3000',
-            cantidad: '250gr',
-            estado: 'Disponible'
-        });
-        this.state.productos.push({
-            id: '2',
-            nombre: 'Chirozo',
-            valor: '3000',
-            cantidad: '250gr',
-            estado: 'Disponible'
-        });
-        this.state.productos.push({
-            id: '3',
-            nombre: 'Punta de anca',
-            valor: '3000',
-            cantidad: '250gr',
-            estado: 'Disponible'
-        });
-        this.state.productos.push({
-            id: '4',
-            nombre: 'Solomito',
-            valor: '3000',
-            cantidad: '250gr',
-            estado: 'Disponible'
-        });
-        this.state.productos.push({
-            id: '2',
-            nombre: 'Pierna',
-            valor: '3000',
-            cantidad: '250gr',
-            estado: 'Disponible'
+    }
+
+    componentDidMount() {
+        this.cargarProductos();
+    }
+
+    cargarProductos() {
+        productoService.getProductos().then(result => {
+            this.setState({ mostrarProductos: true, productos: result.productos });
+        }).catch(error => {
+            Swal.fire('Error', error.msg, 'error').then(() => {
+                this.props.history.push('/');
+            });
         });
     }
 
@@ -69,9 +42,15 @@ export default class Productos extends React.Component {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: '¡Sí, eliminar!',
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-                Swal.fire('¡Eliminado!', "Producto eliminado con exito", 'success');
+                productoService.eliminarProducto(producto._id).then(() => {
+                    Swal.fire('¡Eliminado!', "Producto eliminado con exito", 'success').then(() => {
+                        this.cargarProductos();
+                    });
+                }).catch(error => {
+                    Swal.fire('Error', error.msg, 'error');
+                });
             }
         });
     }
@@ -84,8 +63,8 @@ export default class Productos extends React.Component {
     }
 
     render() {
-        const { productos } = this.state;
-        if (productos.length === 0) {
+        const { productos, mostrarProductos } = this.state;
+        if (!mostrarProductos) {
             return (
                 <div className="usuarios">
                     <NavbarVentanas title="Productos" />
@@ -119,7 +98,7 @@ export default class Productos extends React.Component {
                             {
                                 productos.map(producto => (
                                     <tr>
-                                        <td>{producto.id}</td>
+                                        <td>{producto._id}</td>
                                         <td>{producto.nombre}</td>
                                         <td>
                                             <span className="valor-venta">${producto.valor}</span>

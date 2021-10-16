@@ -10,7 +10,7 @@ const getProductos = async (req = request, res = response) => {
 
 		return res.status(200).send({
 			ok: true,
-			usuarios: productos,
+			productos,
 			total,
 		});
 	} catch (error) {

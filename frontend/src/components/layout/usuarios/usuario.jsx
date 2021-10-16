@@ -3,6 +3,7 @@ import React from 'react';
 import Swal from 'sweetalert2';
 import '../../../App.css';
 import NavbarVentanas from '../share/NavbarVentanas';
+import auth from '../../../services/auth.service';
 
 export default class Usuario extends React.Component {
 
@@ -36,11 +37,11 @@ export default class Usuario extends React.Component {
         this.setState({ actualizarDisabled: true });
         try {
             const { usuario, urlUsuarios } = this.state;
-            await axios({
-                method: 'PUT',
-                url: `${urlUsuarios}/${usuario.uid}`,
-                data: usuario
+            
+            await axios.put(`${urlUsuarios}/${usuario.uid}`,usuario,{
+                headers:auth.getHeader()
             });
+            
             Swal.fire('Actualizado', 'El usuario ha sido actualizado', 'success')
                 .then(result => {
                     this.regresar();
