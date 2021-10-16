@@ -9,6 +9,7 @@ import Sidebar from './components/layout/Sidebar';
 
 import Ventas from './components/layout/ventas/Ventas';
 import NuevaVenta from './components/layout/ventas/NuevaVenta';
+import EditarVenta from './components/layout/ventas/EditarVenta';
 
 import Productos from './components/layout/Productos/Productos';
 import Producto from './components/layout/Productos/Producto';
@@ -34,6 +35,7 @@ function App() {
 				<Route exact path="/dashboard" component={Dashboard} />
 				<Route exact path="/ventas" component={Ventas} />
 				<Route exact path="/ventas/nueva" component={NuevaVenta} />
+				<Route exact path="/ventas/editar/:id" component={EditarVenta} />
 				<Route exact path="/usuarios" component={Usuarios}></Route>
 				<Route exact path="/usuarios/info" component={Usuario}></Route>
 				<Route exact path="/usuarios/nuevo" component={NuevoUsuario}></Route>

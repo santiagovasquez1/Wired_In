@@ -250,16 +250,6 @@ const NuevaVenta = () => {
 
 					<form onSubmit={submitNuevaVenta}>
 						<div className="form-group">
-							{/* <div className="field-form">
-								<label>Código</label>
-								<input
-									type="text"
-									placeholder="Código"
-									name="id"
-									onChange={onChangeNuevaVenta}
-								/>
-							</div> */}
-
 							<div className="field-form venta__productos">
 								<table>
 									<thead className="table-head">

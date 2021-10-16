@@ -17,7 +17,7 @@ const Ventas = () => {
 			try {
 				const respuesta = await axios({
 					method: 'get',
-					url: 'http://localhost:4000/ventas',
+					url: 'http://localhost:3500/api/ventas',
 				});
 				guardarVentas(respuesta.data);
 			} catch (error) {
@@ -49,7 +49,7 @@ const Ventas = () => {
 						? 'No hay ventas'
 						: ventas.map((venta) => (
 								<Venta
-									key={venta.id}
+									key={venta._id}
 									ventas={ventas}
 									guardarVentas={guardarVentas}
 									venta={venta}
