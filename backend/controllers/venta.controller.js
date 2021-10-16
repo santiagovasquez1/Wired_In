@@ -1,5 +1,4 @@
 const Venta = require('../models/Venta');
-const mongoose = require('mongoose');
 
 // Nueva venta
 exports.nuevaVenta = async (req, res, next) => {

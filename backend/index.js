@@ -24,7 +24,7 @@ bdConnection();
 //Rutas
 app.use('/api/usuarios', require('./routes/usuario.route'));
 app.use('/api/login', require('./routes/auth.route'));
-app.use('/api/ventas', require('./routes/ventas'));
+app.use('/api/ventas', require('./routes/ventas.route'));
 app.use('/api/productos', require('./routes/producto.route'));
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
