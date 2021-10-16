@@ -37,6 +37,7 @@ const VentaSchema = new Schema({
 				type: Schema.ObjectId,
 				ref: 'Producto',
 			},
+			unidades: Number,
 		},
 	],
 });

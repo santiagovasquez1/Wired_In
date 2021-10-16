@@ -22,7 +22,7 @@ bdConnection();
 // app.use(express.static('public'));
 
 //Rutas
-app.use('/api/usuarios', require('./routes/usuario.routes'));
+app.use('/api/usuarios', require('./routes/usuario.route'));
 app.use('/api/login', require('./routes/auth.route'));
 app.use('/api/ventas', require('./routes/ventas'));
 app.use('/api/productos', require('./routes/producto.route'));
