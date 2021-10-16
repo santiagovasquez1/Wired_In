@@ -24,7 +24,9 @@ exports.mostrarVentas = async (req, res, next) => {
 		// 	path: 'listaProductos.producto',
 		// 	model: 'Producto',
 		// });
-		const ventas = await Venta.find({}).populate('vendedor');
+		const ventas = await Venta.find({})
+			.populate('vendedor')
+			.populate('listaProductos');
 		res.json(ventas);
 	} catch (error) {
 		console.error(error);
@@ -34,7 +36,9 @@ exports.mostrarVentas = async (req, res, next) => {
 
 // Muestra una venta por su id
 exports.mostrarVenta = async (req, res, next) => {
-	const venta = await Venta.findById(req.params.idVenta).populate('vendedor');
+	const venta = await Venta.findById(req.params.idVenta)
+		.populate('vendedor')
+		.populate('listaProductos');
 
 	if (!venta) {
 		res.json({ mensaje: 'Esa venta no existe' });
@@ -52,7 +56,9 @@ exports.actualizarVenta = async (req, res, next) => {
 			{ id: req.params.idVenta },
 			req.body,
 			{ new: true }
-		).populate('vendedor');
+		)
+			.populate('vendedor')
+			.populate('listaProductos');
 
 		res.json(venta);
 	} catch (error) {

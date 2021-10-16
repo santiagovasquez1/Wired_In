@@ -10,11 +10,11 @@ const productoSchema = Schema({
 		require: true,
 		default: 0,
 	},
-	cantidad: {
-		type: Number,
-		require: true,
-		default: 0,
-	},
+	// cantidad: {
+	// 	type: Number,
+	// 	require: true,
+	// 	default: 0,
+	// },
 	estado: {
 		type: String,
 		require: true,

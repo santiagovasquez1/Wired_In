@@ -33,11 +33,8 @@ const VentaSchema = new Schema({
 	},
 	listaProductos: [
 		{
-			producto: {
-				type: Schema.ObjectId,
-				ref: 'Producto',
-			},
-			unidades: Number,
+			type: Schema.ObjectId,
+			ref: 'Producto',
 		},
 	],
 });
