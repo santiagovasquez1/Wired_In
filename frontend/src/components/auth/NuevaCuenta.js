@@ -98,6 +98,7 @@ const NuevaCuenta = () => {
 			mensaje: '',
 		});
 		registrarUsuario({ nombre, email, password });
+		console.log({ nombre, email, password });
 
 		// limpiar formulario
 		guardarUsuario({

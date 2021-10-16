@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Componentes
 import NavbarVentas from './NavbarVentas';
@@ -6,8 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import axios from 'axios';
 
-// Context
-import { ProductosContext } from '../../../Context/ProductosContext';
+import auth from '../../../services/auth.service';
 
 // Sweetalert
 import Swal from 'sweetalert2';
@@ -20,12 +19,10 @@ import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 const NuevaVenta = () => {
 	const history = useHistory();
 
-	// Llamando los productos desde el context
-	const { productos } = useContext(ProductosContext);
-
 	// State con el valor total de la venta
 	const [valortotal, guardarValorTotal] = useState(0);
 	const [items, guardarItems] = useState([]);
+	const [productos, guardarProductos] = useState([]);
 
 	// Actualizar valor total a pagar
 	const actualizarTotal = () => {
@@ -41,7 +38,21 @@ const NuevaVenta = () => {
 		guardarValorTotal(nuevoTotal);
 	};
 
+	// Cargar productos
 	useEffect(() => {
+		const obtenerProductos = async () => {
+			const url = 'http://localhost:3500/api/productos';
+			const respuesta = await axios({
+				method: 'get',
+				headers: auth.getHeader(),
+				url: url,
+			});
+			guardarProductos(respuesta.data.productos);
+			// console.log(respuesta.data.productos);
+			// console.log(auth.getHeader());
+		};
+		obtenerProductos();
+
 		actualizarTotal();
 	}, [items]);
 
@@ -69,14 +80,14 @@ const NuevaVenta = () => {
 		guardarNuevaVenta({
 			...nuevaVenta,
 			total: valortotal,
-			listaProductos: [...items, todosItems[i]],
+			listaProductos: todosItems,
 		});
 		//console.log(todosItems[i].unidades);
 	};
 
 	const restarItems = (i) => {
 		// Copiar el arreglo original
-		const todosItems = [...items];
+		const todosItems = items;
 
 		// Validar que el numero no sea menor que 0
 		if (todosItems[i].unidades === 0) return;
@@ -86,7 +97,7 @@ const NuevaVenta = () => {
 		guardarNuevaVenta({
 			...nuevaVenta,
 			total: valortotal,
-			listaProductos: [...items, todosItems[i]],
+			listaProductos: todosItems,
 		});
 		//console.log(todosItems[i].unidades);
 	};
@@ -98,7 +109,7 @@ const NuevaVenta = () => {
 		guardarNuevaVenta({
 			...nuevaVenta,
 			total: valortotal,
-			listaProductos: [...items, item],
+			listaProductos: items,
 		});
 	};
 

@@ -1,11 +1,14 @@
 import axios from 'axios';
 import React, { Fragment, useState } from 'react';
+import Error from './Error'
 import { Link, useHistory } from 'react-router-dom';
 import auth from '../../services/auth.service';
 import Swal from 'sweetalert2';
 import './Login.css';
 
 const Login = () => {
+	const [error, guardarError] = useState(false);
+
 	// State para iniciar sesion
 	const [usuario, guardarUsuario] = useState({
 		email: '',
