@@ -28,13 +28,23 @@ const EditarVenta = (props) => {
 					url: `http://localhost:3500/api/ventas/${id}`,
 				});
 				guardarVenta(respuesta.data);
-				// console.log(respuesta.data);
+				console.log(respuesta.data);
 			} catch (error) {
 				console.log(error);
 			}
 		};
 		obtenerVenta();
 	}, []);
+
+	const {
+		listaProductos,
+		total,
+		fecha,
+		cliente,
+		cedula,
+		vendedor,
+		estadoVenta,
+	} = venta;
 
 	// Leer los datos del formulario y tenerlos en el estado
 	// const onChangeNuevaVenta = (e) => {
@@ -65,27 +75,16 @@ const EditarVenta = (props) => {
 										<tr>
 											<th scope="col">Producto</th>
 											<th scope="col">Valor</th>
-											<th scope="col">Cantidad</th>
 											<th scope="col">Accion</th>
 										</tr>
 									</thead>
 									<tbody className="table-body">
-										{venta.listaProductos.map((item, index) => (
+										{listaProductos.map((item, index) => (
 											<tr key={item._id}>
 												<td>{item.nombre}</td>
 												<td>$ {item.valor}</td>
-												<td>{item.unidades}</td>
+
 												<td className="acciones">
-													<FontAwesomeIcon
-														className="fa-icon"
-														icon={faPlus}
-														// onClick={() => sumarItems(index)}
-													/>
-													<FontAwesomeIcon
-														className="fa-icon"
-														icon={faMinus}
-														// onClick={() => restarItems(index)}
-													/>
 													<FontAwesomeIcon
 														className="fa-icon"
 														icon={faTrash}
@@ -103,7 +102,7 @@ const EditarVenta = (props) => {
 								<input
 									type="number"
 									readOnly
-									// value={valortotal}
+									value={total}
 									name="total"
 									// onChange={onChangeNuevaVenta}
 								/>
@@ -115,6 +114,7 @@ const EditarVenta = (props) => {
 									type="date"
 									placeholder="Fecha"
 									name="fecha"
+									value={fecha}
 									// onChange={onChangeNuevaVenta}
 								/>
 							</div>
@@ -124,6 +124,7 @@ const EditarVenta = (props) => {
 									type="text"
 									placeholder="Cliente"
 									name="cliente"
+									value={cliente}
 									// onChange={onChangeNuevaVenta}
 								/>
 							</div>
@@ -133,6 +134,7 @@ const EditarVenta = (props) => {
 									type="number"
 									placeholder="Cédula"
 									name="cedula"
+									value={cedula}
 									// onChange={onChangeNuevaVenta}
 								/>
 							</div>
@@ -142,12 +144,17 @@ const EditarVenta = (props) => {
 									type="text"
 									placeholder="Vendedor"
 									name="vendedor"
+									value={vendedor.nombre}
+									readOnly
 									// onChange={onChangeNuevaVenta}
 								/>
 							</div>
 							<div className="field-form">
 								<label>Estado</label>
-								<select name="estadoVenta" /* onChange={onChangeNuevaVenta} */>
+								<select
+									name="estadoVenta"
+									/* onChange={onChangeNuevaVenta} */
+								>
 									<option value="proceso">En proceso</option>
 									<option value="cancelada">Cancelada</option>
 									<option value="entregada">Entregada</option>
