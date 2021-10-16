@@ -41,20 +41,23 @@ const NuevaVenta = () => {
 		guardarValorTotal(nuevoTotal);
 	};
 
+	useEffect(() => {
+		actualizarTotal();
+	}, [items]);
+
 	// Funcion para agregar producto a la venta
 	const agregarProducto = (producto) => {
-		// validar el estado disponible del producto
-		if (producto.estado === 'Disponible') {
+		// validar el estado disponible del producto o si se encuentra en el array de items
+		if (producto.estado === 'Disponible' && !items.includes(producto)) {
 			producto.unidades = 0;
 			guardarItems([...items, producto]);
-			actualizarTotal();
 			guardarNuevaVenta({
 				...nuevaVenta,
-				valor: valortotal + producto.valor,
+				total: valortotal,
 				listaProductos: [...items, producto],
 			});
 		} else {
-			alert(`El producto ${producto.nombre} no esta disponible`);
+			alert(`El producto ${producto.nombre} no se puede agregar`);
 		}
 	};
 
@@ -63,10 +66,9 @@ const NuevaVenta = () => {
 		const todosItems = [...items];
 		todosItems[i].unidades++;
 		guardarItems(todosItems);
-		actualizarTotal();
 		guardarNuevaVenta({
 			...nuevaVenta,
-			valor: valortotal,
+			total: valortotal,
 			listaProductos: [...items, todosItems[i]],
 		});
 		//console.log(todosItems[i].unidades);
@@ -81,10 +83,9 @@ const NuevaVenta = () => {
 
 		todosItems[i].unidades--;
 		guardarItems(todosItems);
-		actualizarTotal();
 		guardarNuevaVenta({
 			...nuevaVenta,
-			valor: valortotal,
+			total: valortotal,
 			listaProductos: [...items, todosItems[i]],
 		});
 		//console.log(todosItems[i].unidades);
@@ -96,7 +97,7 @@ const NuevaVenta = () => {
 		actualizarTotal();
 		guardarNuevaVenta({
 			...nuevaVenta,
-			valor: valortotal,
+			total: valortotal,
 			listaProductos: [...items, item],
 		});
 	};
@@ -104,9 +105,9 @@ const NuevaVenta = () => {
 	// State con la informacion de la venta
 	const [nuevaVenta, guardarNuevaVenta] = useState({
 		// Valores iniciales
-		id: '',
+
 		listaProductos: [],
-		valor: 0,
+		total: 0,
 		fecha: '',
 		cliente: '',
 		cedula: null,
@@ -118,12 +119,12 @@ const NuevaVenta = () => {
 	const [alerta, guardarAlerta] = useState(null);
 
 	// Desestructuración de nuevaVenta
-	const { id, valor, fecha, cliente, cedula, vendedor, listaProductos } =
+	const { total, fecha, cliente, cedula, vendedor, listaProductos } =
 		nuevaVenta;
 
 	// Leer los datos del formulario y tenerlos en el estado
 	const onChangeNuevaVenta = (e) => {
-		if (e.target.name === 'valor' || e.target.name === 'cedula') {
+		if (e.target.name === 'total' || e.target.name === 'cedula') {
 			guardarNuevaVenta({
 				...nuevaVenta,
 				[e.target.name]: Number(e.target.value),
@@ -141,7 +142,7 @@ const NuevaVenta = () => {
 		try {
 			await axios({
 				method: 'post',
-				url: 'http://localhost:4000/ventas',
+				url: 'http://localhost:3500/api/ventas',
 				data: nuevaVenta,
 			});
 
@@ -165,8 +166,7 @@ const NuevaVenta = () => {
 
 		// Validar formulario
 		if (
-			id.trim() === '' ||
-			valor <= 0 ||
+			total <= 0 ||
 			fecha.trim() === '' ||
 			cliente.trim() === '' ||
 			cedula <= 0 ||
@@ -296,7 +296,7 @@ const NuevaVenta = () => {
 									type="number"
 									readOnly
 									value={valortotal}
-									name="valor"
+									name="total"
 									onChange={onChangeNuevaVenta}
 								/>
 							</div>
