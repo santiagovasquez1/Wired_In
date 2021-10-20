@@ -24,7 +24,7 @@ const getProductos = async(req = request, res = response) => {
 
 const crearProducto = async(req = request, res = response) => {
     try {
-        if (req.rol == 'Administrador' || req.rol == 'Vendedor') {
+        if (req.rol == 'Administrador') {
             const { nombre } = req.body;
             const existeProducto = await ProductoDb.findOne({ nombre });
 
@@ -60,7 +60,7 @@ const crearProducto = async(req = request, res = response) => {
 
 const actualizarProducto = async(req = request, res = response) => {
     try {
-        if (req.rol == 'Administrador' || req.rol == 'Vendedor') {
+        if (req.rol == 'Administrador') {
             const id = req.params.id;
             const producto = await ProductoDb.findById(id);
 
