@@ -2,9 +2,13 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import NavbarVentas from './NavbarVentas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
+import { useHistory } from 'react-router-dom';
 
 const EditarVenta = (props) => {
+	const history = useHistory();
+
 	// Obtener el id
 	const { id } = props.match.params;
 
@@ -18,6 +22,8 @@ const EditarVenta = (props) => {
 		vendedor: '',
 		estadoVenta: 'proceso',
 	});
+
+	const [alerta, guardarAlerta] = useState(false);
 
 	// Consultar a la api para traer la venta a editar
 	useEffect(() => {
@@ -46,20 +52,81 @@ const EditarVenta = (props) => {
 		estadoVenta,
 	} = venta;
 
-	// Leer los datos del formulario y tenerlos en el estado
-	// const onChangeNuevaVenta = (e) => {
-	// 	if (e.target.name === 'total' || e.target.name === 'cedula') {
-	// 		guardarNuevaVenta({
-	// 			...nuevaVenta,
-	// 			[e.target.name]: Number(e.target.value),
-	// 		});
-	// 	} else {
-	// 		guardarNuevaVenta({
-	// 			...nuevaVenta,
-	// 			[e.target.name]: e.target.value,
-	// 		});
-	// 	}
+	// Cambiar los datos del vendedor
+	// const cambiarDatosVendedor = (venta) => {
+	// 	guardarVenta({
+	// 		...venta,
+	// 		[venta.vendedor]: venta.vendedor.uid,
+	// 	});
 	// };
+
+	// Leer los datos del formulario y tenerlos en el estado
+	const onChangeEditarVenta = (e) => {
+		if (e.target.name === 'total' || e.target.name === 'cedula') {
+			guardarVenta({
+				...venta,
+				[e.target.name]: Number(e.target.value),
+			});
+			// } else if (e.target.name === 'vendedor') {
+			// 	guardarVenta({
+			// 		...venta,
+			// 		[e.target.name]: vendedor.uid,
+			// 	});
+		} else {
+			guardarVenta({
+				...venta,
+				[e.target.name]: e.target.value,
+			});
+		}
+	};
+
+	// Funcion submit
+	const submitEditarVenta = async (e) => {
+		e.preventDefault();
+
+		// Validar formulario
+		if (
+			total <= 0 ||
+			fecha.trim() === '' ||
+			cliente.trim() === '' ||
+			cedula <= 0
+		) {
+			guardarAlerta({
+				msg: 'Todos los campos son obligatorios',
+				classes: 'alerta',
+			});
+			return;
+		}
+
+		guardarVenta({
+			...venta,
+			[vendedor]: vendedor.uid,
+		});
+
+		// Edita la venta en la base de datos
+		try {
+			await axios({
+				method: 'put',
+				url: `http://localhost:3500/api/ventas/${id}`,
+				data: venta,
+			});
+
+			// Alerta de exito al ingresar venta
+			Swal.fire('Correcto', 'La venta se actualizo correctamente', 'success');
+		} catch (error) {
+			console.log(error);
+
+			// Alerta de error
+			Swal.fire({
+				icon: 'error',
+				title: 'Error',
+				text: 'Hubo un error, intenta de nuevo',
+			});
+		}
+
+		// Redireccionar al home de ventas
+		// history.push('/ventas');
+	};
 
 	return (
 		<div className="main-container">
@@ -67,7 +134,20 @@ const EditarVenta = (props) => {
 			<div className="main">
 				<div className="nuevo-item">
 					<h2>Editar Venta</h2>
-					<form>
+
+					{alerta ? (
+						<p className={alerta.classes}>
+							{alerta.msg}{' '}
+							<span>
+								<FontAwesomeIcon
+									onClick={() => guardarAlerta(null)}
+									icon={faWindowClose}
+								/>
+							</span>
+						</p>
+					) : null}
+
+					<form onSubmit={submitEditarVenta}>
 						<div className="form-group">
 							<div className="field-form venta__productos">
 								<table>
@@ -104,7 +184,7 @@ const EditarVenta = (props) => {
 									readOnly
 									value={total}
 									name="total"
-									// onChange={onChangeNuevaVenta}
+									onChange={onChangeEditarVenta}
 								/>
 							</div>
 
@@ -114,8 +194,8 @@ const EditarVenta = (props) => {
 									type="date"
 									placeholder="Fecha"
 									name="fecha"
-									value={fecha}
-									// onChange={onChangeNuevaVenta}
+									defaultValue={fecha}
+									onChange={onChangeEditarVenta}
 								/>
 							</div>
 							<div className="field-form">
@@ -124,8 +204,8 @@ const EditarVenta = (props) => {
 									type="text"
 									placeholder="Cliente"
 									name="cliente"
-									value={cliente}
-									// onChange={onChangeNuevaVenta}
+									defaultValue={cliente}
+									onChange={onChangeEditarVenta}
 								/>
 							</div>
 							<div className="field-form">
@@ -134,8 +214,8 @@ const EditarVenta = (props) => {
 									type="number"
 									placeholder="Cédula"
 									name="cedula"
-									value={cedula}
-									// onChange={onChangeNuevaVenta}
+									defaultValue={cedula}
+									onChange={onChangeEditarVenta}
 								/>
 							</div>
 							<div className="field-form">
@@ -146,14 +226,15 @@ const EditarVenta = (props) => {
 									name="vendedor"
 									value={vendedor.nombre}
 									readOnly
-									// onChange={onChangeNuevaVenta}
+									onChange={onChangeEditarVenta}
 								/>
 							</div>
 							<div className="field-form">
 								<label>Estado</label>
 								<select
 									name="estadoVenta"
-									/* onChange={onChangeNuevaVenta} */
+									defaultValue={estadoVenta}
+									onChange={onChangeEditarVenta}
 								>
 									<option value="proceso">En proceso</option>
 									<option value="cancelada">Cancelada</option>
