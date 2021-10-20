@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Componentes
 import NavbarVentas from './NavbarVentas';
@@ -6,8 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import axios from 'axios';
 
-// Context
-import { ProductosContext } from '../../../Context/ProductosContext';
+import auth from '../../../services/auth.service';
 
 // Sweetalert
 import Swal from 'sweetalert2';
@@ -15,46 +14,111 @@ import Swal from 'sweetalert2';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 const NuevaVenta = () => {
 	const history = useHistory();
 
-	// Llamando los productos desde el context
-	const { productos } = useContext(ProductosContext);
-
 	// State con el valor total de la venta
 	const [valortotal, guardarValorTotal] = useState(0);
 	const [items, guardarItems] = useState([]);
+	const [productos, guardarProductos] = useState([]);
+
+	// Actualizar valor total a pagar
+	const actualizarTotal = () => {
+		if (items.length === 0) {
+			guardarValorTotal(0);
+			return;
+		}
+
+		let nuevoTotal = 0;
+
+		items.map((item) => (nuevoTotal += item.unidades * item.valor));
+
+		guardarValorTotal(nuevoTotal);
+	};
+
+	// Cargar productos
+	useEffect(() => {
+		const obtenerProductos = async () => {
+			const url = 'http://localhost:3500/api/productos';
+			const respuesta = await axios({
+				method: 'get',
+				headers: auth.getHeader(),
+				url: url,
+			});
+			guardarProductos(respuesta.data.productos);
+			// console.log(respuesta.data.productos);
+			// console.log(auth.getHeader());
+		};
+		obtenerProductos();
+
+		actualizarTotal();
+	}, [items]);
 
 	// Funcion para agregar producto a la venta
 	const agregarProducto = (producto) => {
-		// validar el estado disponible del producto
-		if (producto.estadoProducto) {
+		// validar el estado disponible del producto o si se encuentra en el array de items
+		if (producto.estado === 'Disponible' && !items.includes(producto)) {
+			producto.unidades = 0;
 			guardarItems([...items, producto]);
-			guardarValorTotal(valortotal + producto.valorUnitario);
 			guardarNuevaVenta({
 				...nuevaVenta,
-				valor: valortotal + producto.valorUnitario,
+				total: valortotal,
 				listaProductos: [...items, producto],
 			});
 		} else {
-			alert(`El producto ${producto.descripcion} no esta disponible`);
+			alert(`El producto ${producto.nombre} no se puede agregar`);
 		}
 	};
 
+	// Actualizar las cantidades de productos en la tabla
+	const sumarItems = (i) => {
+		const todosItems = [...items];
+		todosItems[i].unidades++;
+		guardarItems(todosItems);
+		guardarNuevaVenta({
+			...nuevaVenta,
+			total: valortotal,
+			listaProductos: todosItems,
+		});
+		//console.log(todosItems[i].unidades);
+	};
+
+	const restarItems = (i) => {
+		// Copiar el arreglo original
+		const todosItems = items;
+
+		// Validar que el numero no sea menor que 0
+		if (todosItems[i].unidades === 0) return;
+
+		todosItems[i].unidades--;
+		guardarItems(todosItems);
+		guardarNuevaVenta({
+			...nuevaVenta,
+			total: valortotal,
+			listaProductos: todosItems,
+		});
+		//console.log(todosItems[i].unidades);
+	};
+
 	// Funcion para eliminar producto de la venta
-	const eliminarProducto = (item) => {
-		guardarItems(items.filter((itemState) => itemState.id !== item.id));
-		guardarValorTotal(valortotal - item.valorUnitario);
+	const eliminarItems = (item) => {
+		guardarItems(items.filter((itemState) => itemState._id !== item._id));
+		actualizarTotal();
+		guardarNuevaVenta({
+			...nuevaVenta,
+			total: valortotal,
+			listaProductos: items,
+		});
 	};
 
 	// State con la informacion de la venta
 	const [nuevaVenta, guardarNuevaVenta] = useState({
 		// Valores iniciales
-		id: '',
+
 		listaProductos: [],
-		valor: 0,
+		total: 0,
 		fecha: '',
 		cliente: '',
 		cedula: null,
@@ -66,12 +130,12 @@ const NuevaVenta = () => {
 	const [alerta, guardarAlerta] = useState(null);
 
 	// Desestructuración de nuevaVenta
-	const { id, valor, fecha, cliente, cedula, vendedor, listaProductos } =
+	const { total, fecha, cliente, cedula, vendedor, listaProductos } =
 		nuevaVenta;
 
 	// Leer los datos del formulario y tenerlos en el estado
 	const onChangeNuevaVenta = (e) => {
-		if (e.target.name === 'valor' || e.target.name === 'cedula') {
+		if (e.target.name === 'total' || e.target.name === 'cedula') {
 			guardarNuevaVenta({
 				...nuevaVenta,
 				[e.target.name]: Number(e.target.value),
@@ -89,7 +153,7 @@ const NuevaVenta = () => {
 		try {
 			await axios({
 				method: 'post',
-				url: 'http://localhost:4000/ventas',
+				url: 'http://localhost:3500/api/ventas',
 				data: nuevaVenta,
 			});
 
@@ -113,8 +177,7 @@ const NuevaVenta = () => {
 
 		// Validar formulario
 		if (
-			id.trim() === '' ||
-			valor <= 0 ||
+			total <= 0 ||
 			fecha.trim() === '' ||
 			cliente.trim() === '' ||
 			cedula <= 0 ||
@@ -143,7 +206,6 @@ const NuevaVenta = () => {
 					<table>
 						<thead className="table-head">
 							<tr>
-								<th scope="col">Código</th>
 								<th scope="col">Descripción</th>
 								<th scope="col">Valor unitario</th>
 							</tr>
@@ -152,13 +214,10 @@ const NuevaVenta = () => {
 							{productos.length === 0
 								? 'No hay productos'
 								: productos.map((producto) => (
-										<tr key={producto.id}>
-											<td className="codigo">
-												<span>{producto.id}</span>
-											</td>
-											<td>{producto.descripcion}</td>
+										<tr key={producto._id}>
+											<td>{producto.nombre}</td>
 											<td>
-												<span>$ {producto.valorUnitario}</span>
+												<span>$ {producto.valor}</span>
 											</td>
 											<td className="acciones">
 												<button
@@ -191,40 +250,40 @@ const NuevaVenta = () => {
 
 					<form onSubmit={submitNuevaVenta}>
 						<div className="form-group">
-							<div className="field-form">
-								<label>Código</label>
-								<input
-									type="text"
-									placeholder="Código"
-									name="id"
-									onChange={onChangeNuevaVenta}
-								/>
-							</div>
-
 							<div className="field-form venta__productos">
 								<table>
 									<thead className="table-head">
 										<tr>
 											<th scope="col">Producto</th>
 											<th scope="col">Valor</th>
+											<th scope="col">Cantidad</th>
 											<th scope="col">Accion</th>
 										</tr>
 									</thead>
 									<tbody className="table-body">
 										{items.length === 0
 											? 'Agregue items'
-											: items.map((item) => (
-													<tr>
-														<td>{item.descripcion}</td>
-														<td>$ {item.valorUnitario}</td>
+											: items.map((item, index) => (
+													<tr key={item._id}>
+														<td>{item.nombre}</td>
+														<td>$ {item.valor}</td>
+														<td>{item.unidades}</td>
 														<td className="acciones">
 															<FontAwesomeIcon
-																className="icon-trash"
+																className="fa-icon"
+																icon={faPlus}
+																onClick={() => sumarItems(index)}
+															/>
+															<FontAwesomeIcon
+																className="fa-icon"
+																icon={faMinus}
+																onClick={() => restarItems(index)}
+															/>
+															<FontAwesomeIcon
+																className="fa-icon"
 																icon={faTrash}
-																onClick={() => eliminarProducto(item)}
-															>
-																Eliminar
-															</FontAwesomeIcon>
+																onClick={() => eliminarItems(item)}
+															/>
 														</td>
 													</tr>
 											  ))}
@@ -238,7 +297,7 @@ const NuevaVenta = () => {
 									type="number"
 									readOnly
 									value={valortotal}
-									name="valor"
+									name="total"
 									onChange={onChangeNuevaVenta}
 								/>
 							</div>

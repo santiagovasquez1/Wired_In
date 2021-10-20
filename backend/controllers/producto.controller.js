@@ -138,8 +138,8 @@ const borrarProducto = async(req = request, res = response) => {
 }
 
 module.exports = {
-    getProductos,
-    crearProducto,
-    actualizarProducto,
-    borrarProducto
-}
+	getProductos,
+	crearProducto,
+	actualizarProducto,
+	borrarProducto,
+};
