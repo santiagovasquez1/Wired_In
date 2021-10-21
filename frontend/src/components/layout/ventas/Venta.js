@@ -13,7 +13,7 @@ const Venta = ({ venta, ventas, guardarVentas }) => {
 		try {
 			await axios({
 				method: 'delete',
-				url: `http://localhost:3500/api/ventas/${id}`,
+				url: `https://wiredinbackend.herokuapp.com/api/ventas/${id}`,
 			});
 
 			// Mostrar alerta

@@ -11,7 +11,7 @@ import './usuarios.css';
 
 const Usuarios = () => {
 
-    const urlUsuarios = 'http://localhost:3500/api/usuarios';
+    const urlUsuarios = 'https://wiredinbackend.herokuapp.com/api/usuarios';
     const history = useHistory();
     let [usuarios, guardarUsuarios] = useState([]);
 

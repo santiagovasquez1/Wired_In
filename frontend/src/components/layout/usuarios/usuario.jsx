@@ -19,7 +19,7 @@ export default class Usuario extends React.Component {
                 email: this.props.location.state.email,
                 rol: this.props.location.state.rol
             },
-            urlUsuarios: 'http://localhost:3500/api/usuarios',
+            urlUsuarios: 'https://wiredinbackend.herokuapp.com/api/usuarios',
             redirect: false,
             actualizarDisabled: false
         };

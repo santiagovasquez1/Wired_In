@@ -23,6 +23,13 @@ const EditarVenta = (props) => {
 		estadoVenta: 'proceso',
 	});
 
+	const [ventaEditada, guardarVentaEditada] = useState({
+		fecha: '',
+		cliente: '',
+		cedula: null,
+		estadoVenta: 'proceso',
+	});
+
 	const [alerta, guardarAlerta] = useState(false);
 
 	// Consultar a la api para traer la venta a editar
@@ -31,7 +38,7 @@ const EditarVenta = (props) => {
 			try {
 				const respuesta = await axios({
 					method: 'get',
-					url: `http://localhost:3500/api/ventas/${id}`,
+					url: `https://wiredinbackend.herokuapp.com/api/ventas/${id}`,
 				});
 				guardarVenta(respuesta.data);
 				console.log(respuesta.data);
@@ -52,14 +59,6 @@ const EditarVenta = (props) => {
 		estadoVenta,
 	} = venta;
 
-	// Cambiar los datos del vendedor
-	// const cambiarDatosVendedor = (venta) => {
-	// 	guardarVenta({
-	// 		...venta,
-	// 		[venta.vendedor]: venta.vendedor.uid,
-	// 	});
-	// };
-
 	// Leer los datos del formulario y tenerlos en el estado
 	const onChangeEditarVenta = (e) => {
 		if (e.target.name === 'total' || e.target.name === 'cedula') {
@@ -67,15 +66,22 @@ const EditarVenta = (props) => {
 				...venta,
 				[e.target.name]: Number(e.target.value),
 			});
-			// } else if (e.target.name === 'vendedor') {
-			// 	guardarVenta({
-			// 		...venta,
-			// 		[e.target.name]: vendedor.uid,
-			// 	});
+			guardarVentaEditada({
+				fecha: fecha,
+				cliente: cliente,
+				cedula: cedula,
+				estadoVenta: estadoVenta,
+			});
 		} else {
 			guardarVenta({
 				...venta,
 				[e.target.name]: e.target.value,
+			});
+			guardarVentaEditada({
+				fecha: fecha,
+				cliente: cliente,
+				cedula: cedula,
+				estadoVenta: estadoVenta,
 			});
 		}
 	};
@@ -86,10 +92,9 @@ const EditarVenta = (props) => {
 
 		// Validar formulario
 		if (
-			total <= 0 ||
-			fecha.trim() === '' ||
-			cliente.trim() === '' ||
-			cedula <= 0
+			ventaEditada.fecha.trim() === '' ||
+			ventaEditada.cliente.trim() === '' ||
+			ventaEditada.cedula <= 0
 		) {
 			guardarAlerta({
 				msg: 'Todos los campos son obligatorios',
@@ -98,17 +103,12 @@ const EditarVenta = (props) => {
 			return;
 		}
 
-		guardarVenta({
-			...venta,
-			[vendedor]: vendedor.uid,
-		});
-
 		// Edita la venta en la base de datos
 		try {
 			await axios({
 				method: 'put',
-				url: `http://localhost:3500/api/ventas/${id}`,
-				data: venta,
+				url: `https://wiredinbackend.herokuapp.com/api/ventas/${id}`,
+				data: ventaEditada,
 			});
 
 			// Alerta de exito al ingresar venta
@@ -125,7 +125,7 @@ const EditarVenta = (props) => {
 		}
 
 		// Redireccionar al home de ventas
-		// history.push('/ventas');
+		history.push('/ventas');
 	};
 
 	return (
@@ -182,8 +182,8 @@ const EditarVenta = (props) => {
 								<input
 									type="number"
 									readOnly
-									value={total}
-									name="total"
+									defaultValue={total}
+									// name="total"
 									onChange={onChangeEditarVenta}
 								/>
 							</div>
@@ -223,8 +223,8 @@ const EditarVenta = (props) => {
 								<input
 									type="text"
 									placeholder="Vendedor"
-									name="vendedor"
-									value={vendedor.nombre}
+									// name="vendedor"
+									defaultValue={vendedor.nombre}
 									readOnly
 									onChange={onChangeEditarVenta}
 								/>

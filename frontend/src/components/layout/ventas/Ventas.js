@@ -17,7 +17,7 @@ const Ventas = () => {
 			try {
 				const respuesta = await axios({
 					method: 'get',
-					url: 'http://localhost:3500/api/ventas',
+					url: 'https://wiredinbackend.herokuapp.com/api/ventas',
 				});
 				guardarVentas(respuesta.data);
 			} catch (error) {

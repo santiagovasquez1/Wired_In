@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, { Fragment, useState } from 'react';
-import Error from './Error'
+// import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
+import Error from './Error'
 import auth from '../../services/auth.service';
 import Swal from 'sweetalert2';
 import './Login.css';
@@ -28,18 +28,18 @@ const Login = () => {
 	};
 
 	// Cuando el usuario inicia sesión
-	const iniciarSesion = async (usuario) => {
-		try {
-			const respuesta = await axios({
-				method: 'post',
-				url: 'http://localhost:3500/api/usuarios',
-				data: usuario,
-			});
-			console.log(respuesta);
-		} catch (error) {
-			console.error(error);
-		}
-	};
+	// const iniciarSesion = async (usuario) => {
+	// 	try {
+	// 		const respuesta = await axios({
+	// 			method: 'post',
+	// 			url: 'https://wiredinbackend.herokuapp.com/api/login',
+	// 			data: usuario,
+	// 		});
+	// 		console.log(respuesta);
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 	}
+	// };
 
 	// funcion de iniciar sesion
 	const onSubmit = (e) => {
@@ -60,8 +60,11 @@ const Login = () => {
 			password,
 		}
 
+		console.log(loginData);
+
 		auth.login(loginData).then(result => {
 			localStorage.setItem('token', result.token);
+			// iniciarSesion(usuario);
 			Swal.fire('Login', 'Usuario logeado', 'success').then(result=>{
 				history.push('/usuarios');
 			});
