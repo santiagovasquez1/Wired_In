@@ -41,7 +41,7 @@ const NuevaVenta = () => {
 	// Cargar productos
 	useEffect(() => {
 		const obtenerProductos = async () => {
-			const url = 'http://localhost:3500/api/productos';
+			const url = 'https://wiredinbackend.herokuapp.com/api/productos';
 			const respuesta = await axios({
 				method: 'get',
 				headers: auth.getHeader(),
@@ -153,7 +153,7 @@ const NuevaVenta = () => {
 		try {
 			await axios({
 				method: 'post',
-				url: 'http://localhost:3500/api/ventas',
+				url: 'https://wiredinbackend.herokuapp.com/api/ventas',
 				data: nuevaVenta,
 			});
 

@@ -20,7 +20,7 @@ export default class NuevoUsuario extends Component {
                 password: '',
                 confirmar: ''
             },
-            urlUsuarios: 'http://localhost:3500/api/usuarios',
+            urlUsuarios: 'https://wiredinbackend.herokuapp.com/api/usuarios',
             redirect: false,
             crearDisabled: false
         }

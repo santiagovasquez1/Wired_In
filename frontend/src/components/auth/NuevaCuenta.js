@@ -36,7 +36,7 @@ const NuevaCuenta = () => {
 		try {
 			await axios({
 				method: 'post',
-				url: 'http://localhost:3500/api/usuarios',
+				url: 'https://wiredinbackend.herokuapp.com/api/usuarios',
 				data: datos,
 			});
 			// Usuario ingresado con exito
