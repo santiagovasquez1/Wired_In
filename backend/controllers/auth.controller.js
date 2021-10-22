@@ -14,7 +14,7 @@ const login = async(req = request, res = response) => {
                 msg: "El usuario no esta registrado en la aplicación"
             });
         } else if (validatePassword(password, usuario)) {
-            const token = await generarJWT(usuario.uid, usuario.rol);
+            const token = await generarJWT(usuario._id, usuario.rol);
             res.status(200).send({
                 ok: true,
                 token,
@@ -42,17 +42,25 @@ const validatePassword = (password, user) => {
 
 const renewToken = async(req, res = response) => {
     const { uid, rol } = req;
+    try {
+        const [user, token] = await Promise.all([
+            UsuarioDb.findById(uid),
+            generarJWT(uid, rol)
+        ]);
 
-    const [user, token] = await Promise.all([
-        User.findById(uid),
-        generarJWT(uid, rol)
-    ]);
+        return res.status(200).send({
+            ok: true,
+            token,
+            user
+        });
 
-    res.status(200).send({
-        ok: true,
-        token,
-        user
-    });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg: error.msg
+        });
+    }
 
 }
 

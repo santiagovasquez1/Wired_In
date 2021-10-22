@@ -21,7 +21,6 @@ const Usuarios = () => {
                 const respuesta = await axios.get(urlUsuarios, {
                     headers: authService.getHeader()
                 });
-
                 guardarUsuarios(respuesta.data.usuarios);
             } catch (error) {
                 Swal.fire('Error', 'No se cargaron los usuarios', 'error');

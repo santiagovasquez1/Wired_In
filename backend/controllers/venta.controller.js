@@ -1,79 +1,132 @@
 const Venta = require('../models/Venta');
+const { response, request } = require('express');
 
 // Nueva venta
-exports.nuevaVenta = async (req, res, next) => {
-	// Crear una nueva venta
-	const venta = new Venta(req.body);
+const nuevaVenta = async(req = request, res = response) => {
+    try {
 
-	try {
-		await venta.save();
-		res.json({
-			mensaje: 'Se agregó una nueva venta',
-		});
-	} catch (error) {
-		console.error(error);
-		next();
-		// res.status(500).send('Hubo un error');
-	}
+        if (req.rol == 'Administrador' || req.rol == 'Vendedor') {
+            const venta = new Venta(req.body);
+            await venta.save();
+            return res.status(200).send({
+                msg: 'Se agregó una nueva venta',
+            });
+        } else {
+            return res.status(400).send({
+                ok: false,
+                msg: 'El usuario no tiene permisos para acceder a esta información',
+            });
+        }
+    } catch (error) {
+        return res.status(500).send({
+            ok: false,
+            msg: error.message,
+        });
+    }
 };
 
 // Muestra las ventas
-exports.mostrarVentas = async (req, res, next) => {
-	try {
-		// const ventas = await Venta.find({}).populate('vendedor').populate({
-		// 	path: 'listaProductos.producto',
-		// 	model: 'Producto',
-		// });
-		const ventas = await Venta.find({})
-			.populate('vendedor')
-			.populate('listaProductos');
-		res.json(ventas);
-	} catch (error) {
-		console.error(error);
-		next();
-	}
+const mostrarVentas = async(req, res = response) => {
+    try {
+        const ventas = await Venta.find({})
+            .populate('vendedor')
+            .populate('listaProductos');
+
+        return res.status(200).send({
+            ok: true,
+            ventas
+        });
+    } catch (error) {
+        return res.status(500).send({
+            ok: false,
+            msg: error.message,
+        });
+    }
 };
 
 // Muestra una venta por su id
-exports.mostrarVenta = async (req, res, next) => {
-	const venta = await Venta.findById(req.params.idVenta)
-		.populate('vendedor')
-		.populate('listaProductos');
+const mostrarVenta = async(req, res = response) => {
+    try {
+        const venta = await Venta.findById(req.params.idVenta)
+            .populate('vendedor')
+            .populate('listaProductos');
 
-	if (!venta) {
-		res.json({ mensaje: 'Esa venta no existe' });
-		return next();
-	}
+        if (!venta) {
+            return res.status(400).send({
+                ok: false,
+                msg: 'Esa venta no existe'
+            });
+        }
 
-	// Mostrar la venta
-	res.json(venta);
+        return res.status(200).send({
+            ok: true,
+            venta
+        })
+    } catch (error) {
+        return res.status(500).send({
+            ok: false,
+            msg: error.message,
+        });
+    }
 };
 
 // Actualizar las ventas
-exports.actualizarVenta = async (req, res, next) => {
-	try {
-		let venta = await Venta.findOneAndUpdate(
-			{ id: req.params.idVenta },
-			req.body,
-			{ new: true }
-		)
-			.populate('vendedor')
-			.populate('listaProductos');
+const actualizarVenta = async(req = request, res = response) => {
+    try {
+        if (req.rol == 'Administrador' || req.rol == 'Vendedor') {
+            const venta = await Venta.findOneAndUpdate({ id: req.params.idVenta },
+                    req.body, { new: true }
+                )
+                .populate('vendedor')
+                .populate('listaProductos');
 
-		res.json(venta);
-	} catch (error) {
-		console.error(error);
-		next();
-	}
+            return res.status(200).send({
+                ok: true,
+                venta
+            })
+        } else {
+            return res.status(400).send({
+                ok: false,
+                msg: 'El usuario no tiene permisos para acceder a esta información',
+            });
+        }
+
+    } catch (error) {
+        return res.status(500).send({
+            ok: false,
+            msg: error.message,
+        });
+    }
 };
 
 // Elimina una venta por su id
-exports.eliminarVenta = async (req, res, next) => {
-	try {
-		await Venta.findOneAndDelete({ _id: req.params.idVenta });
-		res.json({ mensaje: 'La venta se ha eliminado' });
-	} catch (error) {
-		console.error(error);
-		next();
-	}
+const eliminarVenta = async(req = request, res = response) => {
+    try {
+        if (req.rol == 'Administrador') {
+            await Venta.findOneAndDelete({ _id: req.params.idVenta });
+            return res.status(200).send({
+                ok: true,
+                msg: 'La venta se ha eliminado'
+            });
+        } else {
+            return res.status(400).send({
+                ok: false,
+                msg: 'El usuario no tiene permisos para acceder a esta información',
+            });
+        }
+
+    } catch (error) {
+        return res.status(500).send({
+            ok: false,
+            msg: error.message,
+        });
+    }
 };
+
+module.exports = {
+    nuevaVenta,
+    mostrarVenta,
+    actualizarVenta,
+    eliminarVenta,
+    mostrarVentas
+}

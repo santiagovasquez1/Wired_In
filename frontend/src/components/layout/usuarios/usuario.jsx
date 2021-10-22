@@ -25,6 +25,10 @@ export default class Usuario extends React.Component {
         };
     }
 
+    componentDidMount() {
+
+    }
+
     onChangeModel(e) {
         const field = e.target.name;
         const { usuario } = this.state;
@@ -37,11 +41,11 @@ export default class Usuario extends React.Component {
         this.setState({ actualizarDisabled: true });
         try {
             const { usuario, urlUsuarios } = this.state;
-            
-            await axios.put(`${urlUsuarios}/${usuario.uid}`,usuario,{
-                headers:auth.getHeader()
+
+            await axios.put(`${urlUsuarios}/${usuario.uid}`, usuario, {
+                headers: auth.getHeader()
             });
-            
+
             Swal.fire('Actualizado', 'El usuario ha sido actualizado', 'success')
                 .then(result => {
                     this.regresar();

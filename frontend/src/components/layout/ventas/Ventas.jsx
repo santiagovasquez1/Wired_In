@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Venta from './Venta';
 import BuscadorVentas from './BuscadorVentas';
 import NavbarVentas from './NavbarVentas';
-
+import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const Ventas = () => {
@@ -21,9 +21,7 @@ const Ventas = () => {
 				});
 				guardarVentas(respuesta.data);
 			} catch (error) {
-				console.log(error);
-				// Alerta momentanea
-				alert('Las ventas no se pueden cargar de la base de datos');
+				Swal.fire('Error', 'Las ventas no se pueden cargar de la base de datos', 'error');
 			}
 		};
 		obtenerVentas();
@@ -48,13 +46,13 @@ const Ventas = () => {
 					{ventas.length === 0
 						? 'No hay ventas'
 						: ventas.map((venta) => (
-								<Venta
-									key={venta._id}
-									ventas={ventas}
-									guardarVentas={guardarVentas}
-									venta={venta}
-								/>
-						  ))}
+							<Venta
+								key={venta._id}
+								ventas={ventas}
+								guardarVentas={guardarVentas}
+								venta={venta}
+							/>
+						))}
 				</tbody>
 			</table>
 		</div>
