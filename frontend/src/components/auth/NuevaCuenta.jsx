@@ -1,9 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import Error from './Error';
-import { Link } from 'react-router-dom';
+import { Link,useHistory} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import './Login.css';
+import authService from '../../services/auth.service';
 
 const NuevaCuenta = () => {
 	// State para crear cuenta
@@ -12,7 +13,6 @@ const NuevaCuenta = () => {
 		email: '',
 		password: '',
 		confirmar: '',
-		rol: '',
 	});
 
 	// State con el error
@@ -23,6 +23,7 @@ const NuevaCuenta = () => {
 
 	// Extraer de usuario
 	const { nombre, email, password, confirmar } = usuario;
+	const history = useHistory();
 
 	const onChange = (e) => {
 		guardarUsuario({
@@ -97,8 +98,8 @@ const NuevaCuenta = () => {
 			error: false,
 			mensaje: '',
 		});
+
 		registrarUsuario({ nombre, email, password });
-		console.log({ nombre, email, password });
 
 		// limpiar formulario
 		guardarUsuario({
@@ -106,8 +107,16 @@ const NuevaCuenta = () => {
 			email: '',
 			password: '',
 			confirmar: '',
-			rol: '',
 		});
+
+		//Almacenar usuario en bd y localStorage
+		authService.signin(usuario).then((response) => {
+			localStorage.setItem('token', response.token);
+			Swal.fire('Login', 'Usuario logeado', 'success').then(result => {
+				history.push('/usuarios');
+			});
+		});
+
 	};
 
 	return (
@@ -167,16 +176,6 @@ const NuevaCuenta = () => {
 							value={confirmar}
 							onChange={onChange}
 						></input>
-					</div>
-
-					<div className="field">
-						<label>Rol</label>
-						<select name="rol" onChange={onChange}>
-							<option value="">-- Selecciona rol --</option>
-							<option value="administrador">Administrador</option>
-							<option value="vendedor">Vendedor</option>
-							<option value="usuario">Usuario</option>
-						</select>
 					</div>
 
 					<div className="submit-btn">

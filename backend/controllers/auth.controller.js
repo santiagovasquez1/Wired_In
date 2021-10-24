@@ -31,8 +31,39 @@ const login = async(req = request, res = response) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: error.msg
+            msg: error.message
         });
+    }
+}
+
+const signin = async(req, res = response) => {
+    try {
+        const { email, password } = req.body;
+        const existeUsuario = await UsuarioDb.findOne({ email });
+
+        if (existeUsuario) {
+            return res.status(400).send({
+                ok: false,
+                msg: 'El usuario ya existe'
+            });
+        }
+
+        const usuario = new UsuarioDb(req.body);
+        const salt = bcrypt.genSaltSync();
+        usuario.password = bcrypt.hashSync(password, salt);
+
+        await usuario.save();
+        const token = await generarJWT(usuario._id, usuario.rol);
+
+        return res.status(200).send({
+            ok: true,
+            msg: 'Usuario creado',
+            usuario,
+            token
+        });
+
+    } catch (error) {
+        return res.status(500).send({ ok: false, msg: error.msg });
     }
 }
 
@@ -58,7 +89,7 @@ const renewToken = async(req, res = response) => {
         console.log(error);
         return res.status(500).json({
             ok: false,
-            msg: error.msg
+            msg: error.message
         });
     }
 
@@ -66,5 +97,6 @@ const renewToken = async(req, res = response) => {
 
 module.exports = {
     login,
+    signin,
     renewToken
 }

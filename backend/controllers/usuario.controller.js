@@ -1,7 +1,6 @@
 const UsuarioDb = require('../models/usuario');
 const { response, request } = require('express');
 const bcrypt = require('bcryptjs');
-// const { generarJWT } = require('../helpers/jwt');
 
 const getUsuarios = async(req = request, res = response) => {
     try {
@@ -147,9 +146,28 @@ const borrarUsuario = async(req = request, res = response) => {
     }
 }
 
+const getUsersByRol = async(req = request, res = response) => {
+    try {
+        rol = req.params.rol;
+        const usuarios = await UsuarioDb.find({ rol });
+
+        return res.status(200).send({
+            ok: true,
+            usuarios
+        });
+
+    } catch (error) {
+        return res.status(500).send({
+            ok: false,
+            msg: error.message
+        });
+    }
+}
+
 module.exports = {
     getUsuarios,
     crearUsuario,
     actualizarUsurario,
-    borrarUsuario
+    borrarUsuario,
+    getUsersByRol
 }

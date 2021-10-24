@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react';
-
-// Componentes
 import NavbarVentas from './NavbarVentas';
 import { useHistory } from 'react-router-dom';
-
 import axios from 'axios';
-
 import auth from '../../../services/auth.service';
-
-// Sweetalert
 import Swal from 'sweetalert2';
 
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import userService from '../../../services/user.service';
+import authService from '../../../services/auth.service';
 
 const NuevaVenta = () => {
 	const history = useHistory();
@@ -23,6 +19,7 @@ const NuevaVenta = () => {
 	const [valortotal, guardarValorTotal] = useState(0);
 	const [items, guardarItems] = useState([]);
 	const [productos, guardarProductos] = useState([]);
+	const [vendedores, guardarVendedores] = useState([]);
 
 	// Actualizar valor total a pagar
 	const actualizarTotal = () => {
@@ -48,13 +45,20 @@ const NuevaVenta = () => {
 				url: url,
 			});
 			guardarProductos(respuesta.data.productos);
-			// console.log(respuesta.data.productos);
-			// console.log(auth.getHeader());
 		};
-		obtenerProductos();
 
+		obtenerProductos();
+		getVendedores();
 		actualizarTotal();
 	}, [items]);
+
+	const getVendedores = () => {
+		userService.getUsersByRole('Vendedor').then((res) => {
+			guardarVendedores(res.usuarios);
+		}).catch((err) => {
+			Swal.fire('Error', 'No se pudieron cargar los vendedores', 'error');
+		});
+	}
 
 	// Funcion para agregar producto a la venta
 	const agregarProducto = (producto) => {
@@ -151,14 +155,14 @@ const NuevaVenta = () => {
 	// Funcion que envia la venta a la api
 	const enviarNuevaVenta = async (nuevaVenta) => {
 		try {
-			await axios({
-				method: 'post',
-				url: 'https://wiredinbackend.herokuapp.com/api/ventas',
-				data: nuevaVenta,
+			const url = 'http://localhost:3500/api/ventas';
+			const resp = await axios.post(url, nuevaVenta, {
+				headers: authService.getHeader()
 			});
-
 			// Alerta de exito al ingresar venta
-			Swal.fire('Correcto', 'La venta se agregó correctamente', 'success');
+			Swal.fire('Correcto', 'La venta se agregó correctamente', 'success').then(() => {
+				history.push('/ventas');
+			});
 		} catch (error) {
 			console.log(error);
 
@@ -193,9 +197,6 @@ const NuevaVenta = () => {
 
 		// Crear la venta
 		enviarNuevaVenta(nuevaVenta);
-
-		// Redireccionar al home de ventas
-		history.push('/ventas');
 	};
 
 	return (
@@ -214,22 +215,22 @@ const NuevaVenta = () => {
 							{productos.length === 0
 								? 'No hay productos'
 								: productos.map((producto) => (
-										<tr key={producto._id}>
-											<td>{producto.nombre}</td>
-											<td>
-												<span>$ {producto.valor}</span>
-											</td>
-											<td className="acciones">
-												<button
-													className="btn btn-editar"
-													type="button"
-													onClick={() => agregarProducto(producto)}
-												>
-													Agregar
-												</button>
-											</td>
-										</tr>
-								  ))}
+									<tr key={producto._id}>
+										<td>{producto.nombre}</td>
+										<td>
+											<span>$ {producto.valor}</span>
+										</td>
+										<td className="acciones">
+											<button
+												className="btn btn-editar"
+												type="button"
+												onClick={() => agregarProducto(producto)}
+											>
+												Agregar
+											</button>
+										</td>
+									</tr>
+								))}
 						</tbody>
 					</table>
 				</div>
@@ -264,29 +265,29 @@ const NuevaVenta = () => {
 										{items.length === 0
 											? 'Agregue items'
 											: items.map((item, index) => (
-													<tr key={item._id}>
-														<td>{item.nombre}</td>
-														<td>$ {item.valor}</td>
-														<td>{item.unidades}</td>
-														<td className="acciones">
-															<FontAwesomeIcon
-																className="fa-icon"
-																icon={faPlus}
-																onClick={() => sumarItems(index)}
-															/>
-															<FontAwesomeIcon
-																className="fa-icon"
-																icon={faMinus}
-																onClick={() => restarItems(index)}
-															/>
-															<FontAwesomeIcon
-																className="fa-icon"
-																icon={faTrash}
-																onClick={() => eliminarItems(item)}
-															/>
-														</td>
-													</tr>
-											  ))}
+												<tr key={item._id}>
+													<td>{item.nombre}</td>
+													<td>$ {item.valor}</td>
+													<td>{item.unidades}</td>
+													<td className="acciones">
+														<FontAwesomeIcon
+															className="fa-icon"
+															icon={faPlus}
+															onClick={() => sumarItems(index)}
+														/>
+														<FontAwesomeIcon
+															className="fa-icon"
+															icon={faMinus}
+															onClick={() => restarItems(index)}
+														/>
+														<FontAwesomeIcon
+															className="fa-icon"
+															icon={faTrash}
+															onClick={() => eliminarItems(item)}
+														/>
+													</td>
+												</tr>
+											))}
 									</tbody>
 								</table>
 							</div>
@@ -330,13 +331,13 @@ const NuevaVenta = () => {
 								/>
 							</div>
 							<div className="field-form">
-								<label>Vendedor</label>
-								<input
-									type="text"
-									placeholder="Vendedor"
-									name="vendedor"
-									onChange={onChangeNuevaVenta}
-								/>
+								<label htmlFor="vendedor">Vendedor</label>
+								<select name="vendedor" id="vendedor" onChange={onChangeNuevaVenta} required="true">
+									<option value=""></option>
+									{vendedores.map((vendedor) => (
+										<option key={vendedor.uid} value={vendedor.uid}>{vendedor.nombre}</option>
+									))}
+								</select>
 							</div>
 							<div className="field-form">
 								<label>Estado</label>

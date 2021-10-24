@@ -30,6 +30,18 @@ const login = (loginData) => {
     });
 };
 
+const signin = (siginData) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            const url = `${urlUsuarios}/signin`;
+            const response = await axios.post(url, siginData);
+            resolve(response.data);
+        } catch (error) {
+            reject(error.response.data);
+        }
+    });
+};
+
 const validarToken = () => {
     return new Promise(async(resolve, reject) => {
         try {
@@ -46,4 +58,4 @@ const validarToken = () => {
     });
 }
 
-export default { login, getHeader, validarToken, usuario };
+export default { login, getHeader, validarToken, signin, usuario };
