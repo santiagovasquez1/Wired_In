@@ -1,0 +1,39 @@
+{
+  "ventas": [
+    {
+      "id": "1222222",
+      "listaProductos": [
+        {
+          "id": "101",
+          "descripcion": "Punta de anca",
+          "valorUnitario": 10000,
+          "estadoProducto": true
+        },
+        {
+          "id": "101",
+          "descripcion": "Punta de anca",
+          "valorUnitario": 10000,
+          "estadoProducto": true
+        },
+        {
+          "id": "103",
+          "descripcion": "Costilla",
+          "valorUnitario": 18000,
+          "estadoProducto": true
+        },
+        {
+          "id": "110",
+          "descripcion": "Paletero externo",
+          "valorUnitario": 18000,
+          "estadoProducto": true
+        }
+      ],
+      "valor": 56000,
+      "fecha": "2021-10-11",
+      "cliente": "2333333",
+      "cedula": 3444444,
+      "vendedor": "qwwwwww",
+      "estadoVenta": "entregada"
+    },
+  ]
+}

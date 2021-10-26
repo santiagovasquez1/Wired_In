@@ -1,0 +1,39 @@
+@import url('../../../App.css');
+.productos {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.nav-productos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 5%;
+    margin-bottom: 5rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.nav-productos h1 {
+    font-size: 2.5rem;
+    color: var(--grisOscuro);
+}
+
+.producto {
+    cursor: pointer;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--grisOscuro);
+    border-radius: 4rem;
+    color: var(--grisOscuro);
+}
+
+.producto:hover {
+    background: var(--grisOscuro);
+    color: var(--blanco);
+}
+
+.producto span {
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-right: 1rem;
+}
