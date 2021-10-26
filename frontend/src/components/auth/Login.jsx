@@ -27,20 +27,6 @@ const Login = () => {
 		});
 	};
 
-	// Cuando el usuario inicia sesión
-	// const iniciarSesion = async (usuario) => {
-	// 	try {
-	// 		const respuesta = await axios({
-	// 			method: 'post',
-	// 			url: 'https://wiredinbackend.herokuapp.com/api/login',
-	// 			data: usuario,
-	// 		});
-	// 		console.log(respuesta);
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	}
-	// };
-
 	// funcion de iniciar sesion
 	const onSubmit = (e) => {
 		e.preventDefault();

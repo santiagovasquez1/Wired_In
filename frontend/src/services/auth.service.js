@@ -1,6 +1,6 @@
 import axios from 'axios';
 // const urlUsuarios = 'http://wiredinbackend.herokuapp.com/api/login';
-const urlUsuarios = 'http://localhost:3500/api/login';
+const urlUsuarios = 'https://wiredinbackend.herokuapp.com/api/login';
 let usuario;
 
 const getToken = () => {

@@ -155,7 +155,7 @@ const NuevaVenta = () => {
 	// Funcion que envia la venta a la api
 	const enviarNuevaVenta = async (nuevaVenta) => {
 		try {
-			const url = 'http://localhost:3500/api/ventas';
+			const url = 'https://wiredinbackend.herokuapp.com/api/ventas';
 			const resp = await axios.post(url, nuevaVenta, {
 				headers: authService.getHeader()
 			});

@@ -1,6 +1,6 @@
 import axios from "axios";
 import authService from "./auth.service";
-const urlUsuarios = 'http://localhost:3500/api/usuarios';
+const urlUsuarios = 'https://wiredinbackend.herokuapp.com/api/usuarios';
 
 const getUsers = () => {
     return new Promise(async(resolve, reject) => {
