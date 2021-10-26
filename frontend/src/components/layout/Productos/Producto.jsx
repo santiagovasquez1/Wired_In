@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 import '../../../App.css';
+import productosService from '../../../services/productos.service';
 import NavbarVentanas from '../share/NavbarVentanas';
 import './productos.css';
 
@@ -11,9 +12,10 @@ export default class Producto extends Component {
         this.regresar = this.regresar.bind(this);
         this.actualizarProducto = this.actualizarProducto.bind(this);
 
-        const { nombre, valor, cantidad, estado } = this.props.location.state;
+        const { _id,nombre, valor, cantidad, estado } = this.props.location.state;
         this.state = {
             producto: {
+                _id,
                 nombre,
                 valor,
                 cantidad,
@@ -36,10 +38,17 @@ export default class Producto extends Component {
 
     actualizarProducto(e) {
         e.preventDefault();
-        Swal.fire('Actualizado', 'El producto ha sido actualizado', 'success')
+
+        productosService.actualizarProducto(this.state.producto._id,this.state.producto).then(result=>{
+            Swal.fire('Actualizado', 'El producto ha sido actualizado', 'success')
             .then(result => {
                 this.regresar();
             });
+        }).catch(err=>{
+            Swal.fire('Error', 'El producto no ha sido actualizado', 'error')
+        });
+
+
     }
 
     render() {

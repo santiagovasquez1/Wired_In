@@ -16,20 +16,19 @@ const Ventas = () => {
 
 	// Consultar la api
 	useEffect(() => {
-		const obtenerVentas = async () => {
-			try {
-				const respuesta = await axios({
-					method: 'get',
-					url: 'https://wiredinbackend.herokuapp.com/api/ventas',
-				});
-				guardarVentas(respuesta.data.ventas);
+		const obtenerVentas = () => {
+			axios({
+				method: 'get',
+				url: 'https://wiredinbackend.herokuapp.com/api/ventas',
+			}).then(res => {
+				guardarVentas(res.data.ventas);
 				setShowVentas(true);
-			} catch (error) {
+			}).catch(err => {
 				Swal.fire('Error', 'Las ventas no se pueden cargar de la base de datos', 'error').then(() => {
 					history.push('/');
 					setShowVentas(false);
 				});
-			}
+			});
 		};
 		obtenerVentas();
 	}, []);

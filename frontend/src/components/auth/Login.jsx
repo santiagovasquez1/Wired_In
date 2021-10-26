@@ -26,8 +26,7 @@ const Login = () => {
 			[e.target.name]: e.target.value,
 		});
 	};
-
-	// funcion de iniciar sesion
+	
 	const onSubmit = (e) => {
 		e.preventDefault();
 

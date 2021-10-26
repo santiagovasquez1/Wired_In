@@ -85,7 +85,7 @@ const Usuarios = () => {
         <div className="usuarios">
             <NavbarVentanas title="Usuarios" />
             <Buscador title='usuario' url='/usuarios/nuevo' />
-            <table className="table">
+            <table >
                 <thead className="table-head">
                     <tr>
                         <th scope="col">Correo</th>

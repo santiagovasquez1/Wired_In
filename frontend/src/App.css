@@ -145,6 +145,7 @@ table {
 
 .table-body {
     background: var(--grisClaro);
+    max-height: 50px;
 }
 
 .table-body td {

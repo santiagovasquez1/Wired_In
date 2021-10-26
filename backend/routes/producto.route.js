@@ -13,7 +13,7 @@ router.post('/', [validarUsuario,
     validarCampos
 ], crearProducto);
 
-router.put('/', [validarUsuario,
+router.put('/:id', [validarUsuario,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('valor', 'El valor es obligatorio').not().isEmpty(),
     check('cantidad', 'la cantidad es obligatorio').not().isEmpty(),
